@@ -1,0 +1,21 @@
+@import '../../../styles/_variables.scss';
+
+.joingame__button {
+    display: block;
+    color: $color-white;
+    margin: 20px auto;
+    outline: none;
+    // border: none;
+    border-radius: 5px;
+    height: 50px;
+    width: 150px;
+    font-size: 20px;
+    font-family: 'Montserrat';
+    background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+    transition: all 0.5s;
+
+    &:hover {
+        transform: translateY(-.1rem) scale(1.03);
+        box-shadow: 0 1.5rem 4rem rgba($color-black, 0.2);
+    }
+}
