@@ -1,0 +1,27 @@
+@import '../../../styles/_variables.scss';
+
+.joingame{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    text-align: center;
+    border: 2px solid $color-grey;
+    border-radius: 5px;
+    height: 50%;
+    
+    &__form{
+        color: $color-black;
+        margin-top: 20%;
+    }
+
+    &__input{
+        color: black;
+    }
+
+    &__button{
+        color: black
+        
+    }
+ }
