@@ -1,11 +1,12 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import JoinGame from './JoinGame/JoinGame'
+
 
 function App() {
   return (
     <div className="App">
-      <h1>Kahootz</h1>
+     
+      <JoinGame />
     </div>
   );
 }
