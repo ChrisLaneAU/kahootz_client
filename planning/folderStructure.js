@@ -1,0 +1,51 @@
+components/
+  App.js
+  App.scss
+  sharedUI/
+    Button/
+      Button.js
+      Button.scss
+    Header/
+      Header.js
+      Header.scss
+  JoinGame/
+    JoinGame.js // Smart component with no UI
+    JoinGameForm/
+      JoinGameForm.js
+      JoinGameForm.scss
+    MuteButton/
+      MuteBotton.js
+      MuteButton.scss
+  AskQuestion/
+    AskQuestion.js // Smart component with no UI
+    Question/
+      Question.js
+      Question.scss
+    Timer/
+      Timer.js
+      Timer.scss
+    SelectAnswerButton/
+      SelectAnswerButton.js
+      SelectAnswerButton.scss
+    AnswersCounter/
+      AnswersCounter.js
+      AnswersCounter.scss
+    AwaitingAnswer/
+      AwaitingAnswer.js
+      AwaitingAnswer.scss
+  AnswerBreakdown/
+    AnswerBreakdown.js // Smart component with no UI
+    Chart/
+      Chart.js
+      Chart.scss
+    LeaderBoard/
+      LeaderBoard.js
+      LeaderBoard.scss
+  PostGame/
+    PostGame.js // Smart component with no UI
+    Podium/
+      Podium.js
+      Podium.scss
+    Positions/
+      Positions.js
+      Positions.scss
