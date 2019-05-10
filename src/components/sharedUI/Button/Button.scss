@@ -1,6 +1,6 @@
 @import '../../../styles/_variables.scss';
 
-.joingame__button {
+.button {
     display: block;
     color: $color-white;
     margin: 20px auto;
@@ -11,7 +11,7 @@
     font-size: 20px;
     font-family: 'Montserrat';
     background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
-    transition: all 0.5s;
+    transition: all 0.3s;
 
     &:hover {
         transform: translateY(-.1rem) scale(1.03);

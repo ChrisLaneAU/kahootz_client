@@ -14,17 +14,17 @@ class JoinGameForm extends Component {
 
     _handlePinInput(event) {
        this.setState({pin: event.target.value});
-       
+       console.log(event.target.value)
     }
 
     render() {
+       
         return (
             <div className="joingame">
                 <form className="joingame__form">
                     <h1>Join Game</h1>
-                    <input className="joingame__input" onChange={this._handlePinInput} value={this.state.pin}></input>
-                    {/* <Input onChange={} type="joingame__input" value=""/> */}
-                    <Button text="Join Game" onClick={this.props.click} type="joingame__button" />
+                    <Input onChange={this._handlePinInput} type="input" value={this.state.pin}/>
+                    <Button text="Join Game" onClick={this.props.click} type="button" />
                 </form>
             </div>
         )
