@@ -8,16 +8,35 @@ components/
     Header/
       Header.js
       Header.scss
+
+///////// USER ONLY ////////////
+
   JoinGame/
-    JoinGame.js // Smart component with no UI
+    JoinGame.js // :root - Smart component with no UI
     JoinGameForm/
       JoinGameForm.js
       JoinGameForm.scss
-    MuteButton/
+    MuteButton/  - // optional
       MuteBotton.js
       MuteButton.scss
-  AskQuestion/
-    AskQuestion.js // Smart component with no UI
+  Nickname/
+    Nickname.js
+    NicknameForm/
+      NicknameForm.js
+      NicknameForm.scss
+
+///////// USER AND ADMIN ///////////
+
+  WaitingRoom/
+    WaitingRoom.js
+      GamePin/
+        GamePin.js
+        GamePin.scss
+      UserCount/
+        UserCount.js
+        UserCount.scss
+  AskQuestions/
+    AskQuestions.js // Smart component with no UI
     Question/
       Question.js
       Question.scss
@@ -38,9 +57,12 @@ components/
     Chart/
       Chart.js
       Chart.scss
-    LeaderBoard/
-      LeaderBoard.js
-      LeaderBoard.scss
+    CorrectAnswer/
+      CorrectAnswer.js
+      CorrectAnswer.scss
+  LeaderBoard/
+    LeaderBoard.js
+    LeaderBoard.scss
   PostGame/
     PostGame.js // Smart component with no UI
     Podium/
@@ -49,3 +71,11 @@ components/
     Positions/
       Positions.js
       Positions.scss
+
+////// USER /////////
+
+  PlaceMedal/
+    PlaceMedal.js
+
+  GameOver/
+    GameOver.js
