@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import './NicknameForm.scss';
+import Button from '../../sharedUI/Button/Button'
+import Input from '../../sharedUI/Input/Input'
 class NicknameForm extends Component {
+
     constructor(){
         super();
         this.state = {
@@ -26,8 +30,9 @@ class NicknameForm extends Component {
                 <div className="nickname">
                     <form className="nickname__form">
                         <h1>Enter Your Nickname</h1>
-                        <input className="nickname__input" onChange={this._handleNicknameInput} ></input>
-                        <button className="nickname__button"onClick={this._handleNicknameSubmit}>Join Game</button>
+                        <Input type="input" onChange={this._handleNicknameInput} value={this.state.nickname}/>
+                        <Button type="button" onClick={this._handleNicknameSubmit} text="Start Game"/>
+                       
                     </form>
                 </div>
             </>
