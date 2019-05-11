@@ -35,8 +35,8 @@ components/
       UserCount/
         UserCount.js
         UserCount.scss
-  AskQuestions/
-    AskQuestions.js // Smart component with no UI
+  PlayGame/
+    PlayGame.js // Smart component with no UI
     Question/
       Question.js
       Question.scss

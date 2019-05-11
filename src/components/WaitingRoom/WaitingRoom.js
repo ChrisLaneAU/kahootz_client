@@ -16,8 +16,6 @@ class WaitingRoom extends Component {
   componentDidMount() {
     axios.get("http://localhost:3000/quizes.json").then(quizzes => {
       const question = quizzes.data[0].questions[0];
-      console.log("question", question);
-      console.log("data", quizzes.data[0]);
       this.setState({
         question_id: question.id,
         question: question.content,
@@ -28,7 +26,6 @@ class WaitingRoom extends Component {
 
   render() {
     const { question_id, question, answers } = this.state;
-    console.log(question_id);
     return (
       <>
         <h1>Waiting Room</h1>
