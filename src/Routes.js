@@ -5,10 +5,16 @@ import {
   Switch,
   Redirect
 } from "react-router-dom";
+
 import JoinGame from "./components/JoinGame/JoinGame";
 import WaitingRoom from "./components/WaitingRoom/WaitingRoom";
 import PlayGame from "./components/PlayGame/PlayGame";
 import PostGame from "./components/PostGame/PostGame";
+
+import Login from "./components/Login/Login";
+import SignUp from "./components/SignUp/SignUp";
+import Dashboard from "./components/Dashboard/Dashboard";
+import CreateQuiz from "./components/CreateQuiz/CreateQuiz";
 
 const Routes = (
   <Router>
@@ -30,6 +36,14 @@ const Routes = (
           path="/post-game"
           render={props => <PostGame {...props} />}
         />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={SignUp} />
+        <Route
+          exact
+          path="/dashboard"
+          render={props => <Dashboard {...props} />}
+        />
+        <Route exact path="/create-quiz" component={CreateQuiz} />
         <Route render={() => <Redirect to="/" />} />
       </Switch>
     </div>

@@ -24,23 +24,34 @@ class WaitingRoom extends Component {
     });
   }
 
-  render() {
+  renderStartGameLink() {
     const { question_id, question, answers } = this.state;
+
+    return (
+      <Link
+        to={{
+          pathname: `/game/${question_id}`,
+          state: {
+            question_id: question_id,
+            question: question,
+            answers: answers
+          }
+        }}
+      >
+        Start Game
+      </Link>
+    );
+  }
+
+  render() {
     return (
       <>
         <h1>Waiting Room</h1>
-        <Link
-          to={{
-            pathname: `/game/${question_id}`,
-            state: {
-              question_id: question_id,
-              question: question,
-              answers: answers
-            }
-          }}
-        >
-          Start Game
-        </Link>
+        {this.state.question_id === "" ? (
+          <p>Loading...</p>
+        ) : (
+          this.renderStartGameLink()
+        )}
         <p>{JSON.stringify(this.state.quiz)}</p>
       </>
     );
