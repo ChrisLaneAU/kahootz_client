@@ -72,10 +72,48 @@ components/
       Positions.js
       Positions.scss
 
-////// USER /////////
+////// USER ONLY /////////
 
   PlaceMedal/
     PlaceMedal.js
+    PlaceMedal.scss
 
   GameOver/
     GameOver.js
+    GameOver.scss
+
+
+////// ADMIN ONLY /////////
+
+  Login/
+    Login.js
+    Login.scss
+
+  SignUp/
+    Signup.js
+    Signup.scss
+
+  Dashboard/
+    Dashboard.js
+    Header/ // should be taken from sharedUI
+      Header.js
+      Header.scss
+    Card/
+      Card.js
+      Card.scss
+
+  CreateQuiz/ // if we get time
+    CreateQuiz.js
+    Questions/
+      Questions.js
+      Question/
+        Question.js
+        Question.scss
+      Answer/
+        Answer.js
+        Answer.scss
+    SelectedQuestions/
+      SelectedQuestions.js
+      QuestionsList/
+        QuestionsList.js
+        QuestionsList.scss
