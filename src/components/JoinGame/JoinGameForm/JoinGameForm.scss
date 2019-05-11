@@ -2,26 +2,18 @@
 
 .joingame{
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 40%;
+    width: 30%;
     text-align: center;
     border: 2px solid $color-grey;
     border-radius: 5px;
-    height: 50%;
+    height: 45%;
+    box-shadow: 0 3rem 6rem rgba($color-black, 0.3);
     
     &__form{
         color: $color-black;
         margin-top: 20%;
-    }
-
-    &__input{
-        color: black;
-    }
-
-    &__button{
-        color: black
-        
     }
  }
