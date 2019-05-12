@@ -34,14 +34,14 @@ class Scoreboard extends Component {
   }
 
   render() {
-    //if (!this.props.location.state) return <Redirect to="/" />;
-    //const { question_id, question, answers } = this.props.location.state;
+    if (!this.props.location.state) return <Redirect to="/" />;
+    const { question_id, question, answers } = this.props.location.state;
     return (
       <>
-        <h1>Game started: Question {"question_id"}...</h1>
-        <Question question={"question"} />
+        <h1>Game started: Question {question_id}...</h1>
+        <Question question={question} />
         <AnswerGraph answers={this.state.answers} />
-        <SelectAnswerButton answers={"answers"} />
+        <SelectAnswerButton answers={answers} />
       </>
     );
   }
