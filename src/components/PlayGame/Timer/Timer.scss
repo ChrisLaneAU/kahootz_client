@@ -21,6 +21,24 @@
     }
 }
 
+.skip-link {
+    position: absolute;
+    right: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid $color-white;
+    text-align: center;
+    box-shadow: 0 3rem 6rem rgba($color-black, 0.5);
+    background-image: linear-gradient(to right bottom, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+    font-size: 35px;
+}
+
+.skip-link a {
+    color: $color-white;
+    text-decoration: none;
+}
+
 
    
 

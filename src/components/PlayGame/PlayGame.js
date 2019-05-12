@@ -14,7 +14,7 @@ const PlayGame = props => {
       <h1>Question {question_id}...</h1>
       
       <Question question={question} />
-      <Timer startCount = '20' />
+      <Timer state= { props.location.state } startCount = '20' />
       <SelectAnswerButton answers={answers} />
     </>
   );

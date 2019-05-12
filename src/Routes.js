@@ -29,14 +29,15 @@ const Routes = (
         />
         <Route
           exact
-          path="/game/:id"
-          render={props => <PlayGame {...props} />}
-        />
-        <Route
-          exact
           path="/game/:id/scoreboard"
           render={props => <Scoreboard {...props} />}
         />
+        <Route
+          exact
+          path="/game/:id"
+          render={props => <PlayGame {...props} />}
+        />
+  
         <Route
           exact
           path="/post-game"
