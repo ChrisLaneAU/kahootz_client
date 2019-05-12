@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import Timer from "./Timer/Timer"
+import Timer from "./Timer/Timer";
 import Question from "./Question/Question";
 import SelectAnswerButton from "./SelectAnswerButton/SelectAnswerButton";
 
@@ -12,7 +12,7 @@ const PlayGame = props => {
   return (
     <>
       <h1>Question {question_id}...</h1>
-      
+
       <Question question={question} />
       <Timer state= { props.location.state } startCount = '20' />
       <SelectAnswerButton answers={answers} />
