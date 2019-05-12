@@ -26,7 +26,8 @@ class JoinGame extends Component {
       currentUI = <JoinGameForm click={this._submitPin} />;
     }
 
-    return <>{currentUI}</>;
+    return <>
+    {currentUI}</>;
   }
 }
 
