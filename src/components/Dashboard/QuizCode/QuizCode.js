@@ -8,8 +8,6 @@ const QuizCode = () => {
 
   let [ gameNum, getGameNum ] = useState(0)
 
-  console.log(gameNum);
-
   useEffect(() => {
      axios.post(SERVER_URL_PUT, { new_game: true } ).then((results) => {
        axios.get(SERVER_URL_GET).then((result) => {
