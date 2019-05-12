@@ -1,0 +1,26 @@
+@import '../../../styles/_variables.scss';
+
+.timer{
+    margin: 15px 15px;
+
+    &__face{
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        border: 2px solid $color-white;
+        text-align: center;
+        box-shadow: 0 3rem 6rem rgba($color-black, 0.5);
+        background-image: linear-gradient(to right bottom, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+
+    }
+
+    &__numbers{
+        color: $color-white;
+        margin-top: 20px;
+        font-size: 45px;
+    }
+}
+
+
+   
+
