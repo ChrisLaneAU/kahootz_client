@@ -16,7 +16,6 @@ const PlayGame = props => {
       <Question question={question} />
       <Timer startCount = '20' />
       <SelectAnswerButton answers={answers} />
-     
     </>
   );
 };
