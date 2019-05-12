@@ -11,7 +11,7 @@ const PlayGame = props => {
 
   return (
     <>
-      <h1>Question {question_id}...</h1>
+      {/* <h1>Question {question_id}...</h1> */}
       
       <Question question={question} />
       <Timer startCount = '20' />

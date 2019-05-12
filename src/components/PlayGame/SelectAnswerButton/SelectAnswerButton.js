@@ -7,7 +7,7 @@ const SelectAnswerButton = ({ answers }) => {
       
       <div className ="answerbutton">
       <div className="answerbutton__answer" key={answer.id}>
-        <Link className="answerbutton__answer-1" to="/post-game">{answer.answer}</Link>
+        <Link className="answerbutton__answertext" to="/post-game">{answer.answer}</Link>
       </div>
       </div>
  
