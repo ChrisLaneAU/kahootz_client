@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from "react-router-dom";
 import "./Timer.scss"
 class Timer extends Component {
     constructor(props){
@@ -9,8 +10,22 @@ class Timer extends Component {
     } 
 
     render() {
+        const { question_id, question, answers } = this.props.state;
+
         return (
          <div className="timer">
+         <button className="skip-link">
+            <Link to={{
+                        pathname: `/game/${question_id}/scoreboard`,
+                        state: {
+                            question_id: question_id,
+                            question: question,
+                            answers: answers
+                            }
+                        }}
+                    > Skip
+            </Link>
+                </button>
             <div className="timer__face">
                 <div className="timer__numbers">  
                     <p>{this.state.count}</p>

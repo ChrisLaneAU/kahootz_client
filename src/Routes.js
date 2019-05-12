@@ -22,6 +22,7 @@ const Routes = (
     <div>
       <Switch>
         <Route exact path="/" component={JoinGame} />
+
         <Route
           exact
           path="/waiting-room"
@@ -37,7 +38,7 @@ const Routes = (
           path="/game/:id/scoreboard"
           render={props => <Scoreboard {...props} />}
         />
-        
+  
         <Route
           exact
           path="/post-game"
@@ -47,7 +48,7 @@ const Routes = (
         <Route exact path="/signup" component={SignUp} />
         <Route
           exact path="/dashboard"
-          
+
           render={props => <Dashboard {...props} />}
         />
         <Route exact path="/create-quiz" component={CreateQuiz} />
