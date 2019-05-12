@@ -15,6 +15,7 @@ import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
 import Dashboard from "./components/Dashboard/Dashboard";
 import CreateQuiz from "./components/CreateQuiz/CreateQuiz";
+import Scoreboard from "./components/Scoreboard/Scoreboard";
 
 const Routes = (
   <Router>
@@ -30,6 +31,11 @@ const Routes = (
           exact
           path="/game/:id"
           render={props => <PlayGame {...props} />}
+        />
+        <Route
+          exact
+          path="/game/:id/scoreboard"
+          render={props => <Scoreboard {...props} />}
         />
         <Route
           exact
