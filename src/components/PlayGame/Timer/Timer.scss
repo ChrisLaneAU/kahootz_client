@@ -10,7 +10,7 @@
         border: 2px solid $color-white;
         text-align: center;
         box-shadow: 0 3rem 6rem rgba($color-black, 0.5);
-        background-image: linear-gradient(to right bottom, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+        background-image: linear-gradient(to right bottom, $timer-color-light 0%,  $timer-color-dark 100%);
 
     }
 
@@ -22,15 +22,18 @@
 }
 
 .skip-link {
+    
     position: absolute;
     right: 0;
+    margin-right: 30px;
+    
     width: 100px;
     height: 100px;
     border-radius: 50%;
     border: 2px solid $color-white;
     text-align: center;
     box-shadow: 0 3rem 6rem rgba($color-black, 0.5);
-    background-image: linear-gradient(to right bottom, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+    background-image: linear-gradient(to right bottom, $timer-color-light 0%,  $timer-color-dark 100%);
     font-size: 35px;
 }
 

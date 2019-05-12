@@ -1,24 +1,35 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./SelectAnswerButton.scss"
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStroopwafel } from '@fortawesome/free-solid-svg-icons'
 
+library.add(faStroopwafel)
 
 
 
 const SelectAnswerButton = ({ answers }) => {
   
-  const getStyle = function () {
-    const list = ["answerbuttonBlue", "answerbuttonGreen", "answerbuttonYellow", "answerbuttonRed"]
+  const styleList = ["answerbuttonBlue", "answerbuttonGreen", "answerbuttonYellow", "answerbuttonRed"]
+  const getStyle = function (){
     
-  }
-
+    let len = styleList.length;
+    let randomNum = Math.floor(Math.random()*len);
+    let style = styleList[randomNum];
+    styleList.splice(randomNum, 1);
+    return style;
+}
   const renderAnswers = answers.map(answer => {
     return (
       
+      
+      
       <div className = {getStyle()}>
-      <div className="answerbutton__answer" key={answer.id}>
+        <div className="answerbutton__answer" key={answer.id}>
         <Link className="answerbutton__answertext" to="/post-game">{answer.answer}</Link>
-      </div>
+            
+        </div>
       </div>
  
           );
@@ -27,7 +38,7 @@ const SelectAnswerButton = ({ answers }) => {
   return (
     <>
     <div className = "display">
-      <div>{renderAnswers}</div>
+      {renderAnswers}
       </div>
     </>
   );

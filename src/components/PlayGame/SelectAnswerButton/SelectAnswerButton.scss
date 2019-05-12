@@ -3,6 +3,12 @@
 .display {
     margin-top: 6%;
     text-align: center;
+    
+}
+
+a:-webkit-any-link {
+    text-decoration: none;
+    color: $color-white;
 }
 
 .answerbutton {
@@ -14,15 +20,17 @@
     border-radius: 5px;
     background-image: linear-gradient(to right bottom, $color-blue-light 0%, $color-blue-dark 100%);
     box-shadow: 0 3rem 6rem rgba($color-black, 0.3);
+    
 
     &__answer {
         margin-top: 75px;
         font-size: 40px;
+ 
     }
     &__answertext a {
         margin-top: 50px;
         color: $color-white;
-        text-decoration: none; 
+      
     }
 }
 
