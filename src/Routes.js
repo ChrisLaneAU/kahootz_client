@@ -22,6 +22,7 @@ const Routes = (
     <div>
       <Switch>
         <Route exact path="/" component={JoinGame} />
+
         <Route
           exact
           path="/waiting-room"
@@ -37,6 +38,7 @@ const Routes = (
           path="/game/:id"
           render={props => <PlayGame {...props} />}
         />
+  
         <Route
           exact
           path="/post-game"
