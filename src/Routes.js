@@ -30,13 +30,13 @@ const Routes = (
         />
         <Route
           exact
-          path="/game/:id/scoreboard"
-          render={props => <Scoreboard {...props} />}
+          path="/game/:id"
+          render={props => <PlayGame {...props} />}
         />
         <Route
           exact
-          path="/game/:id"
-          render={props => <PlayGame {...props} />}
+          path="/game/:id/scoreboard"
+          render={props => <Scoreboard {...props} />}
         />
   
         <Route
@@ -47,8 +47,8 @@ const Routes = (
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
         <Route
-          exact
-          path="/dashboard"
+          exact path="/dashboard"
+
           render={props => <Dashboard {...props} />}
         />
         <Route exact path="/create-quiz" component={CreateQuiz} />
