@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Question from './Question/Question';
+import Question from '../PlayGame/Question/Question';
 import AnswerGraph from './AnswerGraph/AnswerGraph';
-import SelectAnswerButton from './SelectAnswerButton/SelectAnswerButton'
+import SelectAnswerButton from '../PlayGame/SelectAnswerButton/SelectAnswerButton'
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import _ from 'underscore'
@@ -17,17 +17,22 @@ class Scoreboard extends Component {
   };
 
   componentDidMount(){
-    axios.get(GAME_URL + '1.json').then((results) => {
-      console.log(results.data.players);
-      const answers_arr = _.pluck(results.data.players, 'answer');
+    this.getPlayerData();
+  }
 
+  getPlayerData(){
+    axios.get(GAME_URL + '1.json').then((results) => {
+      // gets the players answers into an array
+      const answers_arr = _.pluck(results.data.players, 'answer');
+      // converts the array into an object like {a:1, b:4 etc}
       const count = _.countBy(answers_arr, (l) => {
         return l
       })
 
-      this.setState({ answers: count })
-  })
-}
+      this.setState({ answers: count });
+      
+    });
+  }
 
   render() {
     if (!this.props.location.state) return <Redirect to="/" />;

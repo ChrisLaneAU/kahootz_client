@@ -7,8 +7,8 @@ const AnswerGraph = ( props ) => {
     labels: ["A", "B", "C", "D"],
     datasets: [{
       label: false,
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgb(255, 99, 132)',
+      backgroundColor: ['#c24141', '#4b6cb7', '#ebeb44','#7b972a'],
+      borderColor: 'white',
       data: [a, b, c, d ],
     }]
 }
@@ -24,6 +24,14 @@ const AnswerGraph = ( props ) => {
           return tooltipItem.yLabel;
         }
       }
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          stepSize: 1
+        }
+      }]
     }
     };
   return(

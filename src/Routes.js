@@ -45,8 +45,7 @@ const Routes = (
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
         <Route
-          exact
-          path="/dashboard"
+          exact path="/dashboard"
           render={props => <Dashboard {...props} />}
         />
         <Route exact path="/create-quiz" component={CreateQuiz} />
