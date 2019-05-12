@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Question from "../PlayGame/Question/Question";
 import AnswerGraph from "./AnswerGraph/AnswerGraph";
 import SelectAnswerButton from "../PlayGame/SelectAnswerButton/SelectAnswerButton";
-import { Redirect } from "react-router-dom";
 import axios from "axios";
 import _ from "underscore";
 
@@ -34,14 +33,14 @@ class Scoreboard extends Component {
   }
 
   render() {
-    //if (!this.props.location.state) return <Redirect to="/" />;
-    //const { question_id, question, answers } = this.props.location.state;
+    if (!this.props.location.state) return <Redirect to="/" />;
+    const { question_id, question, answers } = this.props.location.state;
     return (
       <>
-        <h1>Game started: Question {"question_id"}...</h1>
-        <Question question={"question"} />
+        <h1>Game started: Question {question_id}...</h1>
+        <Question question={question} />
         <AnswerGraph answers={this.state.answers} />
-        <SelectAnswerButton answers={"answers"} />
+        <SelectAnswerButton answers={answers} />
       </>
     );
   }

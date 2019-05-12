@@ -1,6 +1,7 @@
 // see https://medium.com/@vickdayaram/using-chart-js-with-react-324b7fac8ee6
 import React from 'react'
 import { Bar } from 'react-chartjs-2'
+import './AnswerGraph.scss'
 const AnswerGraph = ( props ) => {
   const { a, b, c, d } = props.answers
   const data = {

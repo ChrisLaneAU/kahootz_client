@@ -5,8 +5,9 @@ class Timer extends Component {
     constructor(props){
         super(props)
         this.state = {
-            count: 20 
+            count: 20
         }
+        this._startCountdown = this._startCountdown.bind(this)
     } 
 
     render() {
@@ -36,11 +37,15 @@ class Timer extends Component {
     }
 
     _startCountdown = () =>{
-        if(this.state.count <= 0){
-        this.myInterval = setInterval(()=>{
-            this.setState(prevState =>({
-                count: prevState.count - 1
-            }))
+        const myInterval = setInterval(()=>{
+            this.setState({
+                count: this.state.count - 1
+            })
+
+            if ( this.state.count === 0 ){
+                clearInterval( myInterval )
+            };
+
         }, 1000)
     }
     }
