@@ -1,7 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import { Link } from "react-router-dom";
-
+import Timer from "./Timer/Timer"
 import Question from "./Question/Question";
 import SelectAnswerButton from "./SelectAnswerButton/SelectAnswerButton";
 
@@ -12,21 +11,11 @@ const PlayGame = props => {
 
   return (
     <>
-      <h1>Game started: Question {question_id}...</h1>
+      <h1>Question {question_id}...</h1>
+      
       <Question question={question} />
+      <Timer startCount = '20' />
       <SelectAnswerButton answers={answers} />
-      <Link
-        to={{
-          pathname: `/game/${question_id}/scoreboard`,
-          state: {
-            question_id: question_id,
-            question: question,
-            answers: answers
-          }
-        }}
-      >
-        Skip
-      </Link>
     </>
   );
 };

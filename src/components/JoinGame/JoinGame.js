@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import JoinGameForm from "./JoinGameForm/JoinGameForm";
 import NicknameForm from "./NicknameForm/NicknameForm";
+import Timer from "../PlayGame/Timer/Timer"
 
 class JoinGame extends Component {
   constructor() {
@@ -26,7 +27,8 @@ class JoinGame extends Component {
       currentUI = <JoinGameForm click={this._submitPin} />;
     }
 
-    return <>{currentUI}</>;
+    return <>{currentUI}
+    </>;
   }
 }
 
