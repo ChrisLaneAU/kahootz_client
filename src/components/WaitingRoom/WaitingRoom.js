@@ -14,7 +14,7 @@ class WaitingRoom extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:3000/quizes.json").then(quizzes => {
+    axios.get("http://localhost:3000/quizzes.json").then(quizzes => {
       const question = quizzes.data[0].questions[0];
       this.setState({
         question_id: question.id,
