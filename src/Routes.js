@@ -15,6 +15,7 @@ import Login from "./components/Login/Login";
 import SignUp from "./components/SignUp/SignUp";
 import Dashboard from "./components/Dashboard/Dashboard";
 import CreateQuiz from "./components/CreateQuiz/CreateQuiz";
+import Scoreboard from "./components/Scoreboard/Scoreboard";
 
 const Routes = (
   <Router>
@@ -33,14 +34,18 @@ const Routes = (
         />
         <Route
           exact
+          path="/game/:id/scoreboard"
+          render={props => <Scoreboard {...props} />}
+        />
+        <Route
+          exact
           path="/post-game"
           render={props => <PostGame {...props} />}
         />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={SignUp} />
         <Route
-          exact
-          path="/dashboard"
+          exact path="/dashboard"
           render={props => <Dashboard {...props} />}
         />
         <Route exact path="/create-quiz" component={CreateQuiz} />
