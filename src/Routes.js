@@ -22,6 +22,7 @@ const Routes = (
     <div>
       <Switch>
         <Route exact path="/" component={JoinGame} />
+
         <Route
           exact
           path="/waiting-room"
