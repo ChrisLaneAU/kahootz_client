@@ -1,19 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import "./SelectAnswerButton.scss"
 const SelectAnswerButton = ({ answers }) => {
   const renderAnswers = answers.map(answer => {
     return (
-      <li key={answer.id}>
-        <Link to="/post-game">{answer.answer}</Link>
-      </li>
-    );
+      
+      <div className ="answerbutton">
+      <div className="answerbutton__answer" key={answer.id}>
+        <Link className="answerbutton__answer-1" to="/post-game">{answer.answer}</Link>
+      </div>
+      </div>
+ 
+          );
   });
 
   return (
     <>
-      <p>Answers: </p>
-      <ul>{renderAnswers}</ul>
+    <div className = "display">
+      <div>{renderAnswers}</div>
+      </div>
     </>
   );
 };
