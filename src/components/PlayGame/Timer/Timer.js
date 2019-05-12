@@ -21,11 +21,13 @@ class Timer extends Component {
     }
 
     _startCountdown = () =>{
+        if(this.state.count <= 0){
         this.myInterval = setInterval(()=>{
             this.setState(prevState =>({
                 count: prevState.count - 1
             }))
         }, 1000)
+    }
     }
 
     componentDidMount(){
@@ -33,8 +35,10 @@ class Timer extends Component {
         this.setState({
             count: startCount
         })
+        
         this._startCountdown()
-    }
+    
+}
 
     _componentWillUnmount(){
         clearInterval(this.myInterval)

@@ -1,11 +1,21 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./SelectAnswerButton.scss"
+
+
+
+
 const SelectAnswerButton = ({ answers }) => {
+  
+  const getStyle = function () {
+    const list = ["answerbuttonBlue", "answerbuttonGreen", "answerbuttonYellow", "answerbuttonRed"]
+    
+  }
+
   const renderAnswers = answers.map(answer => {
     return (
       
-      <div className ="answerbutton">
+      <div className = {getStyle()}>
       <div className="answerbutton__answer" key={answer.id}>
         <Link className="answerbutton__answertext" to="/post-game">{answer.answer}</Link>
       </div>
