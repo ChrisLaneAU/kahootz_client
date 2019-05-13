@@ -31,7 +31,7 @@ class NewPlayerForm extends Component {
     return (
       <div className="newPlayerForm">
         <form onSubmit={this.handleSubmit}>
-          <label>New Player:</label>
+          <label>Enter Nickname:</label>
           <br />
           <input
             type="text"

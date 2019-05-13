@@ -13,11 +13,12 @@ class NewGameForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    fetch(`${API_ROOT}/games`, {
-      method: "POST",
-      headers: HEADERS,
-      body: JSON.stringify(this.state)
-    });
+    // fetch(`${API_ROOT}/games`, {
+    //   method: "POST",
+    //   headers: HEADERS,
+    //   body: JSON.stringify(this.state)
+    // });
+    this.props.setActiveGame(this.state.title);
     this.setState({ title: "" });
   };
 
@@ -25,7 +26,7 @@ class NewGameForm extends Component {
     return (
       <div className="newGamesForm">
         <form onSubmit={this.handleSubmit}>
-          <label>New Game:</label>
+          <label>Enter Pin:</label>
           <br />
           <input
             type="text"

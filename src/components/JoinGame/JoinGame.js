@@ -6,24 +6,28 @@ class JoinGame extends Component {
   constructor() {
     super();
     this.state = {
-      pin: false
+      pin: 0,
+      nickname: ""
     };
     this._submitPin = this._submitPin.bind(this);
+    this._submitNickname = this._submitNickname.bind(this);
   }
 
-  _submitPin(event) {
-    event.preventDefault();
-    this.setState({ pin: !this.state.pin });
-    console.log(event.target.value);
+  _submitPin(pin) {
+    this.setState({ pin });
+  }
+
+  _submitNickname(nickname) {
+    this.setState({ nickname })
   }
 
   render() {
     let currentUI = "";
 
     if (this.state.pin) {
-      currentUI = <NicknameForm />;
+      currentUI = <NicknameForm submitNickname={nickname => {this._submitNickname(nickname)}} gamePin={this.state.pin} />;
     } else {
-      currentUI = <JoinGameForm click={this._submitPin} />;
+      currentUI = <JoinGameForm click={pin => {this._submitPin(pin)}} />;
     }
 
     return <>{currentUI}

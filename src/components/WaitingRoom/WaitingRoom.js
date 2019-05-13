@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import GamePin from "./GamePin/GamePin";
 
 // ACTIONCABLE
-import { ActionCable } from "react-actioncable-provider";
-import { API_ROOT } from "../../constants";
+import { ActionCableConsumer } from "react-actioncable-provider";
+import { API_ROOT, HEADERS } from "../../constants";
 import NewGameForm from "./NewGameForm/NewGameForm";
 import PlayersArea from "./PlayersArea/PlayersArea";
 import Cable from "./Cable/Cable";
@@ -18,7 +19,8 @@ class WaitingRoom extends Component {
       question: "",
       answers: [],
       games: [],
-      activeGame: ""
+      activeGame: "",
+      activePin: ""
     };
   }
 
@@ -26,7 +28,18 @@ class WaitingRoom extends Component {
     // ACTIONCABLE
     fetch(`${API_ROOT}/games`)
       .then(res => res.json())
-      .then(games => this.setState({ games }));
+      .then(games => this.setState({ games }))
+      .then(() => {
+        if (this.props.location.state.gamePin) {
+          const { gamePin, nickname } = this.props.location.state;
+          this._setActiveGame(gamePin);
+          fetch(`${API_ROOT}/players`, {
+            method: "POST",
+            headers: HEADERS,
+            body: JSON.stringify({ nickname, game_id: this.state.activeGame})
+          });
+        };
+      });
 
     axios.get("http://localhost:3000/quizzes.json").then(quizzes => {
       const question = quizzes.data[0].questions[0];
@@ -36,6 +49,8 @@ class WaitingRoom extends Component {
         answers: question.answers
       });
     });
+
+
   }
 
   // ACTIONCABLE
@@ -77,15 +92,20 @@ class WaitingRoom extends Component {
     );
   }
 
+  _setActiveGame(gameTitle) {
+    const game = this.state.games.find(game => game.title === gameTitle);
+    this.setState({ activeGame: game.id, activePin: gameTitle })
+  }
+
   render() {
     // ACTIONCABLE
-    const { games, activeGame } = this.state;
+    const { games, activeGame, activePin } = this.state;
 
     return (
       <>
         <h1>Waiting Room</h1>
-        <h3>-=-=-=-==-=-=ACTION CABLE START-=-=-=-==-=-=</h3>
-        <ActionCable
+        <GamePin gamePin={activePin}/>
+        <ActionCableConsumer
           channel={{ channel: "GamesChannel" }}
           onReceived={this.handleReceivedGame}
         />
@@ -95,13 +115,12 @@ class WaitingRoom extends Component {
             handleReceivedPlayer={this.handleReceivedPlayer}
           />
         ) : null}
-        <h2>Games</h2>
+        {/*<h2>Games</h2>
         <ul>{mapGames(games, this.handleClick)}</ul>
-        <NewGameForm />
+        <NewGameForm setActiveGame={(gameTitle) => {this._setActiveGame(gameTitle)}} />*/}
         {activeGame ? (
           <PlayersArea game={findActiveGame(games, activeGame)} />
         ) : null}
-        <h3>-=-=-=-==-=-=ACTION CABLE END-=-==-=-=</h3>
         {this.state.question_id === "" ? (
           <p>Loading...</p>
         ) : (
