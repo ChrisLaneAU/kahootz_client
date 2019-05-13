@@ -48,19 +48,18 @@ class Timer extends Component {
 
         }, 1000)
     }
-    }
+    
 
-    componentDidMount(){
+    componentDidMount = () => {
         const {startCount} = this.props
         this.setState({
             count: startCount
         })
         
         this._startCountdown()
-    
-}
+    }
 
-    _componentWillUnmount(){
+    _componentWillUnmount = () => {
         clearInterval(this.myInterval)
     }
 

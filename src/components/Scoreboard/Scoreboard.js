@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Redirect } from "react";
 import Question from "../PlayGame/Question/Question";
 import AnswerGraph from "./AnswerGraph/AnswerGraph";
 import SelectAnswerButton from "../PlayGame/SelectAnswerButton/SelectAnswerButton";
