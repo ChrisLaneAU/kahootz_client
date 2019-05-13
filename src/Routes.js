@@ -17,45 +17,50 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import CreateQuiz from "./components/CreateQuiz/CreateQuiz";
 import Scoreboard from "./components/Scoreboard/Scoreboard";
 
+import { ActionCableProvider } from 'react-actioncable-provider';
+import { API_WS_ROOT } from './constants';
+
 const Routes = (
-  <Router>
-    <div>
-      <Switch>
-        <Route exact path="/" component={JoinGame} />
+  <ActionCableProvider url={API_WS_ROOT}>
+    <Router>
+      <div>
+        <Switch>
+          <Route exact path="/" component={JoinGame} />
 
-        <Route
-          exact
-          path="/waiting-room"
-          render={props => <WaitingRoom {...props} />}
-        />
-        <Route
-          exact
-          path="/game/:id"
-          render={props => <PlayGame {...props} />}
-        />
-        <Route
-          exact
-          path="/game/:id/scoreboard"
-          render={props => <Scoreboard {...props} />}
-        />
-  
-        <Route
-          exact
-          path="/post-game"
-          render={props => <PostGame {...props} />}
-        />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={SignUp} />
-        <Route
-          exact path="/dashboard"
+          <Route
+            exact
+            path="/waiting-room"
+            render={props => <WaitingRoom {...props} />}
+          />
+          <Route
+            exact
+            path="/game/:id"
+            render={props => <PlayGame {...props} />}
+          />
+          <Route
+            exact
+            path="/game/:id/scoreboard"
+            render={props => <Scoreboard {...props} />}
+          />
 
-          render={props => <Dashboard {...props} />}
-        />
-        <Route exact path="/create-quiz" component={CreateQuiz} />
-        <Route render={() => <Redirect to="/" />} />
-      </Switch>
-    </div>
-  </Router>
+          <Route
+            exact
+            path="/post-game"
+            render={props => <PostGame {...props} />}
+          />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/signup" component={SignUp} />
+          <Route
+            exact path="/dashboard"
+
+            render={props => <Dashboard {...props} />}
+          />
+          <Route exact path="/create-quiz" component={CreateQuiz} />
+          <Route render={() => <Redirect to="/" />} />
+        </Switch>
+      </div>
+    </Router>
+  </ActionCableProvider>
 );
 
 export default Routes;

@@ -34,7 +34,7 @@ class Scoreboard extends Component {
   }
 
   render() {
-    if (!this.props.location.state) return <Redirect to="/" />;
+    //if (!this.props.location.state) return <Redirect to="/" />;
     const { question_id, question, answers } = this.props.location.state;
     return (
       <>
