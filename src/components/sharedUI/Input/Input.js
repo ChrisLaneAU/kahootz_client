@@ -8,8 +8,10 @@ const Input = (props) => {
     return(
         <input
         onChange={handlChange} 
-        className={props.type} 
+        className={props.class} 
         value={props.value}
+        type={props.type || "text"}
+        placeholder={props.placeholder}
         >
         </input>
     )

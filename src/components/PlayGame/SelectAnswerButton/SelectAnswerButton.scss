@@ -6,10 +6,7 @@
     
 }
 
-a:-webkit-any-link {
-    text-decoration: none;
-    color: $color-white;
-}
+
 
 .answerbutton {
     display: inline-block;
@@ -27,9 +24,10 @@ a:-webkit-any-link {
         font-size: 40px;
  
     }
-    &__answertext a {
+    &__answertext{
         margin-top: 50px;
         color: $color-white;
+        text-decoration: none;
       
     }
 }

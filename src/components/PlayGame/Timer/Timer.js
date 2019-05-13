@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import "./Timer.scss"
-class Timer extends Component {
+
+export default class Timer extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -48,7 +49,7 @@ class Timer extends Component {
 
         }, 1000)
     }
-    }
+    
 
     componentDidMount(){
         const {startCount} = this.props
@@ -57,13 +58,10 @@ class Timer extends Component {
         })
         
         this._startCountdown()
-    
-}
-
-    _componentWillUnmount(){
-        clearInterval(this.myInterval)
     }
 
-}
 
-export default Timer;
+    componentWillUnmount(){
+        clearInterval(this.myInterval)
+    }
+}

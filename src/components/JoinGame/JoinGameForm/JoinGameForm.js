@@ -23,7 +23,7 @@ class JoinGameForm extends Component {
             <div className="joingame">
                 <form className="joingame__form">
                     <h1>Join Game</h1>
-                    <Input onChange={this._handlePinInput} type="input" value={this.state.pin}/>
+                    <Input onChange={this._handlePinInput} type="text" class="input" value={this.state.pin}/>
                     <Button text="Join Game" onClick={this.props.click} type="button" />
                 </form>
             </div>
