@@ -9,7 +9,6 @@ const USER_TOKEN_URL = "https://kahootz.herokuapp.com/quizzes/user_token" // cha
 
 class Login extends Component {
   constructor() {
-
     super();
     this.state = {
       email: "",

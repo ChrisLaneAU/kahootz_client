@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Redirect} from 'react-router-dom'
 import Question from "../PlayGame/Question/Question";
 import AnswerGraph from "./AnswerGraph/AnswerGraph";
 import SelectAnswerButton from "../PlayGame/SelectAnswerButton/SelectAnswerButton";

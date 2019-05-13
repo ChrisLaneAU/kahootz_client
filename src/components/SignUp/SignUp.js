@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component, Redirect } from "react";
 import { Link } from "react-router-dom";
 import './SignUp.scss'
 import Input from '../sharedUI/Input/Input'
