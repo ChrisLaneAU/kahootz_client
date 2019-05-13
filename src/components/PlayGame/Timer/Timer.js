@@ -8,7 +8,7 @@ class Timer extends Component {
             count: 20
         }
         this._startCountdown = this._startCountdown.bind(this)
-    } 
+    }
 
     render() {
         const { question_id, question, answers } = this.props.state;
@@ -28,7 +28,7 @@ class Timer extends Component {
             </Link>
                 </button>
             <div className="timer__face">
-                <div className="timer__numbers">  
+                <div className="timer__numbers">
                     <p>{this.state.count}</p>
                 </div>
              </div>
@@ -55,9 +55,10 @@ class Timer extends Component {
         this.setState({
             count: startCount
         })
-        
+
         this._startCountdown()
     }
+
 
     _componentWillUnmount = () => {
         clearInterval(this.myInterval)
