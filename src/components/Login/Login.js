@@ -6,7 +6,7 @@ import Input from '../sharedUI/Input/Input'
 import Button from '../sharedUI/Button/Button'
 import axios from 'axios'
 
-const USER_TOKEN_URL = "http://localhost:3000/quizzes/user_token" // change to heroku
+const USER_TOKEN_URL = "https://kahootz.herokuapp.com/quizzes/user_token" // change to heroku
 
 class Login extends Component {
   constructor() {

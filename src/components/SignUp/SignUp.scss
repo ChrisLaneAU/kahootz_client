@@ -1,0 +1,28 @@
+@import '../../styles/variables';
+
+.signup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  text-align: center;
+  border: 2px solid $color-grey;
+  border-radius: 5px;
+  height: 60%;
+  box-shadow: 0 3rem 6rem rgba($color-black, 0.3);
+
+  &__form {
+    color: $color-black;
+    margin-top: 10%;
+  }
+}
+
+.small {
+  color: $color-grey;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-blue-dark
+  }
+}
