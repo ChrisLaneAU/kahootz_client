@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 import { Link } from "react-router-dom";
 import './Login.scss'
 import Input from '../sharedUI/Input/Input'
@@ -66,11 +66,13 @@ class Login extends Component {
         </form>
       </div>
 
+
       // <Link to="/signup">Sign Up</Link>
       // <Link to="/dashboard">Log In</Link>
 
-    );
-  }
+
+  );
+}
 };
 
 export default Login;
