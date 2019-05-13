@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from "react-router-dom";
 import "./Card.scss"
 import gk from './img/generalknowledge.jpg';
 import boardgame from './img/boardgame.jpg';
@@ -26,55 +25,38 @@ class Card extends Component {
          {
              case "General Knowledge":
                 return gk;
-                break;
             case "Entertainment: Books":
                 return books
-                break;
             case "Entertainment: Film":
                 return film
-                break;
             case "Entertainment: Music":
                 return music
-                break;
             case "Entertainment: Television":
                 return tele
-                break;
             case "Entertainment: Video Games":
                 return video
-                break;
             case "Entertainment: Board Games":
                 return boardgame
-                break;
             case "Science & Nature":
                 return nature
-                break;
             case "Science: Computers":
                 return computer
-                break;
             case "Mythology":
                 return myth
-                break;
             case "Sports":
                 return sport
-                break;
             case "Geography":
                 return geo
-                break;
             case "History":
                 return history
-                break;
             case "Celebrities":
                 return celebrity
-                break;
             case "Vehicles":
                 return vehicle
-                break;
             case "Entertainment: Japanese Anime & Manga":
                 return manga
-                break;
             case "Entertainment: Cartoon & Animations":
                 return cartoon
-                break;
             default: 
                 console.log("Image NOT Found");
                 break;
