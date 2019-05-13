@@ -1,0 +1,57 @@
+@import '../../../styles/_variables.scss';
+
+
+.header{
+    position: fixed;
+    width: 100vw;
+    color: $color-white;
+    padding: 30px;
+    height: 100px;
+    margin-bottom: 200px;
+    background-image: linear-gradient(to right bottom, $color-blue-light 0%, $color-blue-dark 100%);
+}
+
+
+.display{
+
+}
+
+.podium{
+    
+    &__first{
+        animation: createBox 1s;
+        background-image: linear-gradient(to right bottom, $color-yellow-light 0%, $color-yellow-dark 100%);
+        height: 500px;
+        width: 300px;
+        display: inline-block;
+
+        &-place{
+            border: 1px solid black;
+            height: 50px;
+        }
+    }
+  
+    &__second{
+        
+        animation: createBox 1s;
+        background-image: linear-gradient(to right bottom, $color-green-light 0%, $color-green-dark 100%);
+        height:375px;
+        width: 300px;
+        display: inline-block;
+    }
+    &__third{
+        animation: createBox 1s;
+        background-image: linear-gradient(to right bottom, $color-red-light 0%, $color-red-dark 100%);
+        height: 300px;
+        width: 300px;
+        display: inline-block;
+    }
+}
+// @keyframes createBox {
+//     from {
+//       transform: scale(0)
+//     }
+//     to {
+//       transform: scale(1);
+//     }
+//   }

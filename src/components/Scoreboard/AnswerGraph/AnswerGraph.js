@@ -2,6 +2,8 @@
 import React from 'react'
 import { Bar } from 'react-chartjs-2'
 import './AnswerGraph.scss'
+import '../../../styles/_variables.scss';
+
 const AnswerGraph = ( props ) => {
   const { a, b, c, d } = props.answers
   const data = {
