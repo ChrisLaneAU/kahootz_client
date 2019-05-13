@@ -16,6 +16,7 @@
     overflow: hidden;
     transition: all 0.4s;
     cursor: pointer;
+    color: $color-black;
     
     &:hover {
         transform: translateY(-.1rem) scale(1.03);
