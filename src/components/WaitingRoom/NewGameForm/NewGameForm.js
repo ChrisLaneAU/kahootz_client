@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from "axios";
 import { API_ROOT, HEADERS } from "../../../constants";
 
 class NewGameForm extends Component {

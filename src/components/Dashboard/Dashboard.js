@@ -5,6 +5,7 @@ import axios from "axios"
 import QuizCode from "./QuizCode/QuizCode";
 import Card from "./Card/Card"
 
+const QUIZ_URL = "https://kahootz.herokuapp.com/quizzes.json"
 
 class Dashboard extends Component {
   constructor() {
@@ -16,17 +17,35 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:3000/quizzes.json").then(quizzes => {
+    axios.get(QUIZ_URL).then(quizzes => {
       this.setState({
         quizzes: quizzes.data
       });
+      console.log("this is the quizzes", quizzes);
     });
   }
 
   renderCards() {
     return this.state.quizzes.map(quiz => {
-      console.log("TEST");
-      return <Card category={quiz.category} difficulty={quiz.difficulty} questions={quiz.questions} />
+      return (
+        <Link
+          key={ quiz.id }
+          to={{
+            pathname: '/waiting-room',
+            state: {
+              category: quiz.category,
+              difficulty: quiz.difficulty,
+              questions: quiz.questions,
+              answers: quiz.answers
+            }
+          }}
+        >
+          <Card key={quiz.id} category={quiz.category} difficulty={quiz.difficulty} questions={quiz.questions} />
+
+      </Link>
+
+     
+      ) 
     })
   }
 

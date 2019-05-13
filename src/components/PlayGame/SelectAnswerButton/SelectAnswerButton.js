@@ -2,10 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./SelectAnswerButton.scss"
 
-
-
-
-
 const SelectAnswerButton = ({ answers }) => {
   
   const styleList = ["answerbuttonBlue", "answerbuttonGreen", "answerbuttonYellow", "answerbuttonRed"]

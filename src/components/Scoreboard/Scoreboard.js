@@ -1,9 +1,4 @@
-<<<<<<< HEAD
-import React, { Component, Redirect } from "react";
-=======
 import React, { Component } from "react";
-import {Redirect} from 'react-router-dom'
->>>>>>> 79ada1ce22776c53841a4a761be60d1e480fa50a
 import Question from "../PlayGame/Question/Question";
 import AnswerGraph from "./AnswerGraph/AnswerGraph";
 import SelectAnswerButton from "../PlayGame/SelectAnswerButton/SelectAnswerButton";
