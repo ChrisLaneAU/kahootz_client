@@ -10,7 +10,7 @@
     width: 150px;
     font-size: 20px;
     font-family: 'Montserrat';
-    background-image: linear-gradient(to right, #77A1D3 0%, #79CBCA 51%, #77A1D3 100%);
+    background-image: linear-gradient(to right bottom, $color-blue-light 0%, $color-blue-dark 100%);
     transition: all 0.3s;
 
     &:hover {

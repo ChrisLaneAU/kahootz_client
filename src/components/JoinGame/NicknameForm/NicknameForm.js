@@ -35,7 +35,8 @@ class NicknameForm extends Component {
           <form className="nickname__form">
             <h1>Enter Your Nickname</h1>
             <Input
-              type="input"
+              type="text"
+              class="input"
               onChange={this._handleNicknameInput}
               value={this.state.nickname}
             />
