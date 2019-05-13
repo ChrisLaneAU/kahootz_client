@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
-// ACTIONCABLE
 import { ActionCable } from "react-actioncable-provider";
 import { API_ROOT } from "../../constants";
 import NewGameForm from "./NewGameForm/NewGameForm";
 import PlayersArea from "./PlayersArea/PlayersArea";
 import Cable from "./Cable/Cable";
+import Loading from "./Loading/Loading"
+
+const GET_QUIZ_OBJ = "https://kahootz.herokuapp.com/quizzes.json"
+// ACTIONCABLE
+
+
 
 class WaitingRoom extends Component {
   constructor() {
@@ -28,7 +32,7 @@ class WaitingRoom extends Component {
       .then(res => res.json())
       .then(games => this.setState({ games }));
 
-    axios.get("http://localhost:3000/quizzes.json").then(quizzes => {
+    axios.get(GET_QUIZ_OBJ).then(quizzes => {
       const question = quizzes.data[0].questions[0];
       this.setState({
         question_id: question.id,
@@ -103,7 +107,8 @@ class WaitingRoom extends Component {
         ) : null}
         <h3>-=-=-=-==-=-=ACTION CABLE END-=-==-=-=</h3>
         {this.state.question_id === "" ? (
-          <p>Loading...</p>
+          
+          <Loading />
         ) : (
           this.renderStartGameLink()
         )}
