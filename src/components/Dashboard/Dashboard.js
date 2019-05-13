@@ -18,27 +18,33 @@ class Dashboard extends Component {
   componentDidMount() {
     axios.get("http://localhost:3000/quizzes.json").then(quizzes => {
       this.setState({
-        quizzes: quizzes.data  
+        quizzes: quizzes.data
       });
     });
   }
 
-  renderCards () {
+  renderCards() {
     return this.state.quizzes.map(quiz => {
-        console.log("TEST");
-        return <Card category={quiz.category} difficulty={quiz.difficulty} questions={quiz.questions}/>
+      console.log("TEST");
+      return <Card category={quiz.category} difficulty={quiz.difficulty} questions={quiz.questions} />
     })
-}
+  }
 
   render() {
     return (
-      
-        <div className="displayQuizzes">
-          {/* <Link to="/create-quiz">Create Quiz</Link>
-          <Link to="/login">Logout</Link> */}
-          <QuizCode />
+
+      <div className="displayQuizzes">
+
+        <div className="header">
+          <h1>Select A Quiz To Play</h1>
+        </div>
+
+        <div className="displayCards">
           {this.renderCards()}
         </div>
+
+        
+      </div>
 
     )
 

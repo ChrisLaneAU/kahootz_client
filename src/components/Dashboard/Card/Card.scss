@@ -15,6 +15,7 @@
     margin: 15px 15px;
     overflow: hidden;
     transition: all 0.4s;
+    cursor: pointer;
     
     &:hover {
         transform: translateY(-.1rem) scale(1.03);
