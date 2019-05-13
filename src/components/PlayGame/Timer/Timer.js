@@ -12,17 +12,17 @@ export default class Timer extends Component {
   }
 
   render() {
-    const { question_id, question, answers } = this.props.state;
-
+    const { id, answers, content } = this.props.state.question;
+    console.log('TIMER', this.props.state);
     return (
       <div className="timer">
         <button className="skip-link">
           <Link
             to={{
-              pathname: `/game/${question_id}/scoreboard`,
+              pathname: `/game/${id}/scoreboard`,
               state: {
-                question_id: question_id,
-                question: question,
+                question_id: id,
+                question: content,
                 answers: answers
               }
             }}
@@ -45,6 +45,8 @@ export default class Timer extends Component {
       this.setState({
         count: this.state.count - 1
       });
+
+      this.props.adjustCount(this.state.count)
 
       if (this.state.count === 0) {
         clearInterval(myInterval);

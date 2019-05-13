@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { ActionCable } from "react-actioncable-provider";
+import { ActionCableConsumer } from "react-actioncable-provider";
 import { API_ROOT } from "../../constants";
 import NewGameForm from "./NewGameForm/NewGameForm";
 import PlayersArea from "./PlayersArea/PlayersArea";
 import Cable from "./Cable/Cable";
 import Loading from "./Loading/Loading"
 
-const GET_QUIZ_OBJ = "https://kahootz.herokuapp.com/quizzes.json"
+// const GET_QUIZ_OBJ = "https://kahootz.herokuapp.com/quizzes.json"
 // ACTIONCABLE
 
 
@@ -18,9 +18,9 @@ class WaitingRoom extends Component {
     super();
 
     this.state = {
-      question_id: "",
-      question: "",
-      answers: [],
+      next_question_id: "",
+      next_question: 0,  //relates to the index of questions
+      questions: '',
       games: [],
       activeGame: ""
     };
@@ -32,14 +32,14 @@ class WaitingRoom extends Component {
       .then(res => res.json())
       .then(games => this.setState({ games }));
 
-    axios.get(GET_QUIZ_OBJ).then(quizzes => {
-      const question = quizzes.data[0].questions[0];
-      this.setState({
-        question_id: question.id,
-        question: question.content,
-        answers: question.answers
-      });
-    });
+      if ( this.props.location.state ) {
+        this.setState({ 
+          questions: this.props.location.state.questions,
+          next_question_id: this.props.location.state.questions[0].id
+        })
+      }
+      
+
   }
 
   // ACTIONCABLE
@@ -63,16 +63,15 @@ class WaitingRoom extends Component {
   };
 
   renderStartGameLink() {
-    const { question_id, question, answers } = this.state;
+    const { questions, next_question, next_question_id } = this.state;
 
     return (
       <Link
         to={{
-          pathname: `/game/${question_id}`,
+          pathname: `/game/${next_question_id}`,
           state: {
-            question_id: question_id,
-            question: question,
-            answers: answers
+            question_id: next_question_id,
+            question: questions[0],
           }
         }}
       >
@@ -89,7 +88,7 @@ class WaitingRoom extends Component {
       <>
         <h1>Waiting Room</h1>
         <h3>-=-=-=-==-=-=ACTION CABLE START-=-=-=-==-=-=</h3>
-        <ActionCable
+        <ActionCableConsumer
           channel={{ channel: "GamesChannel" }}
           onReceived={this.handleReceivedGame}
         />
@@ -106,7 +105,7 @@ class WaitingRoom extends Component {
           <PlayersArea game={findActiveGame(games, activeGame)} />
         ) : null}
         <h3>-=-=-=-==-=-=ACTION CABLE END-=-==-=-=</h3>
-        {this.state.question_id === "" ? (
+        {this.state.questions === '' ? (
           
           <Loading />
         ) : (
