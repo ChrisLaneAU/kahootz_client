@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
+const GET_QUIZ_OBJ = "https://kahootz.herokuapp.com/quizzes.json"
+
 class WaitingRoom extends Component {
   constructor() {
     super();
@@ -14,7 +16,7 @@ class WaitingRoom extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:3000/quizzes.json").then(quizzes => {
+    axios.get(GET_QUIZ_OBJ).then(quizzes => {
       const question = quizzes.data[0].questions[0];
       this.setState({
         question_id: question.id,

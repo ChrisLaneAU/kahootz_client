@@ -5,7 +5,7 @@ import SelectAnswerButton from "../PlayGame/SelectAnswerButton/SelectAnswerButto
 import axios from "axios";
 import _ from "underscore";
 
-const GAME_URL = "http://localhost:3000/games/"; // needs an id on the end ( we will get this info when making a post request and getting a game number back some how )
+const GAME_URL = "https://kahootz.herokuapp.com/games/"; // needs an id on the end ( we will get this info when making a post request and getting a game number back some how )
 
 class Scoreboard extends Component {
   constructor() {

@@ -13,6 +13,7 @@ class JoinGame extends Component {
 
   _submitPin(event) {
     event.preventDefault();
+    this.setState({ pin: !this.state.pin });
     console.log(event.target.value);
   }
 
