@@ -6,12 +6,13 @@ import Podium from "./Podium/Podium"
 const PostGame = props => {
   return (
     <>
-      <div className="header">
+      <div className="podium__header">
           <h1>A The Winner Is...</h1>
-          <Link to="/">Play Another Game</Link>
+          
         </div>
       
       <Podium />
+      <Link to="/">Play Another Game</Link>
     </>
   );
 };

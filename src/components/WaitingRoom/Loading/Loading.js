@@ -7,7 +7,9 @@ library.add(faSpinner)
 
 const Loading = () => {
   return(
+    <div className = "display__loading">
     <FontAwesomeIcon className="fa-spin fa-5x" icon="spinner" />
+    </div>
   );
 }
 
