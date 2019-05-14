@@ -1,0 +1,11 @@
+.game-pin {
+  padding: 1em 2em;
+  margin: 1em 2em;
+  border: 2px solid black;
+  max-width: 14em;
+  font-weight: normal;
+
+  &__number {
+    font-weight: bold;
+  }
+}

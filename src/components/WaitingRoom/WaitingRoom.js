@@ -1,20 +1,18 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import './WaitingRoom.scss'
 import axios from "axios";
+import GamePin from "./GamePin/GamePin";
+
+// ACTIONCABLE
 import { ActionCableConsumer } from "react-actioncable-provider";
-import { API_ROOT } from "../../constants";
+import { API_ROOT, HEADERS } from "../../constants";
 import NewGameForm from "./NewGameForm/NewGameForm";
 import PlayersArea from "./PlayersArea/PlayersArea";
 import Cable from "./Cable/Cable";
 import Loading from "./Loading/Loading"
-import Sound from 'react-sound';
 import QuizCode from "../Dashboard/QuizCode/QuizCode"
 
 // const GET_QUIZ_OBJ = "https://kahootz.herokuapp.com/quizzes.json"
-// ACTIONCABLE
-
-
 
 class WaitingRoom extends Component {
   constructor() {
@@ -25,7 +23,8 @@ class WaitingRoom extends Component {
       next_question: 0,  //relates to the index of questions
       questions: '',
       games: [],
-      activeGame: ""
+      activeGame: "",
+      activePin: ""
     };
   }
 
@@ -33,16 +32,34 @@ class WaitingRoom extends Component {
     // ACTIONCABLE
     fetch(`${API_ROOT}/games`)
       .then(res => res.json())
-      .then(games => this.setState({ games }));
+      .then(games => this.setState({ games }))
+      .then(() => {
+        if (this.props.location.state.gamePin) {
+          const { gamePin, nickname } = this.props.location.state;
+          this._setActiveGame(gamePin);
+          fetch(`${API_ROOT}/players`, {
+            method: "POST",
+            headers: HEADERS,
+            body: JSON.stringify({ nickname, game_id: this.state.activeGame})
+          });
+        };
+      }).catch(
+        error => {
+          console.log("props", this.props);
+          // this.props.history.push({
+          //   pathname: "/",
+          //   //state: { gamePin: this.props.gamePin, nickname: this.state.nickname }
+          // });
+        }
+      );
 
-      if ( this.props.location.state ) {
-        this.setState({ 
-          questions: this.props.location.state.questions,
-          next_question_id: this.props.location.state.questions[0].id
+      if ( this.props.location.state.questions ) {
+        const { questions } = this.props.location.state;
+        this.setState({
+          questions: questions,
+          next_question_id: questions[0].id
         })
       }
-      
-
   }
 
   // ACTIONCABLE
@@ -83,6 +100,11 @@ class WaitingRoom extends Component {
     );
   }
 
+  _setActiveGame(gameTitle) {
+    const game = this.state.games.find(game => game.title === gameTitle);
+    this.setState({ activeGame: game.id, activePin: gameTitle })
+  }
+
   render() {
     console.log(this.props.location);
     // ACTIONCABLE
@@ -90,57 +112,34 @@ class WaitingRoom extends Component {
     return (
       <div>
         <QuizCode quiz_id={this.props.location.state.quiz_id}/>
-      <div className = "display__waitingroom">
-      <div className = "waitroom__header">
-        <h1>Waiting For Players To Join</h1>
-      </div>
+        <div className = "display__waitingroom">
+          <div className = "waitroom__header">
+            <h1>Waiting For Players To Join</h1>
+          </div>
 
-        <ActionCableConsumer
-          channel={{ channel: "GamesChannel" }}
-          onReceived={this.handleReceivedGame}
-        />
-
-
-        {this.state.games.length ? (
-          <Cable
-            games={games}
-            handleReceivedPlayer={this.handleReceivedPlayer}
+          <ActionCableConsumer
+            channel={{ channel: "GamesChannel" }}
+            onReceived={this.handleReceivedGame}
           />
-        ) : null}
+          {this.state.games.length ? (
+            <Cable
+              games={games}
+              handleReceivedPlayer={this.handleReceivedPlayer}
+            />
+          ) : null}
+          {activeGame ? (
+            <PlayersArea game={findActiveGame(games, activeGame)} />
+          ) : null}
+          {this.state.questions === '' ? (
 
-
-        <h2>Games</h2>
-        <ul>{mapGames(games, this.handleClick)}</ul>
-        <NewGameForm />
-        {activeGame ? (
-          <PlayersArea game={findActiveGame(games, activeGame)} />
-        ) : ''}
-        
-        {this.state.questions === '' ? (
-          
-          <Loading />
-        ) : (
-          this.renderStartGameLink()
-        )}
-
-
-        <p>{JSON.stringify(this.state.quiz)}</p>
-        
-        
-        
-        
-        {/* ****TODO**** */}
-        {/* KAHOOTZ BACKGROUND MUSIC <Sound
-      url= './music.mp3'
-      playStatus={Sound.status.PLAYING}
-      playFromPosition={300} 
-      onLoading={this.handleSongLoading}
-      onPlaying={this.handleSongPlaying}
-      onFinishedPlaying={this.handleSongFinishedPlaying}
-       /> */}
-      </div>
-      </div>
-    )
+            <>{/*<Loading />*/}</>
+          ) : (
+            this.renderStartGameLink()
+          )}
+          <p>{JSON.stringify(this.state.quiz)}</p>
+        </div>
+      </>
+    );
   }
 }
 
