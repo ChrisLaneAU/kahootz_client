@@ -6,7 +6,7 @@ import SelectAnswerButton from "./SelectAnswerButton/SelectAnswerButton";
 import Scoreboard from "../Scoreboard/Scoreboard";
 
 const PlayGame = props => {
-  const [count, setCount] = useState( 20 ); //timer count
+  const [count, setCount] = useState( 12000 ); //timer count
   const [ questionCount, setQuestionCount ] = useState( 1 )
   const [ gameEnded, setGameEnded ] = useState( false ) // question count
   const question_object = props.location.state.questions

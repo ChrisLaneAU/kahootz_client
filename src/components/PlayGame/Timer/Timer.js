@@ -36,14 +36,15 @@ export default class Timer extends Component {
 
   render() {
     return (
+      <>{ localStorage.getItem('jwt') ? this.renderSkipLink() : '' }
       <div className="timer">
-        { localStorage.getItem('jwt') ? this.renderSkipLink() : '' }
         <div className="timer__face">
           <div className="timer__numbers">
             { this.renderTimer() }
           </div>
         </div>
       </div>
+      </>
     );
   }
 

@@ -8,7 +8,7 @@ class PlayersArea extends Component {
 
 
   renderPlayer(){
-  const players = ["james", "ben", "chris", "sam", "jen", "kylie", "bob", "fred", "jack", "cooper", "sally", "anne", "billy", "frank", "james", "ben", "chris", "sam", "jen", "kylie", "bob", "fred", "jack", "cooper", "sally", "anne", "billy", "frank"]
+  const players = ["james", "ben", "chris", "sam", "jen", "kylie", "bob","jen", "kylie", "fred","jen", "kylie", "jack", "cooper","jen", "kylie", "sally", "anne", "billy", "frank", "james", "ben", "chris", "sam", "jen", "kylie", "bob", "fred", "jack", "cooper", "sally", "anne", "billy", "frank"]
   const listPlayers = players.map((player) => 
     <li>{player}</li>
   )

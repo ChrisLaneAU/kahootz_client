@@ -40,12 +40,13 @@ class Scoreboard extends Component {
       <>
         <h1>Question {question_number} Results...</h1>
         <Question question={question} />
-        <AnswerGraph answers={this.state.answers} />
-        <SelectAnswerButton answers={answers} />
         { localStorage.getItem('jwt') ? 
            <button onClick={next_question_nav} className="skip-link">
           NEXT
         </button>  : '' }
+        <AnswerGraph answers={this.state.answers} />
+        <SelectAnswerButton answers={answers} />
+        
         
       </>
     );
