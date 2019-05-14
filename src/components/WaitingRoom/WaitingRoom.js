@@ -110,7 +110,7 @@ class WaitingRoom extends Component {
     // ACTIONCABLE
     const { games, activeGame } = this.state;
     return (
-      <div>
+      <>
         <QuizCode quiz_id={this.props.location.state.quiz_id}/>
         <div className = "display__waitingroom">
           <div className = "waitroom__header">
@@ -138,7 +138,7 @@ class WaitingRoom extends Component {
           )}
           <p>{JSON.stringify(this.state.quiz)}</p>
         </div>
-      </>
+        </>
     );
   }
 }
