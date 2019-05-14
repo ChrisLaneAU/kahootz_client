@@ -10,6 +10,7 @@ import NewGameForm from "./NewGameForm/NewGameForm";
 import PlayersArea from "./PlayersArea/PlayersArea";
 import Cable from "./Cable/Cable";
 import Loading from "./Loading/Loading"
+import QuizCode from "../Dashboard/QuizCode/QuizCode"
 
 // const GET_QUIZ_OBJ = "https://kahootz.herokuapp.com/quizzes.json"
 // ACTIONCABLE
@@ -87,7 +88,7 @@ class WaitingRoom extends Component {
           pathname: `/game/${next_question_id}`,
           state: {
             question_id: next_question_id,
-            question: questions[0],
+            questions: questions
           }
         }}
       >
@@ -108,6 +109,7 @@ class WaitingRoom extends Component {
 
     return (
       <>
+      <QuizCode />
         <h1>Waiting Room</h1>
         <GamePin gamePin={activePin}/>
         <ActionCableConsumer
