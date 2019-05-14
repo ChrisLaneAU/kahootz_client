@@ -1,0 +1,13 @@
+@import '../../styles/_variables.scss';
+.display__waitingroom{
+    position: relative;
+}
+.waitroom__header{
+    text-align: center;
+    width: 100vw;
+    color: $color-white;
+    padding: 10px;
+    height: 100px;
+    font-size: 30px;
+    background-image: linear-gradient(to right bottom, $color-blue-light 0%, $color-blue-dark 100%);
+}

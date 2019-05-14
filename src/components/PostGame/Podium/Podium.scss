@@ -1,57 +1,151 @@
 @import '../../../styles/_variables.scss';
 
 
-.header{
-    position: fixed;
+.display {
+    transition: all 0.4s;
+}
+
+.podium__header {
+    text-align: center;
     width: 100vw;
     color: $color-white;
-    padding: 30px;
+    padding: 10px;
     height: 100px;
-    margin-bottom: 200px;
+    font-size: 30px;
     background-image: linear-gradient(to right bottom, $color-blue-light 0%, $color-blue-dark 100%);
 }
 
+.podium {
 
-.display{
-
-}
-
-.podium{
-    
-    &__first{
+    &__first {
         animation: createBox 1s;
-        background-image: linear-gradient(to right bottom, $color-yellow-light 0%, $color-yellow-dark 100%);
+        background:
+            radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #e9e99a 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
         height: 500px;
         width: 300px;
         display: inline-block;
+        border-radius: 10px 10px 0 0;
+        position: relative;
 
-        &-place{
-            border: 1px solid black;
-            height: 50px;
+        &--player {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+            text-align: center;
+            color: $color-white;
+            text-shadow: 1px 1px 1px $color-black;
+        }
+
+        &--place {
+            position: absolute;
+            bottom: 40px;
+            left: 100px;
+            border: 2px solid $color-white;
+            font-size: 40px;
+            text-align: center;
+            color: $color-white;
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+            box-shadow: 1px 1px 1px $color-black;
+
+            & p {
+                margin-top: 20px;
+                text-shadow: 1px 1px 1px $color-black;
+            }
         }
     }
-  
-    &__second{
-        
+
+    &__second {
         animation: createBox 1s;
-        background-image: linear-gradient(to right bottom, $color-green-light 0%, $color-green-dark 100%);
-        height:375px;
+        background-image: radial-gradient(ellipse farthest-corner at left top, #cfcfcf 0%, #747474 8%, #9b9b9b 25%, #525252 62.5%, #3a3a3a 100%);
+        height: 375px;
         width: 300px;
         display: inline-block;
+        border-radius: 10px 0 0 0;
+        position: relative;
+
+        &--player {
+            position: absolute;
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+            text-align: center;
+            color: $color-white;
+            text-shadow: 1px 1px 1px $color-black;
+        }
+
+        &--place {
+            position: absolute;
+            bottom: 40px;
+            left: 100px;
+            border: 2px solid $color-white;
+            font-size: 40px;
+            text-align: center;
+            color: $color-white;
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+            box-shadow: 1px 1px 1px $color-black;
+
+            & p {
+                margin-top: 20px;
+                text-shadow: 1px 1px 1px $color-black;
+            }
+        }
     }
-    &__third{
+
+    &__third {
         animation: createBox 1s;
-        background-image: linear-gradient(to right bottom, $color-red-light 0%, $color-red-dark 100%);
+        background-image: radial-gradient(ellipse farthest-corner at left top, #cab89f 0%, #aa8b5f 8%, #a38a67 25%, #5d4a1f 62.5%, #948775 100%);
         height: 300px;
         width: 300px;
         display: inline-block;
+        border-radius: 0 10px 0 0;
+        position: relative;
+
+        &--player {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 60px;
+            text-align: center;
+            color: $color-white;
+            text-shadow: 1px 1px 1px $color-black;
+        }
+
+        &--place {
+            position: absolute;
+            bottom: 40px;
+            left: 100px;
+            border: 2px solid $color-white;
+            font-size: 40px;
+            text-align: center;
+            color: $color-white;
+            border-radius: 50%;
+            height: 100px;
+            width: 100px;
+            box-shadow: 1px 1px 1px $color-black;
+
+            & p {
+                margin-top: 20px;
+                text-shadow: 1px 1px 1px $color-black;
+            }
+        }
     }
 }
-// @keyframes createBox {
-//     from {
-//       transform: scale(0)
-//     }
-//     to {
-//       transform: scale(1);
-//     }
-//   }
+
+@keyframes createBox {
+    from {
+        transform: scale(0)
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
