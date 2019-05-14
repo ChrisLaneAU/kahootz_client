@@ -2,7 +2,7 @@
 
 .display__loading{
     position: absolute;
-    top: 15%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -10,7 +10,7 @@
 
 .fa-spinner {
     color: $color-red-dark;
-    font-size: 200px;
+    font-size: 300px;
     opacity: .7;
 
 }

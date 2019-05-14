@@ -7,7 +7,7 @@ const PostGame = props => {
   return (
     <>
       <div className="podium__header">
-          <h1>A The Winner Is...</h1>
+          <h1>And The Winner Is...</h1>
           
         </div>
       

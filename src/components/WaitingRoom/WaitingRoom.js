@@ -32,6 +32,7 @@ class WaitingRoom extends Component {
     // ACTIONCABLE
     fetch(`${API_ROOT}/games`)
       .then(res => res.json())
+
       .then(games => this.setState({ games }))
       .then(() => {
         if (this.props.location.state.gamePin) {
@@ -110,6 +111,65 @@ class WaitingRoom extends Component {
     // ACTIONCABLE
     const { games, activeGame } = this.state;
     return (
+
+
+      <div className="display__waitingroom">
+        
+        <div className="waitroom__header">
+          <h1>Waiting For Players To Join</h1>
+        </div>
+        
+        <div className="display__quizcode">
+          <QuizCode /*{quiz_id={this.props.location.state.quiz_id} *//>
+        </div>
+
+        <ActionCableConsumer
+          channel={{ channel: "GamesChannel" }}
+          onReceived={this.handleReceivedGame}
+        />
+
+
+        {this.state.games.length ? (
+          <Cable
+            games={games}
+            handleReceivedPlayer={this.handleReceivedPlayer}
+          />
+        ) : null}
+
+
+{this.state.questions === '' ? (
+
+<Loading />
+) : (
+  this.renderStartGameLink()
+)}
+        <PlayersArea />
+
+        {/* <ul>{mapGames(games, this.handleClick)}</ul>
+      
+        {activeGame ? (
+          <PlayersArea game={findActiveGame(games, activeGame)} />
+        ) : null} */}
+
+        
+
+
+        <p>{JSON.stringify(this.state.quiz)}</p>
+
+
+
+
+        {/* ****TODO**** */}
+        {/* KAHOOTZ BACKGROUND MUSIC <Sound
+      url= './music.mp3'
+      playStatus={Sound.status.PLAYING}
+      playFromPosition={300} 
+      onLoading={this.handleSongLoading}
+      onPlaying={this.handleSongPlaying}
+      onFinishedPlaying={this.handleSongFinishedPlaying}
+       /> */}
+      </div>
+/*
       <>
         <QuizCode quiz_id={this.props.location.state.quiz_id}/>
         <div className = "display__waitingroom">
@@ -138,7 +198,8 @@ class WaitingRoom extends Component {
           )}
           <p>{JSON.stringify(this.state.quiz)}</p>
         </div>
-        </>
+      </>
+*/
     );
   }
 }
