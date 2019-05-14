@@ -97,7 +97,6 @@ class WaitingRoom extends Component {
   }
 
   _setActiveGame(gameTitle) {
-    console.log(this.state.games);
     const game = this.state.games.find(game => game.title === gameTitle);
     this.setState({ activeGame: game.id, activePin: gameTitle })
   }
