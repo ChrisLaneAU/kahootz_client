@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
+import './QuizCode.scss'
 
 
 // const SERVER_URL_PUT = 'http://localhost:3000/new_game.json'
@@ -24,7 +25,10 @@ const QuizCode = ( props ) => {
   }, [])
 
   return(
-    <h1>QuizCode: { gameNum * 9999 } </h1> //* 9999 just makes a number 6 digits long
+    //* 9999 just makes a number 6 digits long
+    <div className="quizcode">
+    <h1>QuizCode: { gameNum * 9999 } </h1> 
+    </div>
   );
 }
 
