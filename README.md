@@ -25,12 +25,14 @@ Get It Out Here: (https://kahoot.com/)
 6. `rails db:seed` to generate the quizzes in your local database (This could take a while)
 7. `rails s` to start the server on `localhost:3000`
 
-### Startinmg the UI 
+### Starting the UI 
 1. `cd in `kahootz_client`
 2. `npm install` to initialise the app
 3. `npm start` and `Y` to chose to start the server on a different port `localhost:3001`
 4. Your broswer will open up to the Join Game screen as a User. 
 5. Navigate to `localhost:3001/login` or `localhost:3001/signup` and signup
+
+## Screenshots Of The App
 
 
 
