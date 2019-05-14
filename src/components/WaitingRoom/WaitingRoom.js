@@ -35,13 +35,13 @@ class WaitingRoom extends Component {
       .then(res => res.json())
       .then(games => this.setState({ games }));
 
-      if ( this.props.location.state ) {
-        this.setState({ 
-          questions: this.props.location.state.questions,
-          next_question_id: this.props.location.state.questions[0].id
-        })
-      }
-      
+    if (this.props.location.state) {
+      this.setState({
+        questions: this.props.location.state.questions,
+        next_question_id: this.props.location.state.questions[0].id
+      })
+    }
+
 
   }
 
@@ -88,12 +88,16 @@ class WaitingRoom extends Component {
     const { games, activeGame } = this.state;
 
     return (
-      <div className = "display__waitingroom">
-      <div className = "waitroom__header">
-        <h1>Waiting For Players To Join</h1>
-      </div>
 
-      <QuizCode />
+      <div className="display__waitingroom">
+        
+        <div className="waitroom__header">
+          <h1>Waiting For Players To Join</h1>
+        </div>
+        
+        <div className="display__quizcode">
+          <QuizCode /*{quiz_id={this.props.location.state.quiz_id} *//>
+        </div>
 
         <ActionCableConsumer
           channel={{ channel: "GamesChannel" }}
@@ -109,26 +113,28 @@ class WaitingRoom extends Component {
         ) : null}
 
 
-        <h2>Games</h2>
-        <ul>{mapGames(games, this.handleClick)}</ul>
-        <NewGameForm />
+{this.state.questions === '' ? (
+
+<Loading />
+) : (
+  this.renderStartGameLink()
+)}
+        <PlayersArea />
+
+        {/* <ul>{mapGames(games, this.handleClick)}</ul>
+      
         {activeGame ? (
           <PlayersArea game={findActiveGame(games, activeGame)} />
-        ) : null}
+        ) : null} */}
+
         
-        {this.state.questions === '' ? (
-          
-          <Loading />
-        ) : (
-          this.renderStartGameLink()
-        )}
 
 
         <p>{JSON.stringify(this.state.quiz)}</p>
-        
-        
-        
-        
+
+
+
+
         {/* ****TODO**** */}
         {/* KAHOOTZ BACKGROUND MUSIC <Sound
       url= './music.mp3'

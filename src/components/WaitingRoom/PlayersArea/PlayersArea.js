@@ -1,14 +1,32 @@
-import React from "react";
+import React, { Component } from "react";
 import NewPlayerForm from "../NewPlayerForm/NewPlayerForm";
+import './PlayersArea.scss'
+// const PlayersArea = ({ game: { id, title, players } }) => {
 
-const PlayersArea = ({ game: { id, title, players } }) => {
-  return (
-    <div className="playerArea">
-      <h2>{title}</h2>
-      <ul>{orderedPlayers(players)}</ul>
-      <NewPlayerForm game_id={id} />
-    </div>
-  );
+
+class PlayersArea extends Component {
+
+
+  renderPlayer(){
+  const players = ["james", "ben", "chris", "sam", "jen", "kylie", "bob", "fred", "jack", "cooper", "sally", "anne", "billy", "frank", "james", "ben", "chris", "sam", "jen", "kylie", "bob", "fred", "jack", "cooper", "sally", "anne", "billy", "frank"]
+  const listPlayers = players.map((player) => 
+    <li>{player}</li>
+  )
+
+  return(listPlayers)
+}
+
+
+  render() {
+    return (
+      <div className="playerArea">
+        {/* <h2>{title}</h2>
+      <ul>{orderedPlayers(players)}</ul> */}
+       
+        <ul>{this.renderPlayer()}</ul>
+      </div>
+    );
+  }
 };
 
 export default PlayersArea;
