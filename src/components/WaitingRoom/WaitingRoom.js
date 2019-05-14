@@ -111,34 +111,32 @@ class WaitingRoom extends Component {
     return (
       <>
         <QuizCode quiz_id={this.props.location.state.quiz_id}/>
-      <div className = "display__waitingroom">
-      <div className = "waitroom__header">
-        <h1>Waiting For Players To Join</h1>
-      </div>
+        <div className = "display__waitingroom">
+          <div className = "waitroom__header">
+            <h1>Waiting For Players To Join</h1>
+          </div>
 
-        <ActionCableConsumer
-          channel={{ channel: "GamesChannel" }}
-          onReceived={this.handleReceivedGame}
-        />
-        {this.state.games.length ? (
-          <Cable
-            games={games}
-            handleReceivedPlayer={this.handleReceivedPlayer}
+          <ActionCableConsumer
+            channel={{ channel: "GamesChannel" }}
+            onReceived={this.handleReceivedGame}
           />
-        ) : null}
-        {/*<h2>Games</h2>
-        <ul>{mapGames(games, this.handleClick)}</ul>
-        <NewGameForm setActiveGame={(gameTitle) => {this._setActiveGame(gameTitle)}} />*/}
-        {activeGame ? (
-          <PlayersArea game={findActiveGame(games, activeGame)} />
-        ) : null}
-        {this.state.questions === '' ? (
+          {this.state.games.length ? (
+            <Cable
+              games={games}
+              handleReceivedPlayer={this.handleReceivedPlayer}
+            />
+          ) : null}
+          {activeGame ? (
+            <PlayersArea game={findActiveGame(games, activeGame)} />
+          ) : null}
+          {this.state.questions === '' ? (
 
-          <>{/*<Loading />*/}</>
-        ) : (
-          this.renderStartGameLink()
-        )}
-        <p>{JSON.stringify(this.state.quiz)}</p>
+            <>{/*<Loading />*/}</>
+          ) : (
+            this.renderStartGameLink()
+          )}
+          <p>{JSON.stringify(this.state.quiz)}</p>
+        </div>
       </>
     );
   }
