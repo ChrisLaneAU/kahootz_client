@@ -84,10 +84,11 @@ class WaitingRoom extends Component {
   }
 
   render() {
+    console.log(this.props.location);
     // ACTIONCABLE
     const { games, activeGame } = this.state;
     return (
-      <>
+      <div>
         <QuizCode quiz_id={this.props.location.state.quiz_id}/>
       <div className = "display__waitingroom">
       <div className = "waitroom__header">
@@ -113,7 +114,7 @@ class WaitingRoom extends Component {
         <NewGameForm />
         {activeGame ? (
           <PlayersArea game={findActiveGame(games, activeGame)} />
-        ) : null}
+        ) : ''}
         
         {this.state.questions === '' ? (
           
@@ -138,7 +139,8 @@ class WaitingRoom extends Component {
       onFinishedPlaying={this.handleSongFinishedPlaying}
        /> */}
       </div>
-    );
+      </div>
+    )
   }
 }
 
