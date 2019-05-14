@@ -33,6 +33,7 @@ class Dashboard extends Component {
           to={{
             pathname: '/waiting-room',
             state: {
+              quiz_id: quiz.id,
               category: quiz.category,
               difficulty: quiz.difficulty,
               questions: quiz.questions,

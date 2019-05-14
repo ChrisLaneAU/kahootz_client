@@ -84,10 +84,9 @@ class WaitingRoom extends Component {
   render() {
     // ACTIONCABLE
     const { games, activeGame } = this.state;
-
     return (
       <>
-      <QuizCode />
+        <QuizCode quiz_id={this.props.location.state.quiz_id}/>
         <h1>Waiting Room</h1>
         <h3>-=-=-=-==-=-=ACTION CABLE START-=-=-=-==-=-=</h3>
         <ActionCableConsumer
