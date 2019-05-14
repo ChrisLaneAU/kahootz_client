@@ -4,9 +4,6 @@ import Button from "../../sharedUI/Button/Button";
 import Input from "../../sharedUI/Input/Input";
 import { Route } from "react-router-dom";
 
-// TODO: get a dynamic gameId
-const gameId = 1;
-
 class NicknameForm extends Component {
   constructor() {
     super();
@@ -14,7 +11,7 @@ class NicknameForm extends Component {
       nickname: ""
     };
     this._handleNicknameInput = this._handleNicknameInput.bind(this);
-    this._handleNicknameSubmit = this._handleNicknameSubmit.bind(this);
+    //this._handleNicknameSubmit = this._handleNicknameSubmit.bind(this);
   }
 
   _handleNicknameInput(event) {
@@ -22,11 +19,11 @@ class NicknameForm extends Component {
     console.log(event.target.value);
   }
 
-  _handleNicknameSubmit(event) {
-    event.preventDefault();
-
-    console.log(`Nickname Submitted - ${this.state.nickname} is JOINING GAME`);
-  }
+  // _handleNicknameSubmit(event) {
+  //   event.preventDefault();
+  //
+  //   console.log(`Nickname Submitted - ${this.state.nickname} is JOINING GAME`);
+  // }
 
   render() {
     return (
@@ -45,8 +42,13 @@ class NicknameForm extends Component {
                 <Button
                   type="button"
                   onClick={event => {
-                    this._handleNicknameSubmit(event);
-                    history.push("/waiting-room", gameId);
+                    event.preventDefault();
+                    this.props.submitNickname(this.state.nickname);
+                    //history.push("/waiting-room", this.props.gamePin);
+                    history.push({
+                      pathname: "/waiting-room",
+                      state: { gamePin: this.props.gamePin, nickname: this.state.nickname }
+                    })
                   }}
                   text="Start Game"
                 />

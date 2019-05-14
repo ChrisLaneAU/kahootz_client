@@ -5,13 +5,13 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 32%;
+    width: 25em;
     text-align: center;
     border: 2px solid $color-grey;
     border-radius: 5px;
     height: 45%;
     box-shadow: 0 3rem 6rem rgba($color-black, 0.3);
-    
+
     &__form{
         color: $color-black;
         margin-top: 20%;

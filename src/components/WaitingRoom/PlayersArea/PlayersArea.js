@@ -27,6 +27,7 @@ class PlayersArea extends Component {
       </div>
     );
   }
+
 };
 
 export default PlayersArea;
