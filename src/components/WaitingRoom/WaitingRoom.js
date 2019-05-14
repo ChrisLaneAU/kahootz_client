@@ -13,9 +13,6 @@ import Loading from "./Loading/Loading"
 import QuizCode from "../Dashboard/QuizCode/QuizCode"
 
 // const GET_QUIZ_OBJ = "https://kahootz.herokuapp.com/quizzes.json"
-// ACTIONCABLE
-
-
 
 class WaitingRoom extends Component {
   constructor() {
@@ -46,16 +43,23 @@ class WaitingRoom extends Component {
             body: JSON.stringify({ nickname, game_id: this.state.activeGame})
           });
         };
-      });
+      }).catch(
+        error => {
+          console.log("props", this.props);
+          // this.props.history.push({
+          //   pathname: "/",
+          //   //state: { gamePin: this.props.gamePin, nickname: this.state.nickname }
+          // });
+        }
+      );
 
-      if ( this.props.location.state ) {
+      if ( this.props.location.state.questions ) {
+        const { questions } = this.props.location.state;
         this.setState({
-          questions: this.props.location.state.questions,
-          next_question_id: this.props.location.state.questions[0].id
+          questions: questions,
+          next_question_id: questions[0].id
         })
       }
-
-
   }
 
   // ACTIONCABLE
@@ -107,7 +111,7 @@ class WaitingRoom extends Component {
 
     return (
       <>
-      <QuizCode />
+        <QuizCode />
         <h1>Waiting Room</h1>
         <GamePin gamePin={activePin}/>
         <ActionCableConsumer
@@ -128,7 +132,7 @@ class WaitingRoom extends Component {
         ) : null}
         {this.state.questions === '' ? (
 
-          <Loading />
+          <>{/*<Loading />*/}</>
         ) : (
           this.renderStartGameLink()
         )}
