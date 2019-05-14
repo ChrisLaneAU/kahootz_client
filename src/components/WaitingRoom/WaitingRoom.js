@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import './WaitingRoom.scss'
 import axios from "axios";
 import { ActionCableConsumer } from "react-actioncable-provider";
 import { API_ROOT } from "../../constants";
@@ -7,6 +8,7 @@ import NewGameForm from "./NewGameForm/NewGameForm";
 import PlayersArea from "./PlayersArea/PlayersArea";
 import Cable from "./Cable/Cable";
 import Loading from "./Loading/Loading"
+import Sound from 'react-sound';
 import QuizCode from "../Dashboard/QuizCode/QuizCode"
 
 // const GET_QUIZ_OBJ = "https://kahootz.herokuapp.com/quizzes.json"
@@ -86,35 +88,57 @@ class WaitingRoom extends Component {
     const { games, activeGame } = this.state;
 
     return (
-      <>
+      <div className = "display__waitingroom">
+      <div className = "waitroom__header">
+        <h1>Waiting For Players To Join</h1>
+      </div>
+
       <QuizCode />
-        <h1>Waiting Room</h1>
-        <h3>-=-=-=-==-=-=ACTION CABLE START-=-=-=-==-=-=</h3>
+
         <ActionCableConsumer
           channel={{ channel: "GamesChannel" }}
           onReceived={this.handleReceivedGame}
         />
+
+
         {this.state.games.length ? (
           <Cable
             games={games}
             handleReceivedPlayer={this.handleReceivedPlayer}
           />
         ) : null}
+
+
         <h2>Games</h2>
         <ul>{mapGames(games, this.handleClick)}</ul>
         <NewGameForm />
         {activeGame ? (
           <PlayersArea game={findActiveGame(games, activeGame)} />
         ) : null}
-        <h3>-=-=-=-==-=-=ACTION CABLE END-=-==-=-=</h3>
+        
         {this.state.questions === '' ? (
           
           <Loading />
         ) : (
           this.renderStartGameLink()
         )}
+
+
         <p>{JSON.stringify(this.state.quiz)}</p>
-      </>
+        
+        
+        
+        
+        {/* ****TODO**** */}
+        {/* KAHOOTZ BACKGROUND MUSIC <Sound
+      url= './music.mp3'
+      playStatus={Sound.status.PLAYING}
+      playFromPosition={300} 
+      onLoading={this.handleSongLoading}
+      onPlaying={this.handleSongPlaying}
+      onFinishedPlaying={this.handleSongFinishedPlaying}
+       /> */}
+      </div>
     );
   }
 }

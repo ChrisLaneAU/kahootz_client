@@ -1,0 +1,16 @@
+@import '../../../styles/_variables.scss';
+
+.display__loading{
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.fa-spinner {
+    color: $color-red-dark;
+    font-size: 200px;
+    opacity: .7;
+
+}
