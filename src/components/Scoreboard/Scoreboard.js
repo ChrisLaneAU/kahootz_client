@@ -35,13 +35,16 @@ class Scoreboard extends Component {
 
   render() {
     //if (!this.props.location.state) return <Redirect to="/" />;
-    const { question_id, question, answers } = this.props.location.state;
+    const { question, answers, question_number, next_question_nav } = this.props
     return (
       <>
-        <h1>Game started: Question {question_id}...</h1>
+        <h1>Question {question_number} Results...</h1>
         <Question question={question} />
         <AnswerGraph answers={this.state.answers} />
         <SelectAnswerButton answers={answers} />
+        <button onClick={ next_question_nav } className="skip-link">
+          NEXT
+        </button>
       </>
     );
   }

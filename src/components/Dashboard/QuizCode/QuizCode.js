@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 
 const SERVER_URL_PUT = 'https://kahootz.herokuapp.com/new_game.json' 
-const SERVER_URL_GET = 'hhttps://kahootz.herokuapp.com/new_game.json'
+const SERVER_URL_GET = 'https://kahootz.herokuapp.com/new_game.json'
 
 const QuizCode = () => {
 
