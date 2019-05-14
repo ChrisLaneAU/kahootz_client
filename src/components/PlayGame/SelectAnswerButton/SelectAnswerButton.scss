@@ -5,6 +5,7 @@
   text-align: center;
 }
 
+// BLUE BUTTON
 .answerbutton {
   display: inline-block;
   height: 200px;
@@ -17,7 +18,11 @@
     $color-blue-light 0%,
     $color-blue-dark 100%
   );
-  box-shadow: 0 3rem 6rem rgba($color-black, 0.3);
+  transition: all .3s;
+  &:hover {
+    transform: translateY(-.1rem) scale(1.03);
+    box-shadow: 0 1.5rem 4rem rgba($color-black, 0.4);
+}
 
   &__answer {
     margin-top: 75px;
@@ -29,7 +34,9 @@
   }
 }
 
-.answerbuttonBlue {
+
+//YELLOW BUTTON
+.answerbutton:nth-child(2) {
   display: inline-block;
   height: 200px;
   width: 40vw;
@@ -38,16 +45,15 @@
   border-radius: 5px;
   background-image: linear-gradient(
     to right bottom,
-    $color-blue-light 0%,
-    $color-blue-dark 100%
+    $color-yellow-light 0%,
+    $color-yellow-dark 100%
   );
-  box-shadow: 0 3rem 6rem rgba($color-black, 0.3);
 
   &__answer {
     margin-top: 75px;
     font-size: 40px;
 
-    &__answertext a {
+    &__answertext {
       margin-top: 50px;
       color: $color-white;
       text-decoration: none;
@@ -55,7 +61,8 @@
   }
 }
 
-.answerbuttonGreen {
+//GREEN BUTTON
+.answerbutton:nth-child(3) {
   display: inline-block;
   height: 200px;
   width: 40vw;
@@ -73,7 +80,7 @@
     margin-top: 75px;
     font-size: 40px;
 
-    &__answertext a {
+    &__answertext {
       margin-top: 50px;
       color: $color-white;
       text-decoration: none;
@@ -81,7 +88,8 @@
   }
 }
 
-.answerbuttonRed {
+//RED BUTTON
+.answerbutton:nth-child(4) {
   display: inline-block;
   height: 200px;
   width: 40vw;
@@ -92,32 +100,6 @@
     to right bottom,
     $color-red-light 0%,
     $color-red-dark 100%
-  );
-  box-shadow: 0 3rem 6rem rgba($color-black, 0.3);
-
-  &__answer {
-    margin-top: 75px;
-    font-size: 40px;
-
-    &__answertext a {
-      margin-top: 50px;
-      color: $color-white;
-      text-decoration: none;
-    }
-  }
-}
-
-.answerbuttonYellow {
-  display: inline-block;
-  height: 200px;
-  width: 40vw;
-  text-align: center;
-  margin: 30px 30px;
-  border-radius: 5px;
-  background-image: linear-gradient(
-    to right bottom,
-    $color-yellow-light 0%,
-    $color-yellow-dark 100%
   );
   box-shadow: 0 3rem 6rem rgba($color-black, 0.3);
 

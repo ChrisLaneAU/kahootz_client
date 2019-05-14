@@ -47,13 +47,13 @@ class WaitingRoom extends Component {
         };
       });
 
-      // if ( this.props.location.state ) {
-      //   console.log("location state questions", this.props.location.state);
-      //   this.setState({
-      //     questions: this.props.location.state.questions,
-      //     next_question_id: this.props.location.state.questions[0].id
-      //   })
-      // }
+      if ( this.props.location.state ) {
+        console.log("location state questions", this.props.location.state);
+        this.setState({
+          questions: this.props.location.state.questions,
+          next_question_id: this.props.location.state.questions[0].id
+        })
+      }
 
 
   }
@@ -126,7 +126,6 @@ class WaitingRoom extends Component {
         {activeGame ? (
           <PlayersArea game={findActiveGame(games, activeGame)} />
         ) : null}
-        <h3>-=-=-=-==-=-=ACTION CABLE END-=-==-=-=</h3>
         {this.state.questions === '' ? (
 
           <Loading />
