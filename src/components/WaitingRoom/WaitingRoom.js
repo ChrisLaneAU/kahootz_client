@@ -107,13 +107,15 @@ class WaitingRoom extends Component {
 
   render() {
     // ACTIONCABLE
-    const { games, activeGame, activePin } = this.state;
-
+    const { games, activeGame } = this.state;
     return (
       <>
-        <QuizCode />
-        <h1>Waiting Room</h1>
-        <GamePin gamePin={activePin}/>
+        <QuizCode quiz_id={this.props.location.state.quiz_id}/>
+      <div className = "display__waitingroom">
+      <div className = "waitroom__header">
+        <h1>Waiting For Players To Join</h1>
+      </div>
+
         <ActionCableConsumer
           channel={{ channel: "GamesChannel" }}
           onReceived={this.handleReceivedGame}
