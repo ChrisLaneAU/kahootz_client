@@ -9,15 +9,21 @@ import { API_ROOT, HEADERS } from "../../constants";
 import NewGameForm from "./NewGameForm/NewGameForm";
 import PlayersArea from "./PlayersArea/PlayersArea";
 import Cable from "./Cable/Cable";
+import Loading from "./Loading/Loading"
+
+// const GET_QUIZ_OBJ = "https://kahootz.herokuapp.com/quizzes.json"
+// ACTIONCABLE
+
+
 
 class WaitingRoom extends Component {
   constructor() {
     super();
 
     this.state = {
-      question_id: "",
-      question: "",
-      answers: [],
+      next_question_id: "",
+      next_question: 0,  //relates to the index of questions
+      questions: '',
       games: [],
       activeGame: "",
       activePin: ""
@@ -41,14 +47,13 @@ class WaitingRoom extends Component {
         };
       });
 
-    axios.get("http://localhost:3000/quizzes.json").then(quizzes => {
-      const question = quizzes.data[0].questions[0];
-      this.setState({
-        question_id: question.id,
-        question: question.content,
-        answers: question.answers
-      });
-    });
+      // if ( this.props.location.state ) {
+      //   console.log("location state questions", this.props.location.state);
+      //   this.setState({
+      //     questions: this.props.location.state.questions,
+      //     next_question_id: this.props.location.state.questions[0].id
+      //   })
+      // }
 
 
   }
@@ -74,16 +79,15 @@ class WaitingRoom extends Component {
   };
 
   renderStartGameLink() {
-    const { question_id, question, answers } = this.state;
+    const { questions, next_question, next_question_id } = this.state;
 
     return (
       <Link
         to={{
-          pathname: `/game/${question_id}`,
+          pathname: `/game/${next_question_id}`,
           state: {
-            question_id: question_id,
-            question: question,
-            answers: answers
+            question_id: next_question_id,
+            question: questions[0],
           }
         }}
       >
@@ -93,8 +97,9 @@ class WaitingRoom extends Component {
   }
 
   _setActiveGame(gameTitle) {
-    const game = this.state.games.find(game => game.title === gameTitle);
-    this.setState({ activeGame: game.id, activePin: gameTitle })
+    console.log(this.state.games);
+    // const game = this.state.games.find(game => game.title === gameTitle);
+    // this.setState({ activeGame: game.id, activePin: gameTitle })
   }
 
   render() {
@@ -121,8 +126,10 @@ class WaitingRoom extends Component {
         {activeGame ? (
           <PlayersArea game={findActiveGame(games, activeGame)} />
         ) : null}
-        {this.state.question_id === "" ? (
-          <p>Loading...</p>
+        <h3>-=-=-=-==-=-=ACTION CABLE END-=-==-=-=</h3>
+        {this.state.questions === '' ? (
+
+          <Loading />
         ) : (
           this.renderStartGameLink()
         )}
