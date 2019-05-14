@@ -49,7 +49,6 @@ class WaitingRoom extends Component {
       });
 
       if ( this.props.location.state ) {
-        console.log("location state questions", this.props.location.state);
         this.setState({
           questions: this.props.location.state.questions,
           next_question_id: this.props.location.state.questions[0].id
@@ -99,8 +98,8 @@ class WaitingRoom extends Component {
 
   _setActiveGame(gameTitle) {
     console.log(this.state.games);
-    // const game = this.state.games.find(game => game.title === gameTitle);
-    // this.setState({ activeGame: game.id, activePin: gameTitle })
+    const game = this.state.games.find(game => game.title === gameTitle);
+    this.setState({ activeGame: game.id, activePin: gameTitle })
   }
 
   render() {
