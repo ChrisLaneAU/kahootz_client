@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import JoinGameForm from "./JoinGameForm/JoinGameForm";
 import NicknameForm from "./NicknameForm/NicknameForm";
 
+import { gamesRef } from "../../config/firebase";
+
 class JoinGame extends Component {
   constructor() {
     super();
@@ -15,10 +17,19 @@ class JoinGame extends Component {
 
   _submitPin(pin) {
     this.setState({ pin });
+    gamesRef.set({
+      pin: pin
+    });
   }
 
   _submitNickname(nickname) {
     this.setState({ nickname });
+  }
+
+  componentDidMount() {
+    gamesRef.on("value", snapshot => {
+      console.log("from firebase", snapshot.val());
+    });
   }
 
   render() {
