@@ -88,7 +88,7 @@ class WaitingRoom extends Component {
     const { questions, next_question, next_question_id } = this.state;
 
     return (
-      <Link
+      <Link className="startgame_link"
         to={{
           pathname: `/game/${next_question_id}`,
           state: {
@@ -144,7 +144,9 @@ class WaitingRoom extends Component {
 ) : (
   this.renderStartGameLink()
 )}
-        <PlayersArea />
+        <div className="display__playersarea">
+           <PlayersArea />
+        </div>
 
         {/* <ul>{mapGames(games, this.handleClick)}</ul>
       
@@ -193,7 +195,7 @@ class WaitingRoom extends Component {
           ) : null}
           {this.state.questions === '' ? (
 
-            <>{/*<Loading />}</>
+            <>{/*<Loading /></>
           ) : (
             this.renderStartGameLink()
           )}

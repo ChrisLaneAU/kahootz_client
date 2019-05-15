@@ -1,7 +1,7 @@
 @import "../../../styles/_variables.scss";
 
 .display {
-  margin-top: 6%;
+  
   text-align: center;
 }
 
@@ -26,10 +26,10 @@
 
   &__answer {
     margin-top: 75px;
-    font-size: 40px;
+    font-size: 32px;
   }
   &__answertext {
-    margin-top: 50px;
+    // margin-top: 50px;
     color: $color-white;
     text-decoration: none;
   }
@@ -52,7 +52,7 @@
 
   &__answer {
     margin-top: 75px;
-    font-size: 40px;
+    font-size: 32px;
 
     &__answertext {
       margin-top: 50px;
@@ -79,7 +79,7 @@
 
   &__answer {
     margin-top: 75px;
-    font-size: 40px;
+    font-size: 32px;
 
     &__answertext {
       margin-top: 50px;
@@ -106,7 +106,7 @@
 
   &__answer {
     margin-top: 75px;
-    font-size: 40px;
+    font-size: 32px;
 
     &__answertext {
       margin-top: 50px;

@@ -26,24 +26,26 @@ export default class Timer extends Component {
   renderSkipLink() {
 
     return (
+      <>
       <button className="skip-link"
               onClick={this.props.skip_question}
             >
             SKIP
       </button>
-    )
+    </>)
   }
 
   render() {
     return (
+      <>{ localStorage.getItem('jwt') ? this.renderSkipLink() : '' }
       <div className="timer">
-        { localStorage.getItem('jwt') ? this.renderSkipLink() : '' }
         <div className="timer__face">
           <div className="timer__numbers">
             { this.renderTimer() }
           </div>
         </div>
       </div>
+      </>
     );
   }
 
