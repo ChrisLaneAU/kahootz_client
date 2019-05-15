@@ -2,7 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import GamePin from "./GamePin/GamePin";
+<<<<<<< HEAD
 import "./WaitingRoom.scss";
+=======
+import './WaitingRoom.scss'
+>>>>>>> ec13f0f3ed0811f224c9a27a0a0194d037eb63e3
 
 // ACTIONCABLE
 import { ActionCableConsumer } from "react-actioncable-provider";
@@ -86,8 +90,12 @@ class WaitingRoom extends Component {
     const { questions, next_question, next_question_id } = this.state;
 
     return (
+<<<<<<< HEAD
       <Link
         className="startgame_link"
+=======
+      <Link className="startgame_link"
+>>>>>>> ec13f0f3ed0811f224c9a27a0a0194d037eb63e3
         to={{
           pathname: `/game/${next_question_id}`,
           state: {
@@ -132,9 +140,21 @@ class WaitingRoom extends Component {
           />
         ) : null}
 
+<<<<<<< HEAD
         {this.state.questions === "" ? <Loading /> : this.renderStartGameLink()}
         <div className="display__playersarea">
           <PlayersArea />
+=======
+
+{this.state.questions === '' ? (
+
+<Loading />
+) : (
+  this.renderStartGameLink()
+)}
+        <div className="display__playersarea">
+           <PlayersArea />
+>>>>>>> ec13f0f3ed0811f224c9a27a0a0194d037eb63e3
         </div>
 
         {/* <ul>{mapGames(games, this.handleClick)}</ul>
@@ -155,6 +175,7 @@ class WaitingRoom extends Component {
      onFinishedPlaying={this.handleSongFinishedPlaying}
       /> */}
       </div>
+<<<<<<< HEAD
       /*
      <>
        <QuizCode quiz_id={this.props.location.state.quiz_id}/>
@@ -185,6 +206,38 @@ class WaitingRoom extends Component {
          <p>{JSON.stringify(this.state.quiz)}</p>
        </div>
      </>
+=======
+/*
+      <>
+        <QuizCode quiz_id={this.props.location.state.quiz_id}/>
+        <div className = "display__waitingroom">
+          <div className = "waitroom__header">
+            <h1>Waiting For Players To Join</h1>
+          </div>
+
+          <ActionCableConsumer
+            channel={{ channel: "GamesChannel" }}
+            onReceived={this.handleReceivedGame}
+          />
+          {this.state.games.length ? (
+            <Cable
+              games={games}
+              handleReceivedPlayer={this.handleReceivedPlayer}
+            />
+          ) : null}
+          {activeGame ? (
+            <PlayersArea game={findActiveGame(games, activeGame)} />
+          ) : null}
+          {this.state.questions === '' ? (
+
+            <>{/*<Loading /></>
+          ) : (
+            this.renderStartGameLink()
+          )}
+          <p>{JSON.stringify(this.state.quiz)}</p>
+        </div>
+      </>
+>>>>>>> ec13f0f3ed0811f224c9a27a0a0194d037eb63e3
 */
     );
   }

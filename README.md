@@ -1,68 +1,49 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# General Assembly Group Project - Kahoot Clone (Client Side)
 
-## Available Scripts
+## Technology
+* ReactJS version: v16.8
+* Ruby version: ruby 2.6.2p47 (2019-03-13 revision 67232)
+* Rails version: Rails 5.2.3
+* Database: PostgreSQL 11
+* Messaging: JSON Web Tokens & Action Cable 
+* Style: SCSS
+* Hosted: Heroku
 
-In the project directory, you can run:
 
-### `npm start`
+## What is Kahoot
+Multiple player quiz game. Players use a group pin to join a game and answer multiple choice questions from their computer.
+Get It Out Here: (https://kahoot.com/)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### Setup Database
+1. Download accompanying backend from https://github.com/jamaspy/kahootz_server
+2. `cd` in `kahootz_server`
+3. `bundle install` to setup required gems
+4. `rails db:create` to create your local database (Postgresql is required)
+5. `rails db:migrate` 
+6. `rails db:seed` to generate the quizzes in your local database (This could take a while)
+7. `rails s` to start the server on `localhost:3000`
 
-### `npm test`
+### Starting the UI 
+1. `cd in `kahootz_client`
+2. `npm install` to initialise the app
+3. `npm start` and `Y` to chose to start the server on a different port `localhost:3001`
+4. Your broswer will open up to the Join Game screen as a User. 
+5. Navigate to `localhost:3001/login` or `localhost:3001/signup` and signup
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Screenshots Of The App
 
-### `npm run build`
+### Login Page (SignUp is also an option for New Users)
+![Log In Page](https://github.com/jamaspy/kahootz_client/blob/master/README_screenshots/login.png)
+### Select A Quiz To Play 
+![Select A Quiz Screen](https://github.com/jamaspy/kahootz_client/blob/master/README_screenshots/selectquiz.png)
+### Waiting Room Whilst Other Players Enter Game PIN & Join Game
+![Waiting Room Screen](https://github.com/jamaspy/kahootz_client/blob/master/README_screenshots/waitingroom.png)
+### Answer The Question 
+![Answer Question Screen](https://github.com/jamaspy/kahootz_client/blob/master/README_screenshots/answerquestion.png)
+### Post Game Winners Podium
+![PostGame Winners Podium](https://github.com/jamaspy/kahootz_client/blob/master/README_screenshots/podium.png)
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

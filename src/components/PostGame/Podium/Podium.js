@@ -4,9 +4,9 @@ import "./Podium.scss"
 class Podium extends Component {
     render() {
         return (
-            <div className="display">
-                <div className="podium">
-                    <div className="podium__second">
+            <div className="display"> 
+                <div className="podium"> 
+                    <div className="podium__second"> 
                         <div className="podium__second--player">
                             Chris
                         </div>

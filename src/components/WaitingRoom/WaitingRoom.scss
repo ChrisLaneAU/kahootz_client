@@ -2,10 +2,37 @@
 .display__waitingroom{
     position: relative;
     text-align: center;
+    
 }
 .display__quizcode{
 
 }
+
+.display__playersarea{
+    width: 75%;
+    margin: 0 auto;
+}
+
+.startgame_link{
+    display: inline-block;
+    background-image: linear-gradient(to right bottom, $color-blue-light 0%, $color-blue-dark 100%);
+    color: $color-black;
+    margin: 50px auto;
+    padding: 20px;
+    width: 350px;
+    color: $color-white;
+    font-size: 30px;
+    text-shadow: 1px 1px 1px $color-black;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.4s;
+
+    &:hover{
+        transform: translateY(-.1rem) scale(1.03);
+        box-shadow: 0 1.5rem 4rem rgba($color-black, 0.2);
+    }
+}
+
 .waitroom__header{
     text-align: center;
     width: 100vw;

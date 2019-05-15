@@ -1,0 +1,20 @@
+@import './../../styles/variables';
+
+.playagain_button{
+    border: 2px solid $color-grey;
+    border-radius: 5px;
+    color: $color-grey;
+    font-size: 14px;
+    padding: 10px;
+    position: absolute;
+    top:30px;
+    right:25px;
+    text-decoration: none;
+    transition: all .3s;
+    &:hover{
+        color: $color-white;
+        border: 2px solid $color-white;
+        transform: translateY(-.1rem) scale(1.03);
+        box-shadow: 0 1.5rem 4rem rgba($color-black, 0.4);
+    }
+}

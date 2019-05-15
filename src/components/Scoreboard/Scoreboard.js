@@ -21,7 +21,7 @@ class Scoreboard extends Component {
   }
 
   getPlayerData() {
-    axios.get(GAME_URL + "1.json").then(results => {
+    axios.get(GAME_URL + "229.json").then(results => {
       // gets the players answers into an array
       const answers_arr = _.pluck(results.data.players, "answer");
       // converts the array into an object like {a:1, b:4 etc}
@@ -40,12 +40,13 @@ class Scoreboard extends Component {
       <>
         <h1>Question {question_number} Results...</h1>
         <Question question={question} />
-        <AnswerGraph answers={this.state.answers} />
-        <SelectAnswerButton answers={answers} />
         { localStorage.getItem('jwt') ? 
            <button onClick={next_question_nav} className="skip-link">
           NEXT
         </button>  : '' }
+        <AnswerGraph answers={this.state.answers} />
+        <SelectAnswerButton answers={answers} />
+        
         
       </>
     );

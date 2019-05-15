@@ -9,7 +9,7 @@
 .card{
     display: inline-block;
     width: 250px;
-    height: 350px;
+    height: 375px;
     border: 2px solid $color-grey;
     border-radius: 5px;
     margin: 15px 15px;
@@ -38,6 +38,7 @@
         padding: 10px;
         text-align: center;
         &--category{
+            margin-top: 10px;
             margin-bottom: 20px;
         }
         &--difficulty{

@@ -22,7 +22,7 @@
 }
 
 .skip-link {
-    
+    color: $color-white;
     position: absolute;
     right: 0;
     margin-right: 30px;
@@ -35,13 +35,14 @@
     // background-image: linear-gradient(to right bottom, $timer-color-light 0%,  $timer-color-dark 100%);
     background-color: $color-grey;
     font-size: 35px;
-    margin: 15px 15px;
+    text-decoration: none;
+    font-family: 'Montserrat';
 
 }
 
-.skip-link a {
+.skip-link  {
     color: $color-white;
-    text-decoration: none;
+   
 }
 
 
