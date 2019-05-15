@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import GamePin from "./GamePin/GamePin";
+import './WaitingRoom.scss'
 
 // ACTIONCABLE
 import { ActionCableConsumer } from "react-actioncable-provider";
@@ -107,6 +108,7 @@ class WaitingRoom extends Component {
   }
 
   render() {
+    console.log(this.props.location);
     // ACTIONCABLE
     const { games, activeGame } = this.state;
     return (
@@ -191,7 +193,7 @@ class WaitingRoom extends Component {
           ) : null}
           {this.state.questions === '' ? (
 
-            <>{/*<Loading />*/}</>
+            <>{/*<Loading />}</>
           ) : (
             this.renderStartGameLink()
           )}
