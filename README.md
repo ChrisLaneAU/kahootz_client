@@ -1,4 +1,4 @@
-# General Assembly Group Project - Kahoot Clone
+# General Assembly Group Project - Kahoot Clone (Client Side)
 
 ## Technology
 * ReactJS version: v16.8
