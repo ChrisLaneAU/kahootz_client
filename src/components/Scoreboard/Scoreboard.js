@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import {Redirect} from 'react-router-dom'
 import Question from "../PlayGame/Question/Question";
 import AnswerGraph from "./AnswerGraph/AnswerGraph";
 import SelectAnswerButton from "../PlayGame/SelectAnswerButton/SelectAnswerButton";
@@ -35,19 +34,25 @@ class Scoreboard extends Component {
 
   render() {
     //if (!this.props.location.state) return <Redirect to="/" />;
-    const { question, answers, question_number, next_question_nav } = this.props
+    const {
+      question,
+      answers,
+      question_number,
+      next_question_nav
+    } = this.props;
     return (
       <>
         <h1>Question {question_number} Results...</h1>
         <Question question={question} />
-        { localStorage.getItem('jwt') ? 
-           <button onClick={next_question_nav} className="skip-link">
-          NEXT
-        </button>  : '' }
+        {localStorage.getItem("jwt") ? (
+          <button onClick={next_question_nav} className="skip-link">
+            NEXT
+          </button>
+        ) : (
+          ""
+        )}
         <AnswerGraph answers={this.state.answers} />
         <SelectAnswerButton answers={answers} />
-        
-        
       </>
     );
   }

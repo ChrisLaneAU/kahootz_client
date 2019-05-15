@@ -11,19 +11,11 @@ class NicknameForm extends Component {
       nickname: ""
     };
     this._handleNicknameInput = this._handleNicknameInput.bind(this);
-    //this._handleNicknameSubmit = this._handleNicknameSubmit.bind(this);
   }
 
   _handleNicknameInput(event) {
     this.setState({ nickname: event.target.value });
-    console.log(event.target.value);
   }
-
-  // _handleNicknameSubmit(event) {
-  //   event.preventDefault();
-  //
-  //   console.log(`Nickname Submitted - ${this.state.nickname} is JOINING GAME`);
-  // }
 
   render() {
     return (
@@ -44,7 +36,6 @@ class NicknameForm extends Component {
                   onClick={event => {
                     event.preventDefault();
                     this.props.submitNickname(this.state.nickname);
-                    //history.push("/waiting-room", this.props.gamePin);
                     history.push({
                       pathname: "/waiting-room",
                       state: {

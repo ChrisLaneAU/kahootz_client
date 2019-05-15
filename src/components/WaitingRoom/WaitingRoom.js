@@ -1,16 +1,11 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import GamePin from "./GamePin/GamePin";
+import { Link, Redirect } from "react-router-dom";
 import "./WaitingRoom.scss";
 
-// ACTIONCABLE
-import { ActionCableConsumer } from "react-actioncable-provider";
-import { API_ROOT, HEADERS } from "../../constants";
-import NewGameForm from "./NewGameForm/NewGameForm";
+import { gamesRef } from "../../config/firebase";
+
+import { API_ROOT } from "../../constants";
 import PlayersArea from "./PlayersArea/PlayersArea";
-import Cable from "./Cable/Cable";
-import Loading from "./Loading/Loading";
 import QuizCode from "../Dashboard/QuizCode/QuizCode";
 
 // const GET_QUIZ_OBJ = "https://kahootz.herokuapp.com/quizzes.json"
@@ -25,69 +20,60 @@ class WaitingRoom extends Component {
       questions: "",
       games: [],
       activeGame: "",
-      activePin: ""
+      activePin: "",
+      players: [],
+      redirect: false
     };
   }
 
+  componentWillMount() {
+    if (this.props.location.state === undefined)
+      this.setState({ redirect: true });
+  }
+
   componentDidMount() {
-    // ACTIONCABLE
+    if (this.state.redirect) return;
+    gamesRef
+      .child(`${this.props.location.state.gamePin}`)
+      .on("value", snapshot => {
+        this.setState({
+          players: snapshot.val().players,
+          next_question: snapshot.val().next_question
+        });
+        if (this.props.location.state.isAdmin) {
+          this.setState({
+            next_question_id: snapshot.val().questions[0].id,
+            questions: snapshot.val().questions
+          });
+        }
+      });
     fetch(`${API_ROOT}/games`)
       .then(res => res.json())
-
       .then(games => this.setState({ games }))
       .then(() => {
         if (this.props.location.state.gamePin) {
-          const { gamePin, nickname } = this.props.location.state;
+          const { gamePin } = this.props.location.state;
           this._setActiveGame(gamePin);
-          fetch(`${API_ROOT}/players`, {
-            method: "POST",
-            headers: HEADERS,
-            body: JSON.stringify({ nickname, game_id: this.state.activeGame })
-          });
         }
       })
       .catch(error => {
-        console.log("props", this.props);
-        // this.props.history.push({
-        //   pathname: "/",
-        //   //state: { gamePin: this.props.gamePin, nickname: this.state.nickname }
-        // });
+        console.error(error);
       });
-
-    if (this.props.location.state.questions) {
-      const { questions } = this.props.location.state;
-      this.setState({
-        questions: questions,
-        next_question_id: questions[0].id
-      });
-    }
   }
 
-  // ACTIONCABLE
-  handleReceivedGame = response => {
-    const { game } = response;
-    this.setState({
-      games: [...this.state.games, game]
-    });
-  };
+  _handleStartGameClick() {
+    gamesRef
+      .child(`${this.props.location.state.gamePin}`)
+      .update({ next_question: 1 });
+  }
 
-  handleReceivedPlayer = response => {
-    const { player } = response;
-    const games = [...this.state.games];
-    const game = games.find(game => game.id === player.game_id);
-    game.players = [...game.players, player];
-    this.setState({ games });
-  };
-
-  handleClick = id => {
-    this.setState({ activeGame: id });
-  };
   renderStartGameLink() {
     const { questions, next_question, next_question_id } = this.state;
 
     return (
       <Link
         className="startgame_link"
+        onClick={() => this._handleStartGameClick()}
         to={{
           pathname: `/game/${next_question_id}`,
           state: {
@@ -106,10 +92,7 @@ class WaitingRoom extends Component {
     this.setState({ activeGame: game.id, activePin: gameTitle });
   }
 
-  render() {
-    console.log(this.props.location);
-    // ACTIONCABLE
-    const { games, activeGame } = this.state;
+  renderWaitingRoom() {
     return (
       <div className="display__waitingroom">
         <div className="waitroom__header">
@@ -117,94 +100,51 @@ class WaitingRoom extends Component {
         </div>
 
         <div className="display__quizcode">
-          <QuizCode quiz_id={this.props.location.state.quiz_id} />
+          <QuizCode quiz_id={this.props.location.state.gamePin} />
         </div>
 
-        <ActionCableConsumer
-          channel={{ channel: "GamesChannel" }}
-          onReceived={this.handleReceivedGame}
-        />
-
-        {this.state.games.length ? (
-          <Cable
-            games={games}
-            handleReceivedPlayer={this.handleReceivedPlayer}
-          />
-        ) : null}
-
-        {this.state.questions === "" ? <Loading /> : this.renderStartGameLink()}
+        {this.props.location.state.isAdmin ? this.renderStartGameLink() : <></>}
         <div className="display__playersarea">
-          <PlayersArea />
+          <PlayersArea players={this.state.players} />
         </div>
-
-        {/* <ul>{mapGames(games, this.handleClick)}</ul>
-
-       {activeGame ? (
-         <PlayersArea game={findActiveGame(games, activeGame)} />
-       ) : null} */}
-
-        <p>{JSON.stringify(this.state.quiz)}</p>
 
         {/* ****TODO**** */}
         {/* KAHOOTZ BACKGROUND MUSIC <Sound
-     url= './music.mp3'
-     playStatus={Sound.status.PLAYING}
-     playFromPosition={300}
-     onLoading={this.handleSongLoading}
-     onPlaying={this.handleSongPlaying}
-     onFinishedPlaying={this.handleSongFinishedPlaying}
-      /> */}
+   url= './music.mp3'
+   playStatus={Sound.status.PLAYING}
+   playFromPosition={300}
+   onLoading={this.handleSongLoading}
+   onPlaying={this.handleSongPlaying}
+   onFinishedPlaying={this.handleSongFinishedPlaying}
+    /> */}
       </div>
-      /*
-     <>
-       <QuizCode quiz_id={this.props.location.state.quiz_id}/>
-       <div className = "display__waitingroom">
-         <div className = "waitroom__header">
-           <h1>Waiting For Players To Join</h1>
-         </div>
+    );
+  }
 
-         <ActionCableConsumer
-           channel={{ channel: "GamesChannel" }}
-           onReceived={this.handleReceivedGame}
-         />
-         {this.state.games.length ? (
-           <Cable
-             games={games}
-             handleReceivedPlayer={this.handleReceivedPlayer}
-           />
-         ) : null}
-         {activeGame ? (
-           <PlayersArea game={findActiveGame(games, activeGame)} />
-         ) : null}
-         {this.state.questions === '' ? (
+  render() {
+    const {
+      redirect,
+      next_question,
+      isAdmin,
+      next_question_id,
+      questions
+    } = this.state;
 
-           <>{/*<Loading /></>
-         ) : (
-           this.renderStartGameLink()
-         )}
-         <p>{JSON.stringify(this.state.quiz)}</p>
-       </div>
-     </>
-
-*/
+    if (redirect) return <Redirect to="/" />;
+    return !isAdmin && next_question ? (
+      <Redirect
+        to={{
+          pathname: `/game/${next_question_id}`,
+          state: {
+            question_id: next_question_id,
+            questions: questions
+          }
+        }}
+      />
+    ) : (
+      this.renderWaitingRoom()
     );
   }
 }
 
 export default WaitingRoom;
-
-// ACTIONCABLE HELPERS
-
-const findActiveGame = (games, activeGame) => {
-  return games.find(game => game.id === activeGame);
-};
-
-const mapGames = (games, handleClick) => {
-  return games.map(game => {
-    return (
-      <li key={game.id} onClick={() => handleClick(game.id)}>
-        {game.title}
-      </li>
-    );
-  });
-};
