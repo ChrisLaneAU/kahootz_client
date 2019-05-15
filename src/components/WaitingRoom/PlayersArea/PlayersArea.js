@@ -43,21 +43,8 @@ class PlayersArea extends Component {
     ];
     const listPlayers = players.map(player => <li>{player}</li>);
 
-<<<<<<< HEAD
     return listPlayers;
   }
-=======
-
-  renderPlayer(){
-  const players = ["james", "ben", "chris", "sam", "jen", "kylie", "bob","jen", "kylie", "fred","jen", "kylie", "jack", "cooper","jen", "kylie", "sally", "anne", "billy", "frank", "james", "ben", "chris", "sam", "jen", "kylie", "bob", "fred", "jack", "cooper", "sally", "anne", "billy", "frank"]
-  const listPlayers = players.map((player) => 
-    <li>{player}</li>
-  )
-
-  return(listPlayers)
-}
-
->>>>>>> ec13f0f3ed0811f224c9a27a0a0194d037eb63e3
 
   render() {
     return (

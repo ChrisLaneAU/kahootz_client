@@ -4,21 +4,8 @@ import "./QuizCode.scss";
 
 // const SERVER_URL_PUT = 'http://localhost:3000/new_game.json'
 // const SERVER_URL_GET = 'http://localhost:3000/new_game.json'
-<<<<<<< HEAD
 const SERVER_URL_PUT = "https://kahootz.herokuapp.com/new_game.json";
 const SERVER_URL_GET = "https://kahootz.herokuapp.com/new_game.json";
-=======
-const SERVER_URL_PUT = 'https://kahootz.herokuapp.com/new_game.json' 
-const SERVER_URL_GET = 'https://kahootz.herokuapp.com/new_game.json'
-
-const QuizCode = ( props ) => {
-
-  let [ gameNum, getGameNum ] = useState(0)
-  
-  useEffect(() => {
-     axios.post(SERVER_URL_PUT, { new_game: true, quiz_id: props.quiz_id } ).then((results) => {
-       axios.get(SERVER_URL_GET).then((result) => {
->>>>>>> ec13f0f3ed0811f224c9a27a0a0194d037eb63e3
 
 const QuizCode = props => {
   let [gameNum, getGameNum] = useState(0);
