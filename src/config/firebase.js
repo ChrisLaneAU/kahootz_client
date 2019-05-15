@@ -9,9 +9,10 @@ const FirebaseConfig = {
 };
 firebase.initializeApp(FirebaseConfig);
 
-const databaseRef = firebase.database().ref();
+export const databaseRef = firebase.database().ref();
 
 export const gamesRef = databaseRef.child("games");
+//export const channelRef = databaseRef.child(`games/${}`);
 // export const imagesRef = databaseRef.child("images");
 
 export const newFirebaseId = databaseRef.push().key;

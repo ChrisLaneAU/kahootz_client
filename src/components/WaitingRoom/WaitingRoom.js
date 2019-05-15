@@ -4,6 +4,8 @@ import axios from "axios";
 import GamePin from "./GamePin/GamePin";
 import "./WaitingRoom.scss";
 
+import { gamesRef } from "../../config/firebase";
+
 // ACTIONCABLE
 import { ActionCableConsumer } from "react-actioncable-provider";
 import { API_ROOT, HEADERS } from "../../constants";
@@ -25,29 +27,33 @@ class WaitingRoom extends Component {
       questions: "",
       games: [],
       activeGame: "",
-      activePin: ""
+      activePin: "",
+      players: []
     };
   }
 
   componentDidMount() {
-    // ACTIONCABLE
+    gamesRef
+      .child(`${this.props.location.state.gamePin}`)
+      .on("value", snapshot => {
+        this.setState({ players: snapshot.val().players });
+      });
     fetch(`${API_ROOT}/games`)
       .then(res => res.json())
-
       .then(games => this.setState({ games }))
       .then(() => {
         if (this.props.location.state.gamePin) {
           const { gamePin, nickname } = this.props.location.state;
           this._setActiveGame(gamePin);
-          fetch(`${API_ROOT}/players`, {
-            method: "POST",
-            headers: HEADERS,
-            body: JSON.stringify({ nickname, game_id: this.state.activeGame })
-          });
+          // fetch(`${API_ROOT}/players`, {
+          //   method: "POST",
+          //   headers: HEADERS,
+          //   body: JSON.stringify({ nickname, game_id: this.state.activeGame })
+          // });
         }
       })
       .catch(error => {
-        console.log("props", this.props);
+        console.error(error);
         // this.props.history.push({
         //   pathname: "/",
         //   //state: { gamePin: this.props.gamePin, nickname: this.state.nickname }
@@ -63,25 +69,6 @@ class WaitingRoom extends Component {
     }
   }
 
-  // ACTIONCABLE
-  handleReceivedGame = response => {
-    const { game } = response;
-    this.setState({
-      games: [...this.state.games, game]
-    });
-  };
-
-  handleReceivedPlayer = response => {
-    const { player } = response;
-    const games = [...this.state.games];
-    const game = games.find(game => game.id === player.game_id);
-    game.players = [...game.players, player];
-    this.setState({ games });
-  };
-
-  handleClick = id => {
-    this.setState({ activeGame: id });
-  };
   renderStartGameLink() {
     const { questions, next_question, next_question_id } = this.state;
 
@@ -107,8 +94,6 @@ class WaitingRoom extends Component {
   }
 
   render() {
-    console.log(this.props.location);
-    // ACTIONCABLE
     const { games, activeGame } = this.state;
     return (
       <div className="display__waitingroom">
@@ -117,33 +102,13 @@ class WaitingRoom extends Component {
         </div>
 
         <div className="display__quizcode">
-          <QuizCode quiz_id={this.props.location.state.quiz_id} />
+          <QuizCode quiz_id={this.props.location.state.gamePin} />
         </div>
 
-        <ActionCableConsumer
-          channel={{ channel: "GamesChannel" }}
-          onReceived={this.handleReceivedGame}
-        />
-
-        {this.state.games.length ? (
-          <Cable
-            games={games}
-            handleReceivedPlayer={this.handleReceivedPlayer}
-          />
-        ) : null}
-
-        {this.state.questions === "" ? <Loading /> : this.renderStartGameLink()}
+        {this.props.location.state.isAdmin ? this.renderStartGameLink() : <></>}
         <div className="display__playersarea">
-          <PlayersArea />
+          <PlayersArea players={this.state.players} />
         </div>
-
-        {/* <ul>{mapGames(games, this.handleClick)}</ul>
-
-       {activeGame ? (
-         <PlayersArea game={findActiveGame(games, activeGame)} />
-       ) : null} */}
-
-        <p>{JSON.stringify(this.state.quiz)}</p>
 
         {/* ****TODO**** */}
         {/* KAHOOTZ BACKGROUND MUSIC <Sound
@@ -155,56 +120,8 @@ class WaitingRoom extends Component {
      onFinishedPlaying={this.handleSongFinishedPlaying}
       /> */}
       </div>
-      /*
-     <>
-       <QuizCode quiz_id={this.props.location.state.quiz_id}/>
-       <div className = "display__waitingroom">
-         <div className = "waitroom__header">
-           <h1>Waiting For Players To Join</h1>
-         </div>
-
-         <ActionCableConsumer
-           channel={{ channel: "GamesChannel" }}
-           onReceived={this.handleReceivedGame}
-         />
-         {this.state.games.length ? (
-           <Cable
-             games={games}
-             handleReceivedPlayer={this.handleReceivedPlayer}
-           />
-         ) : null}
-         {activeGame ? (
-           <PlayersArea game={findActiveGame(games, activeGame)} />
-         ) : null}
-         {this.state.questions === '' ? (
-
-           <>{/*<Loading /></>
-         ) : (
-           this.renderStartGameLink()
-         )}
-         <p>{JSON.stringify(this.state.quiz)}</p>
-       </div>
-     </>
-
-*/
     );
   }
 }
 
 export default WaitingRoom;
-
-// ACTIONCABLE HELPERS
-
-const findActiveGame = (games, activeGame) => {
-  return games.find(game => game.id === activeGame);
-};
-
-const mapGames = (games, handleClick) => {
-  return games.map(game => {
-    return (
-      <li key={game.id} onClick={() => handleClick(game.id)}>
-        {game.title}
-      </li>
-    );
-  });
-};

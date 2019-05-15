@@ -1,19 +1,27 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import './Dashboard.scss'
-import axios from "axios"
+import { Redirect } from "react-router-dom";
+import "./Dashboard.scss";
+import axios from "axios";
 import QuizCode from "./QuizCode/QuizCode";
-import Card from "./Card/Card"
+import Card from "./Card/Card";
 
-const QUIZ_URL = "https://kahootz.herokuapp.com/quizzes.json"
+import { gamesRef } from "../../config/firebase";
+
+const QUIZ_URL = "https://kahootz.herokuapp.com/quizzes.json";
+
+const SERVER_URL_PUT = "https://kahootz.herokuapp.com/new_game.json";
+const SERVER_URL_GET = "https://kahootz.herokuapp.com/new_game.json";
 
 class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
-      quizzes: []
-    }
-    this.componentDidMount = this.componentDidMount.bind(this)
+      quizzes: [],
+      redirect: false
+    };
+    this.componentDidMount = this.componentDidMount.bind(this);
+    this._handleCarClick = this._handleCarClick.bind(this);
   }
 
   componentDidMount() {
@@ -25,49 +33,57 @@ class Dashboard extends Component {
     });
   }
 
+  _handleCarClick() {
+    axios.post(SERVER_URL_PUT, { new_game: true, quiz_id: 8 }).then(results => {
+      axios.get(SERVER_URL_GET).then(result => {
+        gamesRef.child(result.data.id).set({ players: [""] }, error => {
+          if (error) {
+            console.error(error);
+          } else {
+            this.setState({ redirect: true, gameId: result.data.id });
+          }
+        });
+      });
+    });
+  }
+
   renderCards() {
     return this.state.quizzes.map(quiz => {
       return (
-        <Link
-          key={ quiz.id }
-          to={{
-            pathname: '/waiting-room',
-            state: {
-              quiz_id: quiz.id,
-              category: quiz.category,
-              difficulty: quiz.difficulty,
-              questions: quiz.questions,
-              answers: quiz.answers
-            }
-          }}
-        >
-          <Card key={quiz.id} category={quiz.category} difficulty={quiz.difficulty} questions={quiz.questions} />
-
-      </Link>
-
-     
-      ) 
-    })
+        <div key={quiz.id} onClick={this._handleCarClick}>
+          <Card
+            key={quiz.id}
+            category={quiz.category}
+            difficulty={quiz.difficulty}
+            questions={quiz.questions}
+          />
+        </div>
+      );
+    });
   }
 
   render() {
     return (
-
       <div className="displayQuizzes">
-
         <div className="header">
           <h1>Select A Quiz To Play</h1>
         </div>
 
-        <div className="displayCards">
-          {this.renderCards()}
-        </div>
-
-        
+        {this.state.redirect ? (
+          <Redirect
+            to={{
+              pathname: "/waiting-room",
+              state: {
+                gamePin: this.state.gameId,
+                isAdmin: true
+              }
+            }}
+          />
+        ) : (
+          <div className="displayCards">{this.renderCards()}</div>
+        )}
       </div>
-
-    )
-
+    );
   }
 }
 
