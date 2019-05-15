@@ -32,7 +32,6 @@ export default class Timer extends Component {
             >
             SKIP
       </button>
-      
     </>)
   }
 
