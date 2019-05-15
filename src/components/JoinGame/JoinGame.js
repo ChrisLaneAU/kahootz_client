@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import JoinGameForm from "./JoinGameForm/JoinGameForm";
 import NicknameForm from "./NicknameForm/NicknameForm";
 
-import { gamesRef } from "../../config/firebase";
 import { databaseRef } from "../../config/firebase";
 
 class JoinGame extends Component {
@@ -18,15 +17,15 @@ class JoinGame extends Component {
   }
 
   _submitPin(pin) {
-    this.setState({ pin });
     databaseRef.child(`games/${pin}`).on("value", snapshot => {
-      this.setState({ players: snapshot.val().players });
+      if (snapshot.val() === null) return;
+      this.setState({ pin, players: snapshot.val().players });
     });
   }
 
   _submitNickname(nickname) {
     this.setState({ nickname });
-    databaseRef.child(`games/${this.state.pin}`).set({
+    databaseRef.child(`games/${this.state.pin}`).update({
       players: [...this.state.players, nickname]
     });
   }

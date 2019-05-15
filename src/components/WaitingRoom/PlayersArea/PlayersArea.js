@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import NewPlayerForm from "../NewPlayerForm/NewPlayerForm";
 import "./PlayersArea.scss";
 
 class PlayersArea extends Component {
   renderPlayer() {
-    const listPlayers = this.props.players.map(player => <li>{player}</li>);
+    const listPlayers = this.props.players.map(player => (
+      <li key={player}>{player}</li>
+    ));
     return listPlayers;
   }
 

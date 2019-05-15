@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import "./Dashboard.scss";
 import axios from "axios";
-import QuizCode from "./QuizCode/QuizCode";
 import Card from "./Card/Card";
 
 import { gamesRef } from "../../config/firebase";
@@ -21,7 +19,7 @@ class Dashboard extends Component {
       redirect: false
     };
     this.componentDidMount = this.componentDidMount.bind(this);
-    this._handleCarClick = this._handleCarClick.bind(this);
+    this._handleCardClick = this._handleCardClick.bind(this);
   }
 
   componentDidMount() {
@@ -29,20 +27,28 @@ class Dashboard extends Component {
       this.setState({
         quizzes: quizzes.data
       });
-      console.log("this is the quizzes", quizzes);
     });
   }
 
-  _handleCarClick() {
+  _handleCardClick(questions) {
     axios.post(SERVER_URL_PUT, { new_game: true, quiz_id: 8 }).then(results => {
       axios.get(SERVER_URL_GET).then(result => {
-        gamesRef.child(result.data.id).set({ players: [""] }, error => {
-          if (error) {
-            console.error(error);
-          } else {
-            this.setState({ redirect: true, gameId: result.data.id });
+        gamesRef.child(result.data.id).set(
+          {
+            players: [""],
+            questions,
+            next_question: 0,
+            currentQuestion: questions[0].content,
+            currentAnswers: questions[0].answers.map(answer => answer.answer)
+          },
+          error => {
+            if (error) {
+              console.error(error);
+            } else {
+              this.setState({ redirect: true, gameId: result.data.id });
+            }
           }
-        });
+        );
       });
     });
   }
@@ -50,8 +56,9 @@ class Dashboard extends Component {
   renderCards() {
     return this.state.quizzes.map(quiz => {
       return (
-        <div key={quiz.id} onClick={this._handleCarClick}>
+        <div key={quiz.id}>
           <Card
+            onClick={questions => this._handleCardClick(questions)}
             key={quiz.id}
             category={quiz.category}
             difficulty={quiz.difficulty}

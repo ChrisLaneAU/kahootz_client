@@ -1,18 +1,11 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import GamePin from "./GamePin/GamePin";
+import { Link, Redirect } from "react-router-dom";
 import "./WaitingRoom.scss";
 
 import { gamesRef } from "../../config/firebase";
 
-// ACTIONCABLE
-import { ActionCableConsumer } from "react-actioncable-provider";
-import { API_ROOT, HEADERS } from "../../constants";
-import NewGameForm from "./NewGameForm/NewGameForm";
+import { API_ROOT } from "../../constants";
 import PlayersArea from "./PlayersArea/PlayersArea";
-import Cable from "./Cable/Cable";
-import Loading from "./Loading/Loading";
 import QuizCode from "../Dashboard/QuizCode/QuizCode";
 
 // const GET_QUIZ_OBJ = "https://kahootz.herokuapp.com/quizzes.json"
@@ -28,45 +21,50 @@ class WaitingRoom extends Component {
       games: [],
       activeGame: "",
       activePin: "",
-      players: []
+      players: [],
+      redirect: false
     };
   }
 
+  componentWillMount() {
+    if (this.props.location.state === undefined)
+      this.setState({ redirect: true });
+  }
+
   componentDidMount() {
+    if (this.state.redirect) return;
     gamesRef
       .child(`${this.props.location.state.gamePin}`)
       .on("value", snapshot => {
-        this.setState({ players: snapshot.val().players });
+        this.setState({
+          players: snapshot.val().players,
+          next_question: snapshot.val().next_question
+        });
+        if (this.props.location.state.isAdmin) {
+          this.setState({
+            next_question_id: snapshot.val().questions[0].id,
+            questions: snapshot.val().questions
+          });
+        }
       });
     fetch(`${API_ROOT}/games`)
       .then(res => res.json())
       .then(games => this.setState({ games }))
       .then(() => {
         if (this.props.location.state.gamePin) {
-          const { gamePin, nickname } = this.props.location.state;
+          const { gamePin } = this.props.location.state;
           this._setActiveGame(gamePin);
-          // fetch(`${API_ROOT}/players`, {
-          //   method: "POST",
-          //   headers: HEADERS,
-          //   body: JSON.stringify({ nickname, game_id: this.state.activeGame })
-          // });
         }
       })
       .catch(error => {
         console.error(error);
-        // this.props.history.push({
-        //   pathname: "/",
-        //   //state: { gamePin: this.props.gamePin, nickname: this.state.nickname }
-        // });
       });
+  }
 
-    if (this.props.location.state.questions) {
-      const { questions } = this.props.location.state;
-      this.setState({
-        questions: questions,
-        next_question_id: questions[0].id
-      });
-    }
+  _handleStartGameClick() {
+    gamesRef
+      .child(`${this.props.location.state.gamePin}`)
+      .update({ next_question: 1 });
   }
 
   renderStartGameLink() {
@@ -75,6 +73,7 @@ class WaitingRoom extends Component {
     return (
       <Link
         className="startgame_link"
+        onClick={() => this._handleStartGameClick()}
         to={{
           pathname: `/game/${next_question_id}`,
           state: {
@@ -93,8 +92,7 @@ class WaitingRoom extends Component {
     this.setState({ activeGame: game.id, activePin: gameTitle });
   }
 
-  render() {
-    const { games, activeGame } = this.state;
+  renderWaitingRoom() {
     return (
       <div className="display__waitingroom">
         <div className="waitroom__header">
@@ -112,14 +110,39 @@ class WaitingRoom extends Component {
 
         {/* ****TODO**** */}
         {/* KAHOOTZ BACKGROUND MUSIC <Sound
-     url= './music.mp3'
-     playStatus={Sound.status.PLAYING}
-     playFromPosition={300}
-     onLoading={this.handleSongLoading}
-     onPlaying={this.handleSongPlaying}
-     onFinishedPlaying={this.handleSongFinishedPlaying}
-      /> */}
+   url= './music.mp3'
+   playStatus={Sound.status.PLAYING}
+   playFromPosition={300}
+   onLoading={this.handleSongLoading}
+   onPlaying={this.handleSongPlaying}
+   onFinishedPlaying={this.handleSongFinishedPlaying}
+    /> */}
       </div>
+    );
+  }
+
+  render() {
+    const {
+      redirect,
+      next_question,
+      isAdmin,
+      next_question_id,
+      questions
+    } = this.state;
+
+    if (redirect) return <Redirect to="/" />;
+    return !isAdmin && next_question ? (
+      <Redirect
+        to={{
+          pathname: `/game/${next_question_id}`,
+          state: {
+            question_id: next_question_id,
+            questions: questions
+          }
+        }}
+      />
+    ) : (
+      this.renderWaitingRoom()
     );
   }
 }
