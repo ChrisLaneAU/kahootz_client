@@ -26,12 +26,14 @@ export default class Timer extends Component {
   renderSkipLink() {
 
     return (
+      <>
       <button className="skip-link"
               onClick={this.props.skip_question}
             >
             SKIP
       </button>
-    )
+      
+    </>)
   }
 
   render() {

@@ -6,17 +6,17 @@ const SelectAnswerButton = ({ answers }) => {
 
   const renderAnswers = answers.map(answer => {
     return (
-      
-      
-      
-      <div className = "answerbutton">
-        <div className="answerbutton__answer" key={answer.id}>
-          <Link className="answerbutton__answertext" to="/post-game">{answer.answer}</Link>    
-        </div>
-      </div>
- 
-          );
-  });
+    <>
+      <Link className="answerbutton answerbutton__answertext" to="/post-game">
+          <div className="answerbutton__answer" key={answer.id}>
+            {answer.answer}
+          </div>
+      </Link>    
+    </>   
+)
+  }
+  )
+    
 
   return (
     <>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
+import "./PlayGame.scss";
 import Timer from "./Timer/Timer";
 import Question from "./Question/Question";
 import SelectAnswerButton from "./SelectAnswerButton/SelectAnswerButton";
@@ -29,14 +30,12 @@ const PlayGame = props => {
 
   if ( count > 0 ){
     return (
-      <>
-        <h1>Question { questionCount } of 10</h1>
-
+      <div className = "display_game">
         <Question question={question_object[ questionCount - 1 ].content} />
         <Timer skip_question={ skipQuestion } state={props.location.state} adjustCount={setCount} count={ count } />
+        <h1 className = "question_count">Question { questionCount } of 10</h1>
         <SelectAnswerButton answers={question_object[ questionCount - 1 ].answers} />
-
-      </>
+      </div>
     )
   } else if ( gameEnded === true ) {
       return (

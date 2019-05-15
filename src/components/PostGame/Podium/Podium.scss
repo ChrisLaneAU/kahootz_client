@@ -3,6 +3,7 @@
 
 .display {
     transition: all 0.4s;
+    
 }
 
 .podium__header {
@@ -12,12 +13,14 @@
     padding: 10px;
     height: 100px;
     font-size: 30px;
+    position: relative;
     background-image: linear-gradient(to right bottom, $color-blue-light 0%, $color-blue-dark 100%);
 }
 
 .podium {
-    margin-top: 70px;
-    
+    position: absolute;
+    bottom: 0;
+    left: 15vw;
     &__first {
         animation: createBox 1s;
         background:
