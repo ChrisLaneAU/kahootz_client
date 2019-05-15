@@ -108,6 +108,7 @@ class WaitingRoom extends Component {
   }
 
   render() {
+    console.log(this.props.location);
     // ACTIONCABLE
     const { games, activeGame } = this.state;
     return (

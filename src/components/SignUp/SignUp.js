@@ -1,5 +1,5 @@
-import React, { Component, Redirect } from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from "react";
+import { Link, Redirect } from "react-router-dom";
 import './SignUp.scss'
 import Input from '../sharedUI/Input/Input'
 import Button from '../sharedUI/Button/Button'
@@ -14,7 +14,9 @@ export default class SignUp extends Component {
     this.state = {
       email: "",
       password: "",
-      password_confirmation: ""
+      password_confirmation: "",
+      login: false,
+      error: false,
     }
     this._handleEmailInput = this._handleEmailInput.bind(this)
     this._handlePasswordInput = this._handlePasswordInput.bind(this)
@@ -47,43 +49,82 @@ export default class SignUp extends Component {
     axios.post(USER_CREATE_URL, request).then((response) => {
       console.log('succesfully created the user with ', response )
 
-      axios.post(USER_TOKEN_URL, { "auth": { "email": email, "password": password } }).then(data => {
-        console.log('second part', data.data.jwt)
-        localStorage.setItem('jwt', data.data.jwt)
-
+      axios.post(USER_TOKEN_URL, { "auth": { "email": email, "password": password } })
+      .then
+        (data => {
+        if ( data.status === 201 ){
+          localStorage.setItem('jwt', data.data.jwt)
+          this.setState({ login: true })
+        }
+      }).catch( error => {
+        this.setState({ error: true })
       })
     })
     //BENS FUNCTION
   }
 
   render() {
-    return (
-      <div className="signup">
-        <form className="signup__form">
-          <h1>SignUp</h1>
-          <Input type="email"
-            class="input"
-            placeholder="Enter Email"
-            value={this.state.email}
-            onChange={this._handleEmailInput}
-          />
+    const { error, login } = this.state
+    if ( error === false && login === false ){
+      return (
+        <div className="signup">
+          <form className="signup__form">
+            <h1>SignUp</h1>
+            <Input type="email"
+              class="input"
+              placeholder="Enter Email"
+              value={this.state.email}
+              onChange={this._handleEmailInput}
+            />
 
-          <Input type="password"
-            class="input"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this._handlePasswordInput}
-          />
-          <Input type="password"
-            class="input"
-            placeholder="Password Confirmation"
-            value={this.state.password_confirmation}
-            onChange={this._handlePasswordAgainInput}
-          />
-          <Button type="button" text="SignUp" onClick={this._handleSignupSubmit} />
-          <Link to="/login" className="small">Already Have An Account? Login</Link>
-        </form>
-      </div>
-    )
+            <Input type="password"
+              class="input"
+              placeholder="Password"
+              value={this.state.password}
+              onChange={this._handlePasswordInput}
+            />
+            <Input type="password"
+              class="input"
+              placeholder="Password Confirmation"
+              value={this.state.password_confirmation}
+              onChange={this._handlePasswordAgainInput}
+            />
+            <Button type="button" text="SignUp" onClick={this._handleSignupSubmit} />
+            <Link to="/login" className="small">Already Have An Account? Login</Link>
+          </form>
+        </div>
+      )
+    } else if ( login === false && error === true ) {
+      return (
+        <div className="signup">
+          <form className="signup__form">
+            <h1>SignUp</h1>
+            <p>Something went wrong, please try again.</p>
+            <Input type="email"
+              class="input"
+              placeholder="Enter Email"
+              value={this.state.email}
+              onChange={this._handleEmailInput}
+            />
+
+            <Input type="password"
+              class="input"
+              placeholder="Password"
+              value={this.state.password}
+              onChange={this._handlePasswordInput}
+            />
+            <Input type="password"
+              class="input"
+              placeholder="Password Confirmation"
+              value={this.state.password_confirmation}
+              onChange={this._handlePasswordAgainInput}
+            />
+            <Button type="button" text="SignUp" onClick={this._handleSignupSubmit} />
+            <Link to="/login" className="small">Already Have An Account? Login</Link>
+          </form>
+        </div>
+      )
+    }
+    return (<Redirect to="/dashboard" />)
   }
 }

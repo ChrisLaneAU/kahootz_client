@@ -9,14 +9,12 @@ const SERVER_URL_PUT = 'https://kahootz.herokuapp.com/new_game.json'
 const SERVER_URL_GET = 'https://kahootz.herokuapp.com/new_game.json'
 
 const QuizCode = ( props ) => {
-  console.log('QUIZID:', props.quiz_id);
-  console.log("PROPS: ", props);
+
   let [ gameNum, getGameNum ] = useState(0)
   
   useEffect(() => {
      axios.post(SERVER_URL_PUT, { new_game: true, quiz_id: props.quiz_id } ).then((results) => {
        axios.get(SERVER_URL_GET).then((result) => {
-        console.log('This is the GET result ', result);
 
         getGameNum(result.data.id)
        })
