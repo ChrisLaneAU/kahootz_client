@@ -47,8 +47,11 @@ class NicknameForm extends Component {
                     //history.push("/waiting-room", this.props.gamePin);
                     history.push({
                       pathname: "/waiting-room",
-                      state: { gamePin: this.props.gamePin, nickname: this.state.nickname }
-                    })
+                      state: {
+                        gamePin: this.props.gamePin,
+                        nickname: this.state.nickname
+                      }
+                    });
                   }}
                   text="Start Game"
                 />
