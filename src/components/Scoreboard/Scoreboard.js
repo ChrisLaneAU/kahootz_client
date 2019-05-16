@@ -20,7 +20,6 @@ class Scoreboard extends Component {
   }
 
   getPlayerData() {
-    
     const game_pin = this.props.game_pin;
     const gameRef = gamesRef.child(game_pin);
 
@@ -39,7 +38,7 @@ class Scoreboard extends Component {
   render() {
     const game_pin = this.props.game_pin;
     const gameRef = gamesRef.child(game_pin);
-    gameRef.child('go_to_scoreboard').set(true)
+    gameRef.child("go_to_scoreboard").set(true);
 
     // gamesRef.on('value', snapshot => {
     //   console.log('snapshot.val().newTimer', snapshot.val().newTimer);
@@ -69,7 +68,11 @@ class Scoreboard extends Component {
           ""
         )}
         <AnswerGraph answers={this.state.answers} />
-        <SelectAnswerButton getAnswer={ this.props.getAnswer } answers={answers} />
+        <SelectAnswerButton
+          isScoreboard={true}
+          getAnswer={this.props.getAnswer}
+          answers={answers}
+        />
       </>
     );
   }
