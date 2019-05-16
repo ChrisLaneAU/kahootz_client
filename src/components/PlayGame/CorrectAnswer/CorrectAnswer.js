@@ -9,13 +9,14 @@ library.add(faCheckCircle)
 class CorrectAnswer extends Component {
 
     render() {
+        this.props.resetAnswer( false )
         return (
             <div className="correctanswer ">
 
                 <div className="correctanswer__content rotate-scale-up">
                     <p className="correctanswer__heading">CORRECT!</p>
                     <FontAwesomeIcon className="correctanswer__icon" icon="check-circle" />
-                    <p className="correctanswer__body">Your Score: 1023</p>
+                    <p className="correctanswer__body">Your Score Is: { this.props.score }</p>
                 </div>
             </div>
         )

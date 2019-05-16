@@ -74,7 +74,8 @@ class WaitingRoom extends Component {
         to={{
           pathname: `/game/${ this.state.gamePin }`,
           state: {
-            gamePin: this.state.gamePin
+            gamePin: this.state.gamePin,
+            isAdmin: this.props.location.state.isAdmin
           }
         }}
       >
@@ -138,7 +139,8 @@ class WaitingRoom extends Component {
           pathname: `/game/${ this.props.location.state.gamePin }`,
           state: {
             gamePin: this.props.location.state.gamePin,
-            nickname: this.props.location.state.nickname
+            nickname: this.props.location.state.nickname,
+            isAdmin: this.props.location.state.isAdmin
           }
         }}
       />

@@ -20,6 +20,7 @@ class Scoreboard extends Component {
   }
 
   getPlayerData() {
+    
     const game_pin = this.props.game_pin;
     const gameRef = gamesRef.child(game_pin);
 
