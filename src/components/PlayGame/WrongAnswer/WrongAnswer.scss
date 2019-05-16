@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300');
+@import '../../styles/variables';
+
+
+.wronganswer {
+    height: 100vh;
+    position: relative;
+
+    &__content {
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        left: 50%;
+        width: 75%;
+        height: 75%;
+        transform: translate(-50%, -50%);
+        border-radius: 5px 5px 5px 5px;
+        background-image: linear-gradient(to right bottom, $color-red-dark 0, $color-red-light 100%);
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 0% 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 60%, 0% 100%);
+        
+    }
+
+    &__heading{
+        color: $color-white;
+        font-size: 60px;
+        font-family: 'Montserrat';
+        margin: 20px auto;
+    }
+
+    .fa-times-circle{
+        color: $color-white;
+        width: 150px;
+        height: 150px;
+        margin-top: 20px;
+        -webkit-animation: rotate-vert-center 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+	            animation: rotate-vert-center 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+    }
+
+    &__body{
+     color: $color-white;
+     font-size: 50px;
+     font-family: 'Montserrat';
+    }
+    
+}
+
+@-webkit-keyframes rotate-vert-center {
+    0% {
+      -webkit-transform: rotateY(0);
+              transform: rotateY(0);
+    }
+    100% {
+      -webkit-transform: rotateY(360deg);
+              transform: rotateY(360deg);
+    }
+  }
+  @keyframes rotate-vert-center {
+    0% {
+      -webkit-transform: rotateY(0);
+              transform: rotateY(0);
+    }
+    100% {
+      -webkit-transform: rotateY(360deg);
+              transform: rotateY(360deg);
+    }
+  }
+  

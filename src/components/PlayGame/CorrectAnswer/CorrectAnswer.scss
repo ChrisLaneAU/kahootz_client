@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300');
+@import '../../styles/variables';
+
+
+.correctanswer {
+    height: 100vh;
+    position: relative;
+    
+
+    &__content {
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        left: 50%;
+        width: 75%;
+        height: 75%;
+        transform: translate(-50%, -50%);
+        border-radius: 5px 5px 5px 5px;
+        background-image: linear-gradient(to right bottom, $color-green-dark 0, $color-green-light 100%);
+        -webkit-clip-path: polygon(0 0, 100% 0, 100% 50%, 0% 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 60%, 0% 100%);
+       
+    }
+
+    &__heading{
+        color: $color-white;
+        font-size: 60px;
+        font-family: 'Montserrat';
+        margin: 20px auto;
+    }
+
+    .fa-check-circle{
+        color: $color-white;
+        width: 150px;
+        height: 150px;
+        margin-top: 20px;
+        -webkit-animation: rotate-scale-up 0.65s linear both;
+	        animation: rotate-scale-up 0.65s linear both;
+    }
+
+    &__body{
+     color: $color-white;
+     font-size: 50px;
+     font-family: 'Montserrat';
+    }
+    
+}
+@keyframes slide-in {
+    100% { transform: translateX(0%); }
+}
+
+@-webkit-keyframes slide-in {
+    100% { -webkit-transform: translateX(0%); }
+}
+
+@-webkit-keyframes rotate-scale-up {
+    0% {
+      -webkit-transform: scale(1) rotateZ(0);
+              transform: scale(1) rotateZ(0);
+    }
+    50% {
+      -webkit-transform: scale(2) rotateZ(180deg);
+              transform: scale(2) rotateZ(180deg);
+    }
+    100% {
+      -webkit-transform: scale(1) rotateZ(360deg);
+              transform: scale(1) rotateZ(360deg);
+    }
+  }
+  @keyframes rotate-scale-up {
+    0% {
+      -webkit-transform: scale(1) rotateZ(0);
+              transform: scale(1) rotateZ(0);
+    }
+    50% {
+      -webkit-transform: scale(2) rotateZ(180deg);
+              transform: scale(2) rotateZ(180deg);
+    }
+    100% {
+      -webkit-transform: scale(1) rotateZ(360deg);
+              transform: scale(1) rotateZ(360deg);
+    }
+  }

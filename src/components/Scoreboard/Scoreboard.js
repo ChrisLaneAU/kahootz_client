@@ -20,7 +20,7 @@ class Scoreboard extends Component {
   }
 
   getPlayerData() {
-    axios.get(GAME_URL + "229.json").then(results => {
+    axios.get(GAME_URL + ".json").then(results => {
       // gets the players answers into an array
       const answers_arr = _.pluck(results.data.players, "answer");
       // converts the array into an object like {a:1, b:4 etc}
