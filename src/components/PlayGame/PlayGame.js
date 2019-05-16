@@ -5,15 +5,30 @@ import Timer from "./Timer/Timer";
 import Question from "./Question/Question";
 import SelectAnswerButton from "./SelectAnswerButton/SelectAnswerButton";
 import Scoreboard from "../Scoreboard/Scoreboard";
+import { gamesRef } from '../../config/firebase'
 
 const PlayGame = props => {
   const [count, setCount] = useState( 20 ); //timer count
   const [ questionCount, setQuestionCount ] = useState( 1 )
   const [ gameEnded, setGameEnded ] = useState( false ) // question count
-  const question_object = props.location.state.questions
+  const games_pin = props.location.state.gamePin
+  const gameRef = gamesRef.child(games_pin)
+
+  let questionList = []
+
+  gameRef.once('value', snapshot => {
+    questionList = (snapshot.val().questions)
+    console.log('this is quesitonList', questionList) 
+  })
+
+
+  const _submitAnswer = ( event ) => {
+    console.log(event.target.value);
+  }
+  
 
   if (!props.location.state) return <Redirect to="/" />;
-  console.log( questionCount );
+
 
   const nextQuestion = () => {
     if ( questionCount === 10 ){
@@ -31,10 +46,10 @@ const PlayGame = props => {
   if ( count > 0 ){
     return (
       <div className = "display_game">
-        <Question question={question_object[ questionCount - 1 ].content} />
+        <Question question={questionList[ questionCount - 1 ].content} />
         <Timer skip_question={ skipQuestion } state={props.location.state} adjustCount={setCount} count={ count } />
         <h1 className = "question_count">Question { questionCount } of 10</h1>
-        <SelectAnswerButton answers={question_object[ questionCount - 1 ].answers} />
+        <SelectAnswerButton getAnswer={  } nickname={props.location.state.nickname} answers={questionList[ questionCount - 1 ].answers} />
       </div>
     )
   } else if ( gameEnded === true ) {
@@ -48,8 +63,8 @@ const PlayGame = props => {
     <>
         <Scoreboard 
             question_id={props.location.next_question_id} 
-            question={question_object[questionCount - 1].content} 
-            answers={question_object[questionCount - 1].answers} 
+            question={questionList[questionCount - 1].content} 
+            answers={questionList[questionCount - 1].answers} 
             question_number={ questionCount }
             next_question_nav={ nextQuestion }
             />

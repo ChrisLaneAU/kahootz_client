@@ -4,7 +4,7 @@ import "./PlayersArea.scss";
 class PlayersArea extends Component {
   renderPlayer() {
     const listPlayers = this.props.players.map(player => (
-      <li key={player}>{player}</li>
+      <li key={player.nickname}>{player.nickname}</li>
     ));
     return listPlayers;
   }

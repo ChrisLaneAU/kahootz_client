@@ -36,7 +36,7 @@ class WaitingRoom extends Component {
       gamesRef.child(`${gamePin}`).on("value", snapshot => {
         this.setState({
           players: snapshot.val().players,
-          next_question: snapshot.val().next_question
+          gameStart: snapshot.val().gameStart
         });
       });
     };
@@ -55,26 +55,13 @@ class WaitingRoom extends Component {
     } else {
       setGameListener(this.props.location.state.gamePin);
     }
-    //if (this.state.redirect) return;
 
-    // fetch(`${API_ROOT}/games`)
-    //   .then(res => res.json())
-    //   .then(games => this.setState({ games }))
-    //   .then(() => {
-    //     if (this.props.location.state.gamePin) {
-    //       const { gamePin } = this.props.location.state;
-    //       this._setActiveGame(gamePin);
-    //     }
-    //   })
-    //   .catch(error => {
-    //     console.error(error);
-    //   });
   }
 
   _handleStartGameClick() {
     gamesRef
-      .child(`${this.props.location.state.gamePin}`)
-      .update({ next_question: 1 });
+      .child(`${this.state.gamePin}`)
+      .update({ gameStart: true });
   }
 
   renderStartGameLink() {
@@ -85,10 +72,9 @@ class WaitingRoom extends Component {
         className="startgame_link"
         onClick={() => this._handleStartGameClick()}
         to={{
-          pathname: `/game/1`,
+          pathname: `/game/${ this.state.gamePin }`,
           state: {
-            question_id: next_question_id,
-            questions: questions
+            gamePin: this.state.gamePin
           }
         }}
       >
@@ -141,17 +127,18 @@ class WaitingRoom extends Component {
       next_question,
       isAdmin,
       next_question_id,
-      questions
+      questions,
+      gameStart
     } = this.state;
-
+    console.log('QUESTIONS', - this.state.questions );
     if (redirect) return <Redirect to="/" />;
-    return !isAdmin && next_question ? (
+    return !this.props.location.state.isAdmin && gameStart ? (
       <Redirect
         to={{
-          pathname: `/game/1`,
+          pathname: `/game/${ this.props.location.state.gamePin }`,
           state: {
-            question_id: next_question_id,
-            questions: questions
+            gamePin: this.props.location.state.gamePin,
+            nickname: this.props.location.state.nickname
           }
         }}
       />

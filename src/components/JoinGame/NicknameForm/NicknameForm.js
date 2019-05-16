@@ -40,7 +40,17 @@ class NicknameForm extends Component {
                       pathname: "/waiting-room",
                       state: {
                         gamePin: this.props.gamePin,
-                        nickname: this.state.nickname
+                        nickname: {
+                          nickname: this.state.nickname,
+                          points: 0,
+                          answer: "",
+                          entered: false,
+                          score: 0,
+                          correct_answers: 0,
+                          streak: 0,
+                          last_correct: false,
+                        },
+                        isAdmin: false
                       }
                     });
                   }}

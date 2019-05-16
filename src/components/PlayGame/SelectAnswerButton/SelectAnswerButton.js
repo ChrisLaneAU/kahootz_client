@@ -2,16 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./SelectAnswerButton.scss"
 
-const SelectAnswerButton = ({ answers }) => {
-
-  const renderAnswers = answers.map(answer => {
+const SelectAnswerButton = ( props ) => {
+  const answersLet = ['a','b','c','d']
+  const renderAnswers = props.answers.map((answer, index)=> {
     return (
     <>
-      <Link className="answerbutton answerbutton__answertext" to="">
-          <div className="answerbutton__answer" key={answer.id}>
+      <div className="answerbutton answerbutton__answertext" to="">
+          <div className="answerbutton__answer" key={answersLet[index]}
+            value={answersLet[index]} onClick={ }>
             {answer.answer}
           </div>
-      </Link>    
+      </div>    
     </>   
 )
   }

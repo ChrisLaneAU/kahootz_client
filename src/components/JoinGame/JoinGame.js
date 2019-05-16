@@ -24,9 +24,19 @@ class JoinGame extends Component {
   }
 
   _submitNickname(nickname) {
-    this.setState({ nickname });
+    const newNickname = {
+      nickname,
+      points: 0,
+      answer: "",
+      entered: false,
+      score: 0,
+      correct_answers: 0,
+      streak: 0,
+      last_correct: false,
+    }
+    this.setState({ nickname: newNickname });
     databaseRef.child(`games/${this.state.pin}`).update({
-      players: [...this.state.players, nickname]
+      players: [...this.state.players, newNickname]
     });
   }
 
