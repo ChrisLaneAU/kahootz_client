@@ -17,3 +17,12 @@
     margin-top: 20%;
   }
 }
+
+.small {
+  color: $color-grey;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-blue-dark
+  }
+}

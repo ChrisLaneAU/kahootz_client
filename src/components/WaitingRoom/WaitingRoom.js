@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
 import "./WaitingRoom.scss";
-
+import Sound from 'react-sound'
 import { gamesRef } from "../../config/firebase";
 import _ from "underscore";
 import { API_ROOT } from "../../constants";
@@ -111,15 +111,14 @@ class WaitingRoom extends Component {
           <PlayersArea players={this.state.players} />
         </div>
 
-        {/* ****TODO**** */}
-        {/* KAHOOTZ BACKGROUND MUSIC <Sound
-   url= './music.mp3'
-   playStatus={Sound.status.PLAYING}
-   playFromPosition={300}
-   onLoading={this.handleSongLoading}
-   onPlaying={this.handleSongPlaying}
-   onFinishedPlaying={this.handleSongFinishedPlaying}
-    /> */}
+         <Sound
+              url= './music.mp3'
+              playStatus={Sound.status.PLAYING}
+              playFromPosition={300}
+              onLoading={this.handleSongLoading}
+              onPlaying={this.handleSongPlaying}
+              onFinishedPlaying={this.handleSongFinishedPlaying}
+          />
       </div>
     );
   }

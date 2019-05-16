@@ -58,7 +58,7 @@ class Scoreboard extends Component {
     } = this.props;
     return (
       <>
-        <h1>Question {question_number} Results...</h1>
+       
         <Question question={question} />
         {localStorage.getItem("jwt") ? (
           <button onClick={next_question_nav} className="skip-link">
