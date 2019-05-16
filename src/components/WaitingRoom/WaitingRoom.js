@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import "./WaitingRoom.scss";
 
 import { gamesRef } from "../../config/firebase";
-import _ from 'underscore'
+import _ from "underscore";
 import { API_ROOT } from "../../constants";
 import PlayersArea from "./PlayersArea/PlayersArea";
 import QuizCode from "../Dashboard/QuizCode/QuizCode";
@@ -40,18 +40,18 @@ class WaitingRoom extends Component {
         });
       });
     };
+
     if (this.props.location.state.isAdmin) {
-      let newQuestions = []
-      this.props.location.state.questions.map( obj => {
-        let newAnswers = _.shuffle(obj.answers)
-        obj.answers = newAnswers
-        newQuestions.push( obj )
-      })
+      let newQuestions = [];
+      this.props.location.state.questions.map(obj => {
+        let newAnswers = _.shuffle(obj.answers);
+        obj.answers = newAnswers;
+        newQuestions.push(obj);
+      });
       const newGamePin = Math.floor(Math.random() * 100000);
       this.setState({ gamePin: newGamePin });
       gamesRef.child(`${newGamePin}`).set(
         {
-          players: [""],
           questions: newQuestions,
           gameStart: false
         },
@@ -60,13 +60,10 @@ class WaitingRoom extends Component {
     } else {
       setGameListener(this.props.location.state.gamePin);
     }
-
   }
 
   _handleStartGameClick() {
-    gamesRef
-      .child(`${this.state.gamePin}`)
-      .update({ gameStart: true });
+    gamesRef.child(`${this.state.gamePin}`).update({ gameStart: true });
   }
 
   renderStartGameLink() {
@@ -77,7 +74,7 @@ class WaitingRoom extends Component {
         className="startgame_link"
         onClick={() => this._handleStartGameClick()}
         to={{
-          pathname: `/game/${ this.state.gamePin }`,
+          pathname: `/game/${this.state.gamePin}`,
           state: {
             gamePin: this.state.gamePin,
             isAdmin: this.props.location.state.isAdmin
@@ -140,7 +137,7 @@ class WaitingRoom extends Component {
     return !this.props.location.state.isAdmin && gameStart ? (
       <Redirect
         to={{
-          pathname: `/game/${ this.props.location.state.gamePin }`,
+          pathname: `/game/${this.props.location.state.gamePin}`,
           state: {
             gamePin: this.props.location.state.gamePin,
             nickname: this.props.location.state.nickname,
