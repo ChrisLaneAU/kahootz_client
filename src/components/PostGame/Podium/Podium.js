@@ -46,6 +46,9 @@ class Podium extends Component {
                   {players[0].score}
                 </div>
             </div>
+            <div className="podium__first--score">
+             {players[0].score}
+            </div>
             <div className="podium__first--place">
               <p>1st</p>
             </div>

@@ -17,6 +17,12 @@ $color-blue-dark:#514a9d;
 $color-green-light:#71b280;
 $color-green-dark:#134e5e;
 
+$gradient-answer-red: linear-gradient(
+    to right bottom,
+    $color-red-light 0%,
+    $color-red-dark 100%
+  );
+
 $timer-color-light: #e55d87;
 $timer-color-dark: #5fc3e4;
 
