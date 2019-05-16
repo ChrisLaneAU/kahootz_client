@@ -32,33 +32,43 @@ class WaitingRoom extends Component {
   }
 
   componentDidMount() {
-    if (this.state.redirect) return;
-    gamesRef
-      .child(`${this.props.location.state.gamePin}`)
-      .on("value", snapshot => {
+    const setGameListener = gamePin => {
+      gamesRef.child(`${gamePin}`).on("value", snapshot => {
         this.setState({
           players: snapshot.val().players,
           next_question: snapshot.val().next_question
         });
-        if (this.props.location.state.isAdmin) {
-          this.setState({
-            next_question_id: snapshot.val().questions[0].id,
-            questions: snapshot.val().questions
-          });
-        }
       });
-    fetch(`${API_ROOT}/games`)
-      .then(res => res.json())
-      .then(games => this.setState({ games }))
-      .then(() => {
-        if (this.props.location.state.gamePin) {
-          const { gamePin } = this.props.location.state;
-          this._setActiveGame(gamePin);
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      });
+    };
+    if (this.props.location.state.isAdmin) {
+      console.log("isAdmin");
+      const newGamePin = Math.floor(Math.random() * 100000);
+      this.setState({ gamePin: newGamePin });
+      gamesRef.child(`${newGamePin}`).set(
+        {
+          players: [""],
+          questions: this.props.location.state.questions,
+          gameStart: false
+        },
+        setGameListener(newGamePin)
+      );
+    } else {
+      setGameListener(this.props.location.state.gamePin);
+    }
+    //if (this.state.redirect) return;
+
+    // fetch(`${API_ROOT}/games`)
+    //   .then(res => res.json())
+    //   .then(games => this.setState({ games }))
+    //   .then(() => {
+    //     if (this.props.location.state.gamePin) {
+    //       const { gamePin } = this.props.location.state;
+    //       this._setActiveGame(gamePin);
+    //     }
+    //   })
+    //   .catch(error => {
+    //     console.error(error);
+    //   });
   }
 
   _handleStartGameClick() {
@@ -75,7 +85,7 @@ class WaitingRoom extends Component {
         className="startgame_link"
         onClick={() => this._handleStartGameClick()}
         to={{
-          pathname: `/game/${next_question_id}`,
+          pathname: `/game/1`,
           state: {
             question_id: next_question_id,
             questions: questions
@@ -93,6 +103,10 @@ class WaitingRoom extends Component {
   }
 
   renderWaitingRoom() {
+    const { isAdmin } = this.props.location.state;
+    const currentGamePin = isAdmin
+      ? this.state.gamePin
+      : this.props.location.state.gamePin;
     return (
       <div className="display__waitingroom">
         <div className="waitroom__header">
@@ -100,10 +114,10 @@ class WaitingRoom extends Component {
         </div>
 
         <div className="display__quizcode">
-          <QuizCode quiz_id={this.props.location.state.gamePin} />
+          <QuizCode quiz_id={currentGamePin} />
         </div>
 
-        {this.props.location.state.isAdmin ? this.renderStartGameLink() : <></>}
+        {isAdmin ? this.renderStartGameLink() : <></>}
         <div className="display__playersarea">
           <PlayersArea players={this.state.players} />
         </div>
@@ -134,7 +148,7 @@ class WaitingRoom extends Component {
     return !isAdmin && next_question ? (
       <Redirect
         to={{
-          pathname: `/game/${next_question_id}`,
+          pathname: `/game/1`,
           state: {
             question_id: next_question_id,
             questions: questions

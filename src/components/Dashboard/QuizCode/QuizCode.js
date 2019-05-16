@@ -6,7 +6,7 @@ const QuizCode = props => {
 
   useEffect(() => {
     setGameNum(props.quiz_id);
-  }, []);
+  });
 
   return (
     <div className="quizcode">

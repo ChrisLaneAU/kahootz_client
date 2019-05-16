@@ -63,8 +63,9 @@ class Card extends Component {
   }
 
   render() {
+    const { questions, onClick } = this.props;
     return (
-      <div className="card" onClick={this.props.onClick(this.props.questions)}>
+      <div className="card">
         <div className="card__header">
           <img className="card__header--image" src={this.getImage()} alt="" />
         </div>
