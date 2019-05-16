@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import "./Podium.scss"
 
+
 class Podium extends Component {
+
+
+
     render() {
+
         return (
             <div className="display"> 
                 <div className="podium"> 

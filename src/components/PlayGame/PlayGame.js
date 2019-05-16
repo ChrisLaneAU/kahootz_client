@@ -42,17 +42,28 @@ const PlayGame = props => {
 
       gameRef.child('nextQuestion').set(false)
     }
+
+    if ( snapshot.val().gameEnd === true ){
+      setGameEnded( true )
+      gameRef.child('gameEnd').set(false)
+    }
   })
 
     const updateState = () => {
-      console.log('questionCount before', questionCount);
-      setQuestionCount( questionCount + 1)
-      console.log('questionCount after', questionCount);
+      setQuestionCount( questionCount + 1) // needed to do this, wouldn't work otherwise
     }
 
     let initialize = _.once(updateState)
 
+    const pointCalc = (timeRemaining) => {
+      let max = 1200
+      let min = 800
 
+      let pointSpread = max - min
+      let speed = ( timeRemaining / 20 )
+
+      return min + (pointSpread * speed)
+    }
   
 
 
@@ -75,7 +86,7 @@ const PlayGame = props => {
           setIsLastCorrect(true);
           correct_answers = Number(correct_answers) + 1;
           last_correct = true;
-          points = 1;
+          points = pointCalc(count);
           score = Number(score) + points;
           setScore( score )
           streak = Number(streak) + 1;
@@ -109,6 +120,7 @@ const PlayGame = props => {
 
   const nextQuestion = () => {
     if (questionCount === 10) {
+      gameRef.child('gameEnd').set(true)
       setGameEnded(true); /// change to
     } else {
       gameRef.child('nextQuestion').set( true ) // this sets to 20 (arbitrary) to navigate to execute code above line 37
@@ -149,7 +161,12 @@ const PlayGame = props => {
     )
   }
     else if (gameEnded === true) {
-    return <Redirect to="/post-game" />;
+    return <Redirect to={{
+      pathname: "/post-game",
+      state: {
+        pin: games_pin
+      }
+    }} />;
   } 
   else if ( count === 0 ){
  
