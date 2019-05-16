@@ -40,6 +40,11 @@ const PlayGame = props => {
       gameRef.child('newTimer').set(false)
     }
 
+    if ( snapshot.val().getOffResult === 0 ){ // navs from the interim results page
+      setCount( 0 )
+      gameRef.child('getOffResult').set(1)
+    }
+
   })
 
 
@@ -95,6 +100,7 @@ const PlayGame = props => {
 
   if (!props.location.state) return <Redirect to="/" />;
 
+
   const nextQuestion = () => {
     if (questionCount === 10) {
       setGameEnded(true); /// change to
@@ -129,17 +135,18 @@ const PlayGame = props => {
     );
   } else if ( count > 0 && answered && ( currentQ === questionCount ) && isLastCorrect ){
     return (
-      <CorrectAnswer resetAnswer={ setAnswered } score={scoreTrack} />
+      <CorrectAnswer resetTimer={ setCount } resetAnswer={ setAnswered } score={scoreTrack} gamesPin={ games_pin }/>
     )
   } else if (count > 0 && answered && (currentQ === questionCount) && !isLastCorrect ){
     return (
-      <WrongAnswer resetAnswer={setAnswered} score={ scoreTrack } />
+      <WrongAnswer resetTimer={setCount} resetAnswer={setAnswered} score={scoreTrack} gamesPin={games_pin} />
     )
   }
     else if (gameEnded === true) {
     return <Redirect to="/post-game" />;
   } 
   else if ( count === 0 ){
+    gameRef.child('getOffResults').set(0)
     return (
       <>
         <Scoreboard
