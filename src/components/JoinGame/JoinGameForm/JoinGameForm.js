@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './JoinGameForm.scss'
+import { Link } from "react-router-dom";
 import Button from '../../sharedUI/Button/Button'
 import Input from '../../sharedUI/Input/Input'
 
@@ -26,6 +27,7 @@ class JoinGameForm extends Component {
                       event.preventDefault();
                       this.props.click(this.state.pin);
                     }} type="button" />
+                    <Link className = "small" to="/login">Login To Create Quiz</Link>
                 </form>
             </div>
         )
