@@ -11,13 +11,14 @@ library.add(faTimesCircle)
 class WrongAnswer extends Component {
 
     render() {
-        const gameRef = gamesRef.child(this.props.gamesPin);
-        gameRef.on('value', snapshot => {
-            if (snapshot.val().getOffResults === 0) {
-                this.props.resetTimer(0)
-                gameRef.child('getOffResult').set(1)
-            }
-        })
+        // const gameRef = gamesRef.child(this.props.gamesPin);
+        // gameRef.on('value', snapshot => {
+        //     if (snapshot.val().getOffResults === 0) {
+        //         this.props.resetTimer(0)
+        //         gameRef.child('getOffResult').set(1)
+        //         this.props.resetAnswer( false )
+        //     }
+        // })
         // this.props.resetAnswer( false )
         return (
             <div className="wronganswer">

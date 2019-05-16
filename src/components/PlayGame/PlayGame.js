@@ -8,16 +8,16 @@ import Scoreboard from "../Scoreboard/Scoreboard";
 import { gamesRef } from "../../config/firebase";
 import CorrectAnswer from './CorrectAnswer/CorrectAnswer'
 import WrongAnswer from './WrongAnswer/WrongAnswer'
+import _ from 'underscore'
 
 const PlayGame = props => {
   const [count, setCount] = useState(20); //timer count
   const [questionCount, setQuestionCount] = useState(1); // question count
-  const [gameEnded, setGameEnded] = useState(false); 
-  const [isLastCorrect, setIsLastCorrect] = useState(0);
-  const [answered, setAnswered ] = useState(false)
-  const [currentQ, setcurrentQ] = useState(0)
+  const [gameEnded, setGameEnded] = useState(false); // to get to scores
+  const [isLastCorrect, setIsLastCorrect] = useState(0); // 
+  const [answered, setAnswered ] = useState(false) // sees if player has answered
+  const [currentQ, setcurrentQ] = useState(0) // sees current Q
   const [ scoreTrack, setScore ] = useState(0) // keeps track of last score 
-  const [ globalTimer, setGTimer ] = useState(false)
 
   const games_pin = props.location.state.gamePin;
   const gameRef = gamesRef.child(games_pin);
@@ -28,33 +28,40 @@ const PlayGame = props => {
     questionList = snapshot.val().questions;
   });
 
-  gameRef.on("value", snapshot => { /// this allows the admin to skip a question globally
-    if ( snapshot.val().timerReset === 0 ){
+  gameRef.on("value", snapshot => { /// heaps of checks to move players on
+
+    if (snapshot.val().go_to_scoreboard === true ){ // if it is 0 then the scoreboard is loaded
       setCount(0)
-      gameRef.child('timerReset').set(1)
+      gameRef.child('go_to_scoreboard').set(false) // just sets it not to 0
     }
 
-    if ( snapshot.val().newTimer === 20 ){
-      setCount( 20 );
-      setQuestionCount( questionCount + 1 )
-      gameRef.child('newTimer').set(false)
-    }
+    if (snapshot.val().nextQuestion === true ){
+      initialize()
+      setAnswered(false)
+      setCount(20);
 
-    if ( snapshot.val().getOffResult === 0 ){ // navs from the interim results page
-      setCount( 0 )
-      gameRef.child('getOffResult').set(1)
+      gameRef.child('nextQuestion').set(false)
     }
-
   })
+
+    const updateState = () => {
+      console.log('questionCount before', questionCount);
+      setQuestionCount( questionCount + 1)
+      console.log('questionCount after', questionCount);
+    }
+
+    let initialize = _.once(updateState)
+
+
+  
 
 
 
 
   const _submitAnswer = (answer, correct) => {
-    if (props.location.state.isAdmin){
-      return  // this means that admin cant try and answer any questions
+    if (props.location.state.isAdmin || count === 0){
+      return  // this means that admin cant try and answer any questions and you cant in the scoreboard either
     } else {
-      console.log('this was clicked');
     gameRef
       .child(`players/${props.location.state.nickname.nickname}`)
       .once("value", snapshot => {
@@ -89,7 +96,6 @@ const PlayGame = props => {
             streak
           });
           setAnswered( true )
-          setcurrentQ( currentQ + 1 )
       });
 
       
@@ -105,14 +111,14 @@ const PlayGame = props => {
     if (questionCount === 10) {
       setGameEnded(true); /// change to
     } else {
-      gameRef.child('newTimer').set( 20 ) // this sets the next question to true to navigate to the scoreboard
-      gameRef.child('nextQuestion').set(questionCount + 1)
+      gameRef.child('nextQuestion').set( true ) // this sets to 20 (arbitrary) to navigate to execute code above line 37
     }
   };
 
   const skipQuestion = () => {
     setCount(0);
-    gameRef.child('timerReset').set(0)
+    gameRef.child('go_to_scoreboard').set(true)
+
   };
 
   if (count > 0 && !answered ) {
@@ -133,11 +139,11 @@ const PlayGame = props => {
         />
       </div>
     );
-  } else if ( count > 0 && answered && ( currentQ === questionCount ) && isLastCorrect ){
+  } else if ( count > 0 && answered  && isLastCorrect ){
     return (
-      <CorrectAnswer resetTimer={ setCount } resetAnswer={ setAnswered } score={scoreTrack} gamesPin={ games_pin }/>
+      <CorrectAnswer resetTimer={ setCount } resetAnswer={ setAnswered } score={scoreTrack} gamesPin={ games_pin } count={ count }/>
     )
-  } else if (count > 0 && answered && (currentQ === questionCount) && !isLastCorrect ){
+  } else if (count > 0 && answered && !isLastCorrect ){
     return (
       <WrongAnswer resetTimer={setCount} resetAnswer={setAnswered} score={scoreTrack} gamesPin={games_pin} />
     )
@@ -146,7 +152,7 @@ const PlayGame = props => {
     return <Redirect to="/post-game" />;
   } 
   else if ( count === 0 ){
-    gameRef.child('getOffResults').set(0)
+ 
     return (
       <>
         <Scoreboard
@@ -156,6 +162,8 @@ const PlayGame = props => {
           question_number={questionCount}
           next_question_nav={nextQuestion}
           game_pin={props.location.state.gamePin}
+          getAnswer={_submitAnswer}
+
         />
       </>
     );
