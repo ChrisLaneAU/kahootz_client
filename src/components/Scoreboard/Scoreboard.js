@@ -37,6 +37,19 @@ class Scoreboard extends Component {
   }
 
   render() {
+    const game_pin = this.props.game_pin;
+    const gameRef = gamesRef.child(game_pin);
+    gameRef.child('go_to_scoreboard').set(true)
+
+    // gamesRef.on('value', snapshot => {
+    //   console.log('snapshot.val().newTimer', snapshot.val().newTimer);
+    //   if (snapshot.val().newTimer === 20) {
+    //     this.props.resetTimer(20);
+    //     this.props.resetQ( this.props.question_number + 1 )
+    //     this.props.resetAnswered( false )
+    //     gameRef.child('newTimer').set(false)
+    //   }
+    // })
     //if (!this.props.location.state) return <Redirect to="/" />;
     const {
       question,
@@ -56,7 +69,7 @@ class Scoreboard extends Component {
           ""
         )}
         <AnswerGraph answers={this.state.answers} />
-        <SelectAnswerButton answers={answers} />
+        <SelectAnswerButton getAnswer={ this.props.getAnswer } answers={answers} />
       </>
     );
   }

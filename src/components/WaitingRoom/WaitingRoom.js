@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import "./WaitingRoom.scss";
 
 import { gamesRef } from "../../config/firebase";
-
+import _ from 'underscore'
 import { API_ROOT } from "../../constants";
 import PlayersArea from "./PlayersArea/PlayersArea";
 import QuizCode from "../Dashboard/QuizCode/QuizCode";
@@ -41,13 +41,18 @@ class WaitingRoom extends Component {
       });
     };
     if (this.props.location.state.isAdmin) {
-      console.log("isAdmin");
+      let newQuestions = []
+      this.props.location.state.questions.map( obj => {
+        let newAnswers = _.shuffle(obj.answers)
+        obj.answers = newAnswers
+        newQuestions.push( obj )
+      })
       const newGamePin = Math.floor(Math.random() * 100000);
       this.setState({ gamePin: newGamePin });
       gamesRef.child(`${newGamePin}`).set(
         {
           players: [""],
-          questions: this.props.location.state.questions,
+          questions: newQuestions,
           gameStart: false
         },
         setGameListener(newGamePin)
@@ -131,7 +136,6 @@ class WaitingRoom extends Component {
       questions,
       gameStart
     } = this.state;
-    console.log('QUESTIONS', - this.state.questions );
     if (redirect) return <Redirect to="/" />;
     return !this.props.location.state.isAdmin && gameStart ? (
       <Redirect
