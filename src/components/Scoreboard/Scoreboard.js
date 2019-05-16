@@ -4,8 +4,7 @@ import AnswerGraph from "./AnswerGraph/AnswerGraph";
 import SelectAnswerButton from "../PlayGame/SelectAnswerButton/SelectAnswerButton";
 import axios from "axios";
 import _ from "underscore";
-
-const GAME_URL = "https://kahootz.herokuapp.com/games/"; // needs an id on the end ( we will get this info when making a post request and getting a game number back some how )
+import { gamesRef } from "../../config/firebase";
 
 class Scoreboard extends Component {
   constructor() {
@@ -13,6 +12,7 @@ class Scoreboard extends Component {
     this.state = {
       answers: {}
     };
+    this.getPlayerData = this.getPlayerData.bind(this);
   }
 
   componentDidMount() {
@@ -20,9 +20,12 @@ class Scoreboard extends Component {
   }
 
   getPlayerData() {
-    axios.get(GAME_URL + ".json").then(results => {
+    const game_pin = this.props.game_pin;
+    const gameRef = gamesRef.child(game_pin);
+
+    gameRef.once("value", results => {
       // gets the players answers into an array
-      const answers_arr = _.pluck(results.data.players, "answer");
+      const answers_arr = _.pluck(results.val().players, "answer");
       // converts the array into an object like {a:1, b:4 etc}
       const count = _.countBy(answers_arr, l => {
         return l;

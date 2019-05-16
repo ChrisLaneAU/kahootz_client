@@ -32,11 +32,11 @@ class JoinGame extends Component {
       score: 0,
       correct_answers: 0,
       streak: 0,
-      last_correct: false,
-    }
+      last_correct: false
+    };
     this.setState({ nickname: newNickname });
     databaseRef.child(`games/${this.state.pin}`).update({
-      players: [...this.state.players, newNickname]
+      players: { ...this.state.players, [nickname]: newNickname }
     });
   }
 
