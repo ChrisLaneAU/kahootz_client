@@ -10,7 +10,7 @@ const AnswerGraph = ( props ) => {
     labels: ["A", "B", "C", "D"],
     datasets: [{
       label: false,
-      backgroundColor: ['#c24141', '#4b6cb7', '#ebeb44','#7b972a'],
+      backgroundColor: ['#24c6dc', '#edde5d', '#71b280','#ed4264'],
       borderColor: 'white',
       data: [a, b, c, d ],
     }]

@@ -28,7 +28,10 @@ class Podium extends Component {
         <div className="podium">
           <div className="podium__second">
             <div className="podium__second--player">
-              {players[1].nickname} ({players[1].score} points)
+              {players[1].nickname}
+            </div>
+            <div className="podium__second--score">
+              {players[1].score}
             </div>
             <div className="podium__second--place">
               <p>2nd</p>
@@ -38,13 +41,19 @@ class Podium extends Component {
             <div className="podium__first--player">
               {players[0].nickname} ({players[0].score} points)
             </div>
+            <div className="podium__first--score">
+             {players[0].score}
+            </div>
             <div className="podium__first--place">
               <p>1st</p>
             </div>
           </div>
           <div className="podium__third">
             <div className="podium__third--player">
-              {players[2].nickname} ({players[2].score} points)
+              {players[2].nickname}
+            </div>
+            <div className="podium__third--score">
+              {players[2].score}
             </div>
             <div className="podium__third--place">
               <p>3rd</p>
