@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "17b8bd222054d3eb9311b35a52e5743b",
+    "revision": "3fdc3ed970db8eebe30add5485340592",
     "url": "/kahootz_client/index.html"
   },
   {
-    "revision": "0104783b6f19a4c22691",
-    "url": "/kahootz_client/static/css/main.2e266610.chunk.css"
+    "revision": "62586051f16a17d20648",
+    "url": "/kahootz_client/static/css/main.9ae8da77.chunk.css"
   },
   {
     "revision": "8f92ac87c0529cce7ed1",
     "url": "/kahootz_client/static/js/2.1907d9a0.chunk.js"
   },
   {
-    "revision": "0104783b6f19a4c22691",
-    "url": "/kahootz_client/static/js/main.f09f5d76.chunk.js"
+    "revision": "62586051f16a17d20648",
+    "url": "/kahootz_client/static/js/main.53a85dfe.chunk.js"
   },
   {
     "revision": "3ffc00ff15f4a6f677fc",
