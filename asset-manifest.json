@@ -1,0 +1,32 @@
+{
+  "files": {
+    "main.css": "/kahootz_client/static/css/main.2e266610.chunk.css",
+    "main.js": "/kahootz_client/static/js/main.b5b74204.chunk.js",
+    "main.js.map": "/kahootz_client/static/js/main.b5b74204.chunk.js.map",
+    "runtime~main.js": "/kahootz_client/static/js/runtime~main.794ba248.js",
+    "runtime~main.js.map": "/kahootz_client/static/js/runtime~main.794ba248.js.map",
+    "static/js/2.1907d9a0.chunk.js": "/kahootz_client/static/js/2.1907d9a0.chunk.js",
+    "static/js/2.1907d9a0.chunk.js.map": "/kahootz_client/static/js/2.1907d9a0.chunk.js.map",
+    "index.html": "/kahootz_client/index.html",
+    "precache-manifest.2ebbfd20155cc77b11daaffd96a0d009.js": "/kahootz_client/precache-manifest.2ebbfd20155cc77b11daaffd96a0d009.js",
+    "service-worker.js": "/kahootz_client/service-worker.js",
+    "static/css/main.2e266610.chunk.css.map": "/kahootz_client/static/css/main.2e266610.chunk.css.map",
+    "static/media/boardgame.jpg": "/kahootz_client/static/media/boardgame.074e55f4.jpg",
+    "static/media/books.jpg": "/kahootz_client/static/media/books.9789951c.jpg",
+    "static/media/cartoon.jpg": "/kahootz_client/static/media/cartoon.825a3a57.jpg",
+    "static/media/celebrity.jpg": "/kahootz_client/static/media/celebrity.9c6d41d8.jpg",
+    "static/media/computer.jpg": "/kahootz_client/static/media/computer.e8ae6f9b.jpg",
+    "static/media/film.jpg": "/kahootz_client/static/media/film.825fb077.jpg",
+    "static/media/generalknowledge.jpg": "/kahootz_client/static/media/generalknowledge.e933a49a.jpg",
+    "static/media/geography.jpg": "/kahootz_client/static/media/geography.7da4fc34.jpg",
+    "static/media/history.jpg": "/kahootz_client/static/media/history.3e37782d.jpg",
+    "static/media/manga.jpg": "/kahootz_client/static/media/manga.6fe4f5b4.jpg",
+    "static/media/music.jpg": "/kahootz_client/static/media/music.308f1b9f.jpg",
+    "static/media/myth.jpg": "/kahootz_client/static/media/myth.65c5f1ec.jpg",
+    "static/media/nature.jpg": "/kahootz_client/static/media/nature.38cd0a3b.jpg",
+    "static/media/sport.jpg": "/kahootz_client/static/media/sport.4ec07cf3.jpg",
+    "static/media/television.jpg": "/kahootz_client/static/media/television.110c2fd8.jpg",
+    "static/media/vehicle.jpg": "/kahootz_client/static/media/vehicle.973793ae.jpg",
+    "static/media/videogame.jpg": "/kahootz_client/static/media/videogame.181ef81b.jpg"
+  }
+}
