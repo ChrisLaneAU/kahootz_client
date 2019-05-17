@@ -88,7 +88,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    if ( localStorage.getItem('jwt') ){
+    if (localStorage.getItem('jwt')) {
       return (
         <div className="displayQuizzes">
           <div className="header">
@@ -103,7 +103,7 @@ class Dashboard extends Component {
         <Redirect to="/" />
       )
     }
-    
+
   }
 }
 

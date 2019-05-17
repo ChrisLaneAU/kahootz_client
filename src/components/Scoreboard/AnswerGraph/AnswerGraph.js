@@ -7,7 +7,7 @@ import '../../../styles/_variables.scss';
 const AnswerGraph = ( props ) => {
   const { a, b, c, d } = props.answers
   const data = {
-    labels: ["A", "B", "C", "D"],
+    labels: ["", "", "", ""],
     datasets: [{
       label: false,
       backgroundColor: ['#24c6dc', '#edde5d', '#71b280','#ed4264'],
@@ -25,7 +25,7 @@ const AnswerGraph = ( props ) => {
       callbacks: {
         label: function (tooltipItem) {
           return tooltipItem.yLabel;
-        }
+        },
       }
     },
     scales: {
@@ -36,7 +36,9 @@ const AnswerGraph = ( props ) => {
         }
       }]
     }
+    
     };
+
   return(
     <div className="chart-parent">
     < Bar 
