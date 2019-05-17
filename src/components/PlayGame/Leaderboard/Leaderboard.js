@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import { gamesRef } from "../../../config/firebase";
+import './Leaderboard.scss';
 
-
-const Leaderboard = ( props ) => {
-  const [players, setPlayers ] = useState([])
+const Leaderboard = (props) => {
+  const [players, setPlayers] = useState([])
 
   useEffect(() => {
     gamesRef.child(`${props.game_pin}/players`).once("value", snapshot => {
@@ -15,8 +15,8 @@ const Leaderboard = ( props ) => {
       );
 
     });
-  },[])
- 
+  }, [])
+
 
   const renderPlayers = () => {
     return players.map( player => {
@@ -25,16 +25,22 @@ const Leaderboard = ( props ) => {
       )
     })
   }
-  return(
-    <div>
-      <h1>LeaderBoard</h1>
-   
-        { players.length > 0 ? renderPlayers() : <div></div> }
+  console.log(players.length);
+  return (
+    <div className="display">
+      <div className="leaderboard">
+        <div className="leaderboard__content">
+          <div className="leaderboard__content--header">
+           <p> Leaderboard </p>
+          </div>
 
-    { props.admin ? (<button onClick={props.next_question_nav}>NEXT</button> ) : <></> }
+          {players.length > 0 ? renderPlayers() : <div className="leaderboard__content--player"></div>}
 
+        </div>
+        {props.admin ? (<button className = "next" onClick={props.next_question_nav}>NEXT</button>) : <></>}
+      </div>
     </div>
-  
+
   );
 }
 
