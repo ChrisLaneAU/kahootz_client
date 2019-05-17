@@ -9,6 +9,7 @@ import { gamesRef } from "../../config/firebase";
 import CorrectAnswer from './CorrectAnswer/CorrectAnswer'
 import WrongAnswer from './WrongAnswer/WrongAnswer'
 import _ from 'underscore'
+import Leaderboard from "./Leaderboard/Leaderboard";
 
 const PlayGame = props => {
   const [count, setCount] = useState(20); //timer count
@@ -18,6 +19,7 @@ const PlayGame = props => {
   const [answered, setAnswered ] = useState(false) // sees if player has answered
   const [currentQ, setcurrentQ] = useState(0) // sees current Q
   const [ scoreTrack, setScore ] = useState(0) // keeps track of last score 
+  const [leader, setLeader] = useState(false)
 
   const games_pin = props.location.state.gamePin;
   const gameRef = gamesRef.child(games_pin);
@@ -32,6 +34,7 @@ const PlayGame = props => {
 
     if (snapshot.val().go_to_scoreboard === true ){ // if it is 0 then the scoreboard is loaded
       setCount(0)
+      console.log('we got here');
       gameRef.child('go_to_scoreboard').set(false) // just sets it not to 0
     }
 
@@ -47,10 +50,16 @@ const PlayGame = props => {
       setGameEnded( true )
       gameRef.child('gameEnd').set(false)
     }
+
+    if (snapshot.val().goToLeaderboard === true) {
+      setLeader(true)
+      gameRef.child('goToLeaderboard').set(false)
+    }
   })
 
     const updateState = () => {
-      setQuestionCount( questionCount + 1) // needed to do this, wouldn't work otherwise
+      setQuestionCount( questionCount + 1)
+      setLeader(false) // needed to do this, wouldn't work otherwise
     }
 
     let initialize = _.once(updateState)
@@ -117,6 +126,9 @@ const PlayGame = props => {
 
   if (!props.location.state) return <Redirect to="/" />;
 
+  const nextFromScoreBoard = () => {
+    gameRef.child('goToLeaderboard').set(true)
+  }
 
   const nextQuestion = () => {
     if (questionCount === 10) {
@@ -168,7 +180,7 @@ const PlayGame = props => {
       }
     }} />;
   } 
-  else if ( count === 0 ){
+  else if ( count === 0 && leader === false ){
  
     return (
       <>
@@ -177,11 +189,22 @@ const PlayGame = props => {
           question={questionList[questionCount - 1].content}
           answers={questionList[questionCount - 1].answers}
           question_number={questionCount}
-          next_question_nav={nextQuestion}
+          next_question_nav={nextFromScoreBoard}
           game_pin={props.location.state.gamePin}
           getAnswer={_submitAnswer}
 
         />
+      </>
+    );
+  } else if (count === 0 && leader === true) {
+    return (
+      <>
+        <Leaderboard 
+          game_pin={props.location.state.gamePin}
+          next_question_nav={nextQuestion }
+          admin={props.location.state.isAdmin }
+        />
+
       </>
     );
   }
