@@ -19,8 +19,7 @@ const Leaderboard = (props) => {
 
 
   const renderPlayers = () => {
-    return players.map(player => {
-      console.log('this is a player', player);
+    return players.map( player => {
       return (
         <h1>{player.nickname}: {player.score} points</h1>
       )
@@ -37,8 +36,8 @@ const Leaderboard = (props) => {
 
           {players.length > 0 ? renderPlayers() : <div className="leaderboard__content--player"></div>}
 
-          {props.admin ? (<button className = "next" onClick={props.next_question_nav}>NEXT</button>) : <></>}
         </div>
+        {props.admin ? (<button className = "next" onClick={props.next_question_nav}>NEXT</button>) : <></>}
       </div>
     </div>
 

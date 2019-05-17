@@ -34,7 +34,6 @@ const PlayGame = props => {
 
     if (snapshot.val().go_to_scoreboard === true ){ // if it is 0 then the scoreboard is loaded
       setCount(0)
-      console.log('we got here');
       gameRef.child('go_to_scoreboard').set(false) // just sets it not to 0
     }
 
