@@ -31,7 +31,7 @@ const Leaderboard = props => {
       <h1>LeaderBoard</h1>
       <ol>{players.length > 0 ? renderPlayers() : <></>}</ol>
       {props.admin ? (
-        <button onClick={props.next_question_nav}>NEXT</button>
+        <button className = "next"  onClick={props.next_question_nav}>NEXT</button>
       ) : (
         <></>
       )}
