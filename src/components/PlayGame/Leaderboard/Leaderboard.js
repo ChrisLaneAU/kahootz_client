@@ -21,7 +21,7 @@ const Leaderboard = (props) => {
   const renderPlayers = () => {
     return players.map( player => {
       return (
-        <h1>{player.nickname}: {player.score} points</h1>
+        <h1 className = "display_player">{player.nickname}: {player.score} points</h1>
       )
     })
   }
