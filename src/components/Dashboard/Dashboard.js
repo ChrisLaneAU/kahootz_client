@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Dashboard.scss";
 import axios from "axios";
 import Card from "./Card/Card";
+import { Redirect } from "react-router-dom";
 
 import { gamesRef } from "../../config/firebase";
 
@@ -23,7 +24,13 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    axios.get(QUIZ_URL).then(quizzes => {
+    const config = {
+      headers: {
+        Authorization: "Bearer " + localStorage.getItem("jwt")
+      }
+    };
+
+    axios.get(QUIZ_URL, config).then(quizzes => {
       this.setState({
         quizzes: quizzes.data
       });
@@ -79,15 +86,19 @@ class Dashboard extends Component {
   }
 
   render() {
-    return (
-      <div className="displayQuizzes">
-        <div className="header">
-          <h1>Select A Quiz To Play</h1>
-        </div>
+    if (localStorage.getItem("jwt")) {
+      return (
+        <div className="displayQuizzes">
+          <div className="header">
+            <h1>Select A Quiz To Play</h1>
+          </div>
 
-        {<div className="displayCards">{this.renderCards()}</div>}
-      </div>
-    );
+          {<div className="displayCards">{this.renderCards()}</div>}
+        </div>
+      );
+    } else {
+      return <Redirect to="/" />;
+    }
   }
 }
 
