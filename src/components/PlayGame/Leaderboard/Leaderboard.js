@@ -20,13 +20,11 @@ const Leaderboard = ( props ) => {
 
   const renderPlayers = () => {
     return players.map( player => {
-      console.log('this is a player', player);
       return (
         <h1>{player.nickname}: {player.score} points</h1>
       )
     })
   }
-  console.log(players.length);
   return(
     <div>
       <h1>LeaderBoard</h1>
