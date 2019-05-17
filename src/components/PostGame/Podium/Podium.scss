@@ -20,7 +20,7 @@
 .podium {
     position: absolute;
     bottom: 0;
-    left: 15vw;
+    left: 26vw;
     &__first {
         animation: createBox 1s;
         background:
@@ -81,7 +81,6 @@
         position: relative;
 
         &--player {
-            position: absolute;
             position: absolute;
             top: 30%;
             left: 50%;
