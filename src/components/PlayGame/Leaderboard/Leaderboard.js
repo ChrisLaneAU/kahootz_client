@@ -37,8 +37,9 @@ const Leaderboard = (props) => {
           {players.length > 0 ? renderPlayers() : <div className="leaderboard__content--player"></div>}
 
         </div>
-        {props.admin ? (<button className = "next" onClick={props.next_question_nav}>NEXT</button>) : <></>}
+       
       </div>
+      {props.admin ? (<button className = "next" onClick={props.next_question_nav}>NEXT</button>) : <></>}
     </div>
 
   );
