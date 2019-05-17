@@ -5,7 +5,6 @@ import axios from "axios";
 import Card from "./Card/Card";
 import { Redirect } from "react-router-dom";
 
-
 import { gamesRef } from "../../config/firebase";
 
 const QUIZ_URL = "https://kahootz.herokuapp.com/quizzes.json";
@@ -27,10 +26,9 @@ class Dashboard extends Component {
   componentDidMount() {
     const config = {
       headers: {
-        Authorization: "Bearer " + localStorage.getItem('jwt')
+        Authorization: "Bearer " + localStorage.getItem("jwt")
       }
-    }
-
+    };
 
     axios.get(QUIZ_URL, config).then(quizzes => {
       this.setState({
@@ -88,7 +86,7 @@ class Dashboard extends Component {
   }
 
   render() {
-    if ( localStorage.getItem('jwt') ){
+    if (localStorage.getItem("jwt")) {
       return (
         <div className="displayQuizzes">
           <div className="header">
@@ -99,11 +97,8 @@ class Dashboard extends Component {
         </div>
       );
     } else {
-      return (
-        <Redirect to="/" />
-      )
+      return <Redirect to="/" />;
     }
-    
   }
 }
 

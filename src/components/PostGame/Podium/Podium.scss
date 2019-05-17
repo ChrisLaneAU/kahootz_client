@@ -1,198 +1,219 @@
-@import '../../../styles/variables';
+@import "../../../styles/_variables.scss";
 
 .display {
- transition: all 0.4s;
+  transition: all 0.4s;
 }
 
 .podium__header {
- text-align: center;
- width: 100vw;
- color: $color-white;
- padding: 10px;
- height: 100px;
- font-size: 30px;
- position: relative;
- background-image: linear-gradient(
-   to right bottom,
-   $color-blue-light 0%,
-   $color-blue-dark 100%
- );
+  text-align: center;
+  width: 100vw;
+  color: $color-white;
+  padding: 10px;
+  height: 100px;
+  font-size: 30px;
+  position: relative;
+  background-image: linear-gradient(
+    to right bottom,
+    $color-blue-light 0%,
+    $color-blue-dark 100%
+  );
 }
 
 .podium {
- display: flex;
- align-items: flex-end;
- justify-content: center;
- height: calc(100vh - 100px);
-    &__first {
-        animation: createBox 1s;
-        background:
-            radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #e9e99a 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
-        height: 500px;
-        width: 300px;
-        display: inline-block;
-        border-radius: 10px 10px 0 0;
-        position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: calc(100vh - 100px);
 
-        &--player {
-            position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 40px;
-            text-align: center;
-            color: $color-white;
-            text-shadow: 1px 1px 1px $color-black;
-        }
-        &--score{
-            font-size: 40px;
-            color: $color-white;
-        }
+  &__first {
+    animation: createBox 1s;
+    background: radial-gradient(
+      ellipse farthest-corner at left top,
+      #ffffff 0%,
+      #e9e99a 8%,
+      #d1b464 25%,
+      #5d4a1f 62.5%,
+      #5d4a1f 100%
+    );
+    height: 500px;
+    width: 300px;
+    display: inline-block;
+    border-radius: 10px 10px 0 0;
+    position: relative;
 
-        &--score{
-            
-        }
-
-        &--place {
-            position: absolute;
-            bottom: 40px;
-            left: 100px;
-            border: 2px solid $color-white;
-            font-size: 40px;
-            text-align: center;
-            color: $color-white;
-            border-radius: 50%;
-            height: 100px;
-            width: 100px;
-            box-shadow: 1px 1px 1px $color-black;
-            -webkit-animation: rotate-vert-center 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
-            animation: rotate-vert-center 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
-            & p {
-                margin-top: 20px;
-                text-shadow: 1px 1px 1px $color-black;
-            }
-        }
+    &--player {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      text-align: center;
+      color: $color-white;
+      text-shadow: 1px 1px 1px $color-black;
+    }
+    &--score {
+      font-size: 40px;
+      color: $color-white;
     }
 
-    &__second {
-        animation: createBox 1s;
-        background-image: radial-gradient(ellipse farthest-corner at left top, #cfcfcf 0%, #747474 8%, #9b9b9b 25%, #525252 62.5%, #3a3a3a 100%);
-        height: 375px;
-        width: 300px;
-        display: inline-block;
-        border-radius: 10px 0 0 0;
-        position: relative;
-
-        &--player {
-            position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 40px;
-            text-align: center;
-            color: $color-white;
-            text-shadow: 1px 1px 1px $color-black;
-        }
-
-        &--score{
-            font-size: 40px;
-            color: $color-white;
-        }
-
-        &--place {
-            position: absolute;
-            bottom: 40px;
-            left: 100px;
-            border: 2px solid $color-white;
-            font-size: 40px;
-            text-align: center;
-            color: $color-white;
-            border-radius: 50%;
-            height: 100px;
-            width: 100px;
-            box-shadow: 1px 1px 1px $color-black;
-
-            & p {
-                margin-top: 20px;
-                text-shadow: 1px 1px 1px $color-black;
-            }
-        }
+    &--score {
     }
 
-    &__third {
-        animation: createBox 1s;
-        background-image: radial-gradient(ellipse farthest-corner at left top, #cab89f 0%, #aa8b5f 8%, #a38a67 25%, #5d4a1f 62.5%, #948775 100%);
-        height: 300px;
-        width: 300px;
-        display: inline-block;
-        border-radius: 0 10px 0 0;
-        position: relative;
-
-        &--player {
-            position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 40px;
-            text-align: center;
-            color: $color-white;
-            text-shadow: 1px 1px 1px $color-black;
-        }
-
-        &--score{
-            font-size: 40px;
-            color: $color-white;
-        }
-
-        &--place {
-            position: absolute;
-            bottom: 40px;
-            left: 100px;
-            border: 2px solid $color-white;
-            font-size: 40px;
-            text-align: center;
-            color: $color-white;
-            border-radius: 50%;
-            height: 100px;
-            width: 100px;
-            box-shadow: 1px 1px 1px $color-black;
-
-            & p {
-                margin-top: 20px;
-                text-shadow: 1px 1px 1px $color-black;
-            }
-        }
+    &--place {
+      position: absolute;
+      bottom: 40px;
+      left: 100px;
+      border: 2px solid $color-white;
+      font-size: 40px;
+      text-align: center;
+      color: $color-white;
+      border-radius: 50%;
+      height: 100px;
+      width: 100px;
+      box-shadow: 1px 1px 1px $color-black;
+      -webkit-animation: rotate-vert-center 0.8s
+        cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+      animation: rotate-vert-center 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955)
+        both;
+      & p {
+        margin-top: 20px;
+        text-shadow: 1px 1px 1px $color-black;
+      }
     }
+  }
+
+  &__second {
+    animation: createBox 1s;
+    background-image: radial-gradient(
+      ellipse farthest-corner at left top,
+      #cfcfcf 0%,
+      #747474 8%,
+      #9b9b9b 25%,
+      #525252 62.5%,
+      #3a3a3a 100%
+    );
+    height: 375px;
+    width: 300px;
+    display: inline-block;
+    border-radius: 10px 0 0 0;
+    position: relative;
+
+    &--player {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      text-align: center;
+      color: $color-white;
+      text-shadow: 1px 1px 1px $color-black;
+    }
+
+    &--score {
+      font-size: 40px;
+      color: $color-white;
+    }
+
+    &--place {
+      position: absolute;
+      bottom: 40px;
+      left: 100px;
+      border: 2px solid $color-white;
+      font-size: 40px;
+      text-align: center;
+      color: $color-white;
+      border-radius: 50%;
+      height: 100px;
+      width: 100px;
+      box-shadow: 1px 1px 1px $color-black;
+
+      & p {
+        margin-top: 20px;
+        text-shadow: 1px 1px 1px $color-black;
+      }
+    }
+  }
+
+  &__third {
+    animation: createBox 1s;
+    background-image: radial-gradient(
+      ellipse farthest-corner at left top,
+      #cab89f 0%,
+      #aa8b5f 8%,
+      #a38a67 25%,
+      #5d4a1f 62.5%,
+      #948775 100%
+    );
+    height: 300px;
+    width: 300px;
+    display: inline-block;
+    border-radius: 0 10px 0 0;
+    position: relative;
+
+    &--player {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 40px;
+      text-align: center;
+      color: $color-white;
+      text-shadow: 1px 1px 1px $color-black;
+    }
+
+    &--score {
+      font-size: 40px;
+      color: $color-white;
+    }
+
+    &--place {
+      position: absolute;
+      bottom: 40px;
+      left: 100px;
+      border: 2px solid $color-white;
+      font-size: 40px;
+      text-align: center;
+      color: $color-white;
+      border-radius: 50%;
+      height: 100px;
+      width: 100px;
+      box-shadow: 1px 1px 1px $color-black;
+
+      & p {
+        margin-top: 20px;
+        text-shadow: 1px 1px 1px $color-black;
+      }
+    }
+  }
 }
 
 @keyframes createBox {
-    from {
-        transform: scale(0)
-    }
+  from {
+    transform: scale(0);
+  }
 
-    to {
-        transform: scale(1);
-    }
+  to {
+    transform: scale(1);
+  }
 }
 
 @-webkit-keyframes rotate-vert-center {
-    0% {
-      -webkit-transform: rotateY(0);
-              transform: rotateY(0);
-    }
-    100% {
-      -webkit-transform: rotateY(360deg);
-              transform: rotateY(360deg);
-    }
+  0% {
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
   }
-  @keyframes rotate-vert-center {
-    0% {
-      -webkit-transform: rotateY(0);
-              transform: rotateY(0);
-    }
-    100% {
-      -webkit-transform: rotateY(360deg);
-              transform: rotateY(360deg);
-    }
+  100% {
+    -webkit-transform: rotateY(360deg);
+    transform: rotateY(360deg);
   }
-  
+}
+@keyframes rotate-vert-center {
+  0% {
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
+  }
+  100% {
+    -webkit-transform: rotateY(360deg);
+    transform: rotateY(360deg);
+  }
+}
