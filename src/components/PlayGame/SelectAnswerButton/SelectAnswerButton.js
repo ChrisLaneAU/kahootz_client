@@ -5,6 +5,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import "./SelectAnswerButton.scss";
 
+const decodeEntities = (function() {
+  // this prevents any overhead from creating the object each time
+  var element = document.createElement("div");
+
+  function decodeHTMLEntities(str) {
+    if (str && typeof str === "string") {
+      // strip script/html tags
+      str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gim, "");
+      str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gim, "");
+      element.innerHTML = str;
+      str = element.textContent;
+      element.textContent = "";
+    }
+
+    return str;
+  }
+
+  return decodeHTMLEntities;
+})();
+
 const SelectAnswerButton = props => {
   const answersLet = ["a", "b", "c", "d"];
   const renderAnswers = props.answers.map((answer, index) => {
@@ -17,6 +37,9 @@ const SelectAnswerButton = props => {
       ) : (
         <></>
       );
+
+    const answerDecoded = decodeEntities(answer.answer);
+
     return (
       <>
         <div
@@ -28,7 +51,7 @@ const SelectAnswerButton = props => {
             key={answersLet[index]}
             value={answersLet[index]}
           >
-            {answer.answer}
+            {answerDecoded}
             {showCorrectAnswer}
           </div>
         </div>
