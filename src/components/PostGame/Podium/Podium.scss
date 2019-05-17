@@ -1,26 +1,29 @@
-@import '../../../styles/_variables.scss';
-
+@import '../../../styles/variables';
 
 .display {
-    transition: all 0.4s;
-    
+ transition: all 0.4s;
 }
 
 .podium__header {
-    text-align: center;
-    width: 100vw;
-    color: $color-white;
-    padding: 10px;
-    height: 100px;
-    font-size: 30px;
-    position: relative;
-    background-image: linear-gradient(to right bottom, $color-blue-light 0%, $color-blue-dark 100%);
+ text-align: center;
+ width: 100vw;
+ color: $color-white;
+ padding: 10px;
+ height: 100px;
+ font-size: 30px;
+ position: relative;
+ background-image: linear-gradient(
+   to right bottom,
+   $color-blue-light 0%,
+   $color-blue-dark 100%
+ );
 }
 
 .podium {
-    position: absolute;
-    bottom: 0;
-    left: 26vw;
+ display: flex;
+ align-items: flex-end;
+ justify-content: center;
+ height: calc(100vh - 100px);
     &__first {
         animation: createBox 1s;
         background:
