@@ -19,7 +19,7 @@ const Leaderboard = props => {
     players.map(player => {
       console.log("this is a player", player);
       return (
-        <h1>
+        <h1 className="display_player">
           {player.nickname}: {player.score} points
         </h1>
       );
